@@ -1,0 +1,6 @@
+{
+  "name": "SaroHub Technologies",
+  "description": "Official enterprise website and content management portal for SaroHub Technologies (Private) Limited.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
