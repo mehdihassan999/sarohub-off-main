@@ -26,12 +26,12 @@ export default function DevelopmentProcess() {
   }, []);
 
   const defaultFallbackSteps = [
-    { id: 1, stepNumber: '01', title: 'Discover', icon: 'Search', shortDescription: 'In-depth scoping of goals, target audience, and technical requirements.' },
-    { id: 2, stepNumber: '02', title: 'Strategy', icon: 'FileText', shortDescription: 'Mapping system architecture, technology stack, and milestone roadmaps.' },
-    { id: 3, stepNumber: '03', title: 'Design', icon: 'Grid', shortDescription: 'Interactive UI/UX prototypes and high-fidelity component design systems.' },
-    { id: 4, stepNumber: '04', title: 'Build', icon: 'Code', shortDescription: 'Full-stack engineering, clean codebase, and automated continuous integration.' },
-    { id: 5, stepNumber: '05', title: 'Launch', icon: 'Globe', shortDescription: 'Zero-downtime production cloud deployment and live performance monitoring.' },
-    { id: 6, stepNumber: '06', title: 'Scale', icon: 'TrendingUp', shortDescription: 'Continuous features expansion, security audits, and dedicated support.' }
+    { id: 1, stepNumber: '01', title: 'Discover', icon: 'Search', shortDescription: 'Understanding your business goals, target audience, and project needs.' },
+    { id: 2, stepNumber: '02', title: 'Strategy', icon: 'FileText', shortDescription: 'System planning, technical architecture, and milestone roadmaps.' },
+    { id: 3, stepNumber: '03', title: 'Design', icon: 'Grid', shortDescription: 'Interactive mockups, clean visual layouts, and user experience testing.' },
+    { id: 4, stepNumber: '04', title: 'Build', icon: 'Code', shortDescription: 'Iterative software development with clean code, testing, and regular updates.' },
+    { id: 5, stepNumber: '05', title: 'Launch', icon: 'Globe', shortDescription: 'Smooth cloud deployment, performance testing, and live release.' },
+    { id: 6, stepNumber: '06', title: 'Scale', icon: 'TrendingUp', shortDescription: 'Continuous support, speed improvements, and new feature enhancements.' }
   ];
 
   const stepsList = processSteps.length > 0 ? processSteps : defaultFallbackSteps;
@@ -149,24 +149,24 @@ export default function DevelopmentProcess() {
 
                   <div className="space-y-3 pt-6 border-t border-white/10">
                     <span className="text-[10px] font-mono uppercase tracking-wider font-extrabold block text-slate-400">
-                      Engineering Principles:
+                      Our Commitments:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="flex gap-2 items-center text-xs font-medium text-slate-300">
                         <CheckCircle className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                        <span>Business ROI Scoped</span>
+                        <span>Clear Business Focus</span>
                       </div>
                       <div className="flex gap-2 items-center text-xs font-medium text-slate-300">
                         <CheckCircle className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                        <span>Strict Quality Assurance</span>
+                        <span>Strict Quality Checks</span>
                       </div>
                       <div className="flex gap-2 items-center text-xs font-medium text-slate-300">
                         <CheckCircle className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                        <span>Security & API Validation</span>
+                        <span>Data Security & Privacy</span>
                       </div>
                       <div className="flex gap-2 items-center text-xs font-medium text-slate-300">
                         <CheckCircle className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                        <span>Scalable Architecture</span>
+                        <span>Built for Future Growth</span>
                       </div>
                     </div>
                   </div>

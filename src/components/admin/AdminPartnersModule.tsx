@@ -2,11 +2,26 @@ import React, { useState, useEffect } from 'react';
 import {
   Handshake, Plus, Search, Edit, Trash2, Globe, ExternalLink,
   Sparkles, Check, Building, ShieldCheck, Star, Layers, Filter, Eye, RefreshCw, X,
-  Image as ImageIcon, Upload, Loader2
+  Image as ImageIcon, Upload, Loader2, Landmark
 } from 'lucide-react';
 import { api } from '../../api';
 import { Partner, PartnerCategory } from '../../types';
 import ImageUploadField from '../ImageUploadField';
+import { getCategoryMeta } from '../partners/PartnerCard';
+
+export const PRESET_PARTNER_CATEGORIES: string[] = [
+  'Government Sector',
+  'Agency Partner',
+  'Technology Partner',
+  'Strategic Partner',
+  'NGO & Non-Profit',
+  'Academic & Research',
+  'Investor & Venture',
+  'Ecosystem & Incubation',
+  'Corporate Partner',
+  'Collaborator',
+  'Sponsor'
+];
 
 interface AdminPartnersModuleProps {
   onNotify?: (title: string, message: string) => void;
@@ -23,7 +38,9 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
   const [editingItem, setEditingItem] = useState<Partner | null>(null);
 
   const [name, setName] = useState('');
-  const [category, setCategory] = useState<PartnerCategory>('Partner');
+  const [category, setCategory] = useState<string>('Government Sector');
+  const [customCategory, setCustomCategory] = useState('');
+  const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [logoUrl, setLogoUrl] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [description, setDescription] = useState('');
@@ -56,7 +73,9 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
   const handleOpenAdd = () => {
     setEditingItem(null);
     setName('');
-    setCategory('Partner');
+    setCategory('Government Sector');
+    setCustomCategory('');
+    setIsCustomCategory(false);
     setLogoUrl('');
     setWebsiteUrl('');
     setDescription('');
@@ -70,7 +89,15 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
   const handleOpenEdit = (partner: Partner) => {
     setEditingItem(partner);
     setName(partner.name);
-    setCategory(partner.category);
+    if (PRESET_PARTNER_CATEGORIES.includes(partner.category)) {
+      setCategory(partner.category);
+      setCustomCategory('');
+      setIsCustomCategory(false);
+    } else {
+      setCategory('Custom');
+      setCustomCategory(partner.category || '');
+      setIsCustomCategory(true);
+    }
     setLogoUrl(partner.logo_url);
     setWebsiteUrl(partner.website_url || '');
     setDescription(partner.description || '');
@@ -123,11 +150,15 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
     e.preventDefault();
     if (!name.trim() || !logoUrl.trim()) return;
 
+    const resolvedCategory = isCustomCategory 
+      ? (customCategory.trim() || 'Partner')
+      : category;
+
     setIsSaving(true);
     try {
       const payload: Partial<Partner> = {
         name,
-        category,
+        category: resolvedCategory as PartnerCategory,
         logo_url: logoUrl,
         website_url: websiteUrl,
         description,
@@ -221,12 +252,12 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-900 w-full sm:w-auto">
-          {['all', 'Agency', 'Investor', 'Partner', 'Collaborator', 'Sponsor'].map((cat) => (
+        <div className="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-900 w-full sm:w-auto overflow-x-auto">
+          {['all', 'Government Sector', 'Agency Partner', 'Technology Partner', 'Investor & Venture', ...(Array.from(new Set(partners.map(p => p.category))) as string[]).filter(c => !['Government Sector', 'Agency Partner', 'Technology Partner', 'Investor & Venture', 'all'].includes(c))].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer whitespace-nowrap ${
                 categoryFilter === cat
                   ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -299,15 +330,16 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
                   </div>
                   
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full border ${
-                      partner.category === 'Investor'
-                        ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                        : partner.category === 'Agency'
-                        ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
-                        : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
-                    }`}>
-                      {partner.category}
-                    </span>
+                    {(() => {
+                      const meta = getCategoryMeta(partner.category);
+                      const CategoryIcon = meta.icon;
+                      return (
+                        <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full border flex items-center gap-1 ${meta.badgeStyle}`}>
+                          <CategoryIcon className="h-3 w-3 shrink-0" />
+                          <span>{partner.category}</span>
+                        </span>
+                      );
+                    })()}
 
                     {partner.featured && (
                       <span className="p-1 rounded bg-amber-500/10 text-amber-400" title="Featured Partner">
@@ -317,12 +349,8 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
                   </div>
                 </div>
 
-                <h3 className="font-bold text-white text-sm group-hover:text-cyan-400 transition-colors">
-                  {partner.name}
-                </h3>
-                
                 {partner.description && (
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">
                     {partner.description}
                   </p>
                 )}
@@ -398,18 +426,37 @@ export const AdminPartnersModule: React.FC<AdminPartnersModuleProps> = ({ onNoti
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">Category Type *</label>
+                  <label className="block text-xs font-mono text-slate-400 mb-1">Category / Sector Type *</label>
                   <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value as PartnerCategory)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500"
+                    value={isCustomCategory ? 'Custom' : category}
+                    onChange={(e) => {
+                      if (e.target.value === 'Custom') {
+                        setIsCustomCategory(true);
+                      } else {
+                        setIsCustomCategory(false);
+                        setCategory(e.target.value);
+                      }
+                    }}
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500 font-sans"
                   >
-                    <option value="Partner">Partner</option>
-                    <option value="Agency">Agency</option>
-                    <option value="Investor">Investor</option>
-                    <option value="Collaborator">Collaborator</option>
-                    <option value="Sponsor">Sponsor</option>
+                    {PRESET_PARTNER_CATEGORIES.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                    <option value="Custom">+ Other / Custom Sector...</option>
                   </select>
+
+                  {isCustomCategory && (
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        placeholder="Type custom sector (e.g. Health Ministry, Transit Board)"
+                        value={customCategory}
+                        onChange={(e) => setCustomCategory(e.target.value)}
+                        className="w-full bg-slate-950 border border-cyan-500/50 rounded-xl px-3 py-2 text-xs text-cyan-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400 font-mono"
+                        required={isCustomCategory}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div>

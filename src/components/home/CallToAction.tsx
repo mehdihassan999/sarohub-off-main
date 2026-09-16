@@ -1,81 +1,81 @@
 import React from 'react';
-import { Sparkles, ArrowRight, HeartHandshake } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Handshake } from 'lucide-react';
 import { motion } from 'motion/react';
 
-export default function CallToAction() {
-  const handleScrollToContact = (topic: string) => {
-    const contactSection = document.getElementById('contact-preview');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-      const msgInput = document.getElementById('contact-message') as HTMLTextAreaElement;
-      if (msgInput) {
-        msgInput.value = `I would like to discuss a potential partnership regarding ${topic}...`;
-      }
-    }
-  };
+interface CallToActionProps {
+  settings?: { [key: string]: string };
+}
+
+export default function CallToAction({ settings = {} }: CallToActionProps) {
+  const heading = settings.cta_heading || 'Have an idea or a business challenge?';
+  const subtext = settings.cta_subtext || "Let's build something meaningful together. Whether you are launching a new product, scaling a business system, or exploring a technology partnership.";
+  const primaryBtn = settings.cta_primary_btn || 'Book Discovery Call';
+  const primaryLink = settings.cta_primary_link || '/book';
+  const secondaryBtn = settings.cta_secondary_btn || 'Calculate Scope & Cost';
+  const secondaryLink = settings.cta_secondary_link || '/estimate';
+  const tertiaryBtn = settings.cta_tertiary_btn || 'Executive Deck (PDF)';
+  const tertiaryLink = settings.cta_tertiary_link || '/capabilities';
 
   return (
     <section 
       id="cta" 
-      className="py-24 relative overflow-hidden border-b grid-bg"
+      className="py-20 lg:py-28 relative overflow-hidden border-b"
       style={{ 
         backgroundColor: 'var(--bg-app)', 
         borderColor: 'var(--border-app)' 
       }}
     >
       {/* Light background glowing ambient details */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 right-10 w-96 h-96 bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-5xl px-6 relative z-10">
         <motion.div
-          className="p-10 sm:p-16 rounded-3xl text-center relative overflow-hidden group transition-all duration-300 border premium-card-hover"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="p-10 sm:p-16 rounded-3xl text-center relative overflow-hidden group border shadow-xl shadow-blue-950/20"
           style={{ 
             backgroundColor: 'var(--bg-card)', 
             borderColor: 'var(--border-app)' 
           }}
         >
-          {/* Top Decorative Floating Elements */}
-          <div className="absolute -top-12 -left-12 h-24 w-24 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
-          
           <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-            {/* Promotional badge */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/8 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="h-3.5 w-3.5 animate-pulse text-blue-400" />
-              <span>Turning Vision Into Ventures</span>
-            </div>
-
             <h2 
-              className="font-display text-3xl sm:text-5xl font-black tracking-tight leading-[1.15]"
-              style={{ color: 'var(--text-main)' }}
+              className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
-              Have an Idea Worth Building?
+              {heading}
             </h2>
-            <p className="text-sm sm:text-base font-medium leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-body)' }}>
-              Whether you're building a new venture, scaling a business, or looking for a technology partner, let's build what comes next.
+            <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed max-w-xl mx-auto">
+              {subtext}
             </p>
 
             {/* Action buttons */}
-            <div className="flex flex-wrap justify-center gap-4 pt-6">
-              <a
-                href="#contact-preview"
-                className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold shadow-md shadow-blue-500/10 transition-all flex items-center gap-2 group cursor-pointer"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <Link
+                to={primaryLink}
+                id="cta-book-consultation"
+                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs tracking-wider uppercase shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2 group cursor-pointer"
               >
-                Start a Conversation
+                <span>{primaryBtn}</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <button
-                onClick={() => handleScrollToContact('technology delivery & product development')}
-                className="px-6 py-3.5 rounded-lg font-bold transition-all flex items-center gap-2 group cursor-pointer border hover:bg-white/[0.04]"
-                style={{ 
-                  backgroundColor: 'var(--bg-app)', 
-                  borderColor: 'var(--border-app)',
-                  color: 'var(--text-main)'
-                }}
+              </Link>
+              <Link
+                to={secondaryLink}
+                id="cta-calculate-scope"
+                className="w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 group cursor-pointer border border-cyan-500/40 bg-cyan-950/20 hover:bg-cyan-900/30 text-cyan-300"
               >
-                <HeartHandshake className="h-4 w-4 text-blue-400" />
-                Partner With Us
-              </button>
+                <span>{secondaryBtn}</span>
+              </Link>
+              <Link
+                to={tertiaryLink}
+                id="cta-download-deck"
+                className="w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 group cursor-pointer border border-slate-700 bg-slate-800/40 hover:bg-slate-800 text-slate-300 hover:text-white"
+              >
+                <span>{tertiaryBtn}</span>
+              </Link>
             </div>
           </div>
         </motion.div>

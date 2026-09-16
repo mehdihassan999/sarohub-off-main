@@ -15,6 +15,7 @@ interface DynamicFormFieldProps {
   uploading?: boolean;
   onFileUpload?: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
   onRemoveFile?: (index?: number) => void;
+  darkTheme?: boolean;
 }
 
 const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
@@ -25,7 +26,8 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
   disabled = false,
   uploading = false,
   onFileUpload,
-  onRemoveFile
+  onRemoveFile,
+  darkTheme = false
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -37,7 +39,7 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
   const renderDescription = () => {
     if (!field.description) return null;
     return (
-      <p className="text-[10px] md:text-xs text-slate-500 mt-1 font-sans leading-relaxed">
+      <p className={`text-[10px] md:text-xs mt-1 font-sans leading-relaxed ${darkTheme ? 'text-slate-400' : 'text-slate-500'}`}>
         {field.description}
       </p>
     );
@@ -73,8 +75,12 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
 
   // Dynamic Border Style for inputs
   const getInputStyles = () => {
-    return `w-full rounded-xl bg-slate-50 border px-3.5 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all ${
-      error ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/10' : 'border-slate-200 focus:border-blue-500'
+    const themeClasses = darkTheme
+      ? 'bg-slate-950/80 border-slate-750 text-white placeholder-slate-500 focus:border-cyan-400 focus:ring-cyan-500/20'
+      : 'bg-slate-50 border-slate-200 text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:ring-blue-500/20';
+
+    return `w-full rounded-xl border px-3.5 py-2.5 text-xs focus:outline-none focus:ring-2 transition-all ${themeClasses} ${
+      error ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/10' : ''
     } ${disabled ? 'opacity-80 cursor-not-allowed bg-slate-100/50 text-slate-500' : ''}`;
   };
 
@@ -95,7 +101,7 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
 
   return (
     <div className={`space-y-1.5 ${field.disabled ? 'hidden' : 'block'}`}>
-      <label className="block text-xs font-semibold text-slate-700 flex items-center justify-between">
+      <label className={`block text-xs font-semibold flex items-center justify-between ${darkTheme ? 'text-slate-300' : 'text-slate-700'}`}>
         <span className="flex items-center gap-1.5">
           {field.label} {isRequired && <span className="text-rose-500 font-bold">*</span>}
         </span>
@@ -452,6 +458,19 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
         if (field.type === 'email') inputType = 'email';
         if (field.type === 'phone') inputType = 'tel';
 
+        const getSmartPlaceholder = () => {
+          if (field.placeholder) return field.placeholder;
+          if (field.type === 'phone') return 'e.g. +1 (555) 019-2834';
+          if (field.type === 'email') return 'e.g. attendee@company.com';
+          if (field.type === 'full_name') return 'e.g. Sarah Jenkins';
+          if (field.type === 'url') return 'https://example.com';
+          if (field.type === 'linkedin') return 'https://linkedin.com/in/username';
+          if (field.type === 'github') return 'https://github.com/username';
+          if (field.type === 'number') return 'e.g. 5';
+          if (field.type === 'cnic_passport') return 'e.g. A12345678 or 12345-6789012-3';
+          return `e.g. Enter your ${field.label.toLowerCase()}...`;
+        };
+
         return (
           <div className="relative">
             {iconPrefix}
@@ -459,7 +478,7 @@ const DynamicFormField: React.FC<DynamicFormFieldProps> = ({
               id={idSafe}
               disabled={disabled}
               type={inputType}
-              placeholder={field.placeholder || `Enter ${field.label.toLowerCase()}...`}
+              placeholder={getSmartPlaceholder()}
               value={value || ''}
               onChange={(e) => onChange(e.target.value)}
               className={`${getInputStyles()} ${hasPrefix ? 'pl-10' : ''}`}

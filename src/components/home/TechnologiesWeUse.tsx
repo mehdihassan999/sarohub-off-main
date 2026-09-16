@@ -6,17 +6,17 @@ import { motion } from 'motion/react';
 
 export default function TechnologiesWeUse() {
   const techs = [
-    { name: 'React', icon: Atom, desc: 'Responsive interfaces & layouts', color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20' },
-    { name: 'Node.js', icon: Server, desc: 'High-speed runtime engines', color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-    { name: 'Express.js', icon: Code2, desc: 'Enterprise REST & JSON pipelines', color: 'text-slate-300', bg: 'bg-slate-500/10 border-slate-500/20' },
-    { name: 'MySQL', icon: Database, desc: 'Relational 3NF transactional data', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
-    { name: 'Tailwind CSS', icon: Layout, desc: 'Modern responsive layouts', color: 'text-cyan-400', bg: 'bg-cyan-500/10 border-cyan-500/20' },
-    { name: 'JavaScript', icon: FileCode, desc: 'Highly optimized scripting rules', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
-    { name: 'TypeScript', icon: Terminal, desc: 'Static type integrity safeguards', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
-    { name: 'Docker', icon: Cloud, desc: 'Isolated sandbox microservices', color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20' },
-    { name: 'Git', icon: Compass, desc: 'Complete version tracing', color: 'text-orange-400', bg: 'bg-orange-500/10 border-orange-500/20' },
-    { name: 'Figma', icon: Palette, desc: 'Collaborative UI/UX wireframes', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
-    { name: 'Cloud Tech', icon: Cloud, desc: 'Serverless containers on GCP/AWS', color: 'text-indigo-400', bg: 'bg-indigo-500/10 border-indigo-500/20' },
+    { name: 'React', icon: Atom, desc: 'Responsive user interfaces', color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20' },
+    { name: 'Node.js', icon: Server, desc: 'Fast, secure backend servers', color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
+    { name: 'Express.js', icon: Code2, desc: 'Reliable web and API services', color: 'text-slate-300', bg: 'bg-slate-500/10 border-slate-500/20' },
+    { name: 'MySQL', icon: Database, desc: 'Structured & secure databases', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+    { name: 'Tailwind CSS', icon: Layout, desc: 'Modern, clean styling', color: 'text-cyan-400', bg: 'bg-cyan-500/10 border-cyan-500/20' },
+    { name: 'JavaScript', icon: FileCode, desc: 'Interactive web features', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+    { name: 'TypeScript', icon: Terminal, desc: 'Error-free, reliable code', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+    { name: 'Docker', icon: Cloud, desc: 'Consistent cloud deployment', color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20' },
+    { name: 'Git', icon: Compass, desc: 'Code management & updates', color: 'text-orange-400', bg: 'bg-orange-500/10 border-orange-500/20' },
+    { name: 'Figma', icon: Palette, desc: 'Visual design & mockups', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+    { name: 'Cloud Tech', icon: Cloud, desc: 'Scalable cloud hosting', color: 'text-indigo-400', bg: 'bg-indigo-500/10 border-indigo-500/20' },
   ];
 
   return (

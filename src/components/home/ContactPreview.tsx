@@ -138,7 +138,7 @@ export default function ContactPreview({ settings }: ContactPreviewProps) {
                     <input
                       type="text"
                       required
-                      placeholder="Your Name"
+                      placeholder="Haider Ali"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full rounded-lg border p-3.5 text-xs sm:text-sm placeholder-slate-500 focus:border-blue-500 bg-slate-950/80 border-white/10 text-white focus:outline-none transition-all font-medium"
@@ -149,7 +149,7 @@ export default function ContactPreview({ settings }: ContactPreviewProps) {
                     <input
                       type="email"
                       required
-                      placeholder="name@company.com"
+                      placeholder="haider.ali@sarohub.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full rounded-lg border p-3.5 text-xs sm:text-sm placeholder-slate-500 focus:border-blue-500 bg-slate-950/80 border-white/10 text-white focus:outline-none transition-all font-medium"

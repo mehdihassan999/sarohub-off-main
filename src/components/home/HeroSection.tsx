@@ -4,11 +4,11 @@ import { ArrowRight, Sparkles, Rocket, Briefcase } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const DEFAULT_TYPED_PHRASES = [
-  "Building Scalable Ventures",
-  "Developing AI-Powered Products",
-  "Turning Ideas Into Reality",
-  "Partnering to Build Technology",
-  "Innovating for Tomorrow"
+  "Custom Web & Mobile Apps",
+  "AI Automations & Enterprise ERPs",
+  "Rapid MVP Development for Startups",
+  "Strategic B2B Technology Partnerships",
+  "Performance Growth & Digital Marketing"
 ];
 
 interface HeroSectionProps {
@@ -19,18 +19,37 @@ export default function HeroSection({ settings = {} }: HeroSectionProps) {
   // Parse typed phrases from settings or fall back to defaults
   const typedPhrases: string[] = React.useMemo(() => {
     if (settings.hero_typed_phrases) {
-      try {
-        const parsed = JSON.parse(settings.hero_typed_phrases);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch { /* ignore */ }
+      const raw = settings.hero_typed_phrases.trim();
+      if (raw.startsWith('[') && raw.endsWith(']')) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed.filter(Boolean);
+        } catch { /* ignore */ }
+      }
+      // Also support newline-delimited or comma-delimited strings
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (lines.length > 0) return lines;
     }
     return DEFAULT_TYPED_PHRASES;
   }, [settings.hero_typed_phrases]);
 
-  const heroHeading = settings.hero_heading || 'Turning Vision Into';
-  const heroHeadingAccent = settings.hero_heading_accent || 'Ventures.';
+  const heroBadge = settings.hero_badge || 'Full-Stack Technology Studio & Venture Partner';
+  const heroHeading = settings.hero_heading || 'Engineering High-Impact Digital Solutions &';
+  const heroHeadingAccent = settings.hero_heading_accent || 'Scalable Tech Ventures.';
   const heroDescription = settings.hero_description ||
-    'We turn ambitious ideas into technology-driven ventures. SaroHub Technologies builds its own products and ventures while partnering with businesses, agencies, and entrepreneurs to transform ideas into scalable digital solutions.';
+    'Whether you need a dedicated engineering team to build your next web app, AI automation, and marketing pipeline, or a technical partner to co-build scalable B2B products and MVPs from scratch — SaroHub delivers end-to-end technology that drives growth.';
+
+  const primaryCtaText = settings.hero_primary_cta_text || 'Hire Us for a Project';
+  const primaryCtaLink = settings.hero_primary_cta_link || '/contact';
+  const secondaryCtaText = settings.hero_secondary_cta_text || 'B2B Partnerships & Ventures';
+  const secondaryCtaLink = settings.hero_secondary_cta_link || '/partnerships';
+
+  const pillar1Title = settings.hero_pillar1_title || 'Client Services';
+  const pillar1Sub = settings.hero_pillar1_sub || 'Web, Mobile & AI';
+  const pillar2Title = settings.hero_pillar2_title || 'B2B Partnerships';
+  const pillar2Sub = settings.hero_pillar2_sub || 'Startups & MVPs';
+  const pillar3Title = settings.hero_pillar3_title || 'Growth & Scale';
+  const pillar3Sub = settings.hero_pillar3_sub || 'SEO, Ads & Marketing';
   const [currentPhraseIdx, setCurrentPhraseIdx] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -101,7 +120,7 @@ export default function HeroSection({ settings = {} }: HeroSectionProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-semibold tracking-wider uppercase bg-blue-500/8 border border-blue-500/20 text-blue-400 shadow-sm shadow-blue-950/20"
             >
               <Sparkles className="h-3.5 w-3.5 text-blue-400 animate-pulse" />
-              <span>Entrepreneurship • Technology • AI • Innovation</span>
+              <span>{heroBadge}</span>
             </motion.div>
 
             {/* Grand Heading */}
@@ -150,27 +169,29 @@ export default function HeroSection({ settings = {} }: HeroSectionProps) {
               className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-4 w-full sm:w-auto"
             >
               <Link
-                to="/services"
+                to={primaryCtaLink}
+                id="hero-primary-cta"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500 rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-lg shadow-blue-500/20 hover:scale-[1.01] cursor-pointer"
               >
-                Explore Our Services
+                {primaryCtaText}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
 
-              <a
-                href="#ventures"
+              <Link
+                to={secondaryCtaLink}
+                id="hero-secondary-cta"
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-transparent rounded-full font-bold text-xs tracking-wider uppercase transition-all duration-300 border border-white/[0.08] hover:border-blue-500/30 text-white hover:bg-white/[0.02] cursor-pointer"
                 style={{
                   color: 'var(--text-main)',
                   backgroundColor: 'rgba(255, 255, 255, 0.03)'
                 }}
               >
-                <Rocket className="h-4 w-4 text-blue-400" />
-                Explore Our Ventures
-              </a>
+                <Rocket className="h-4 w-4 text-cyan-400" />
+                {secondaryCtaText}
+              </Link>
             </motion.div>
 
-            {/* Core pillars instead of fake metrics */}
+            {/* Core pillars */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -178,18 +199,18 @@ export default function HeroSection({ settings = {} }: HeroSectionProps) {
               className="mt-12 flex items-center justify-center lg:justify-start gap-8 text-xs border-t border-white/[0.05] pt-8 w-full max-w-xl"
             >
               <div>
-                <span className="block font-bold text-lg text-white">Venture Building</span>
-                <span className="text-slate-400 text-[10px] tracking-wider uppercase">Our Own Products</span>
+                <span className="block font-bold text-lg text-white">{pillar1Title}</span>
+                <span className="text-slate-400 text-[10px] tracking-wider uppercase">{pillar1Sub}</span>
               </div>
               <div className="w-[1px] h-8 bg-white/[0.08]" />
               <div>
-                <span className="block font-bold text-lg text-white">Tech Solutions</span>
-                <span className="text-slate-400 text-[10px] tracking-wider uppercase">For Businesses</span>
+                <span className="block font-bold text-lg text-white">{pillar2Title}</span>
+                <span className="text-slate-400 text-[10px] tracking-wider uppercase">{pillar2Sub}</span>
               </div>
               <div className="w-[1px] h-8 bg-white/[0.08]" />
               <div>
-                <span className="block font-bold text-lg text-white">Innovation</span>
-                <span className="text-slate-400 text-[10px] tracking-wider uppercase">Research & AI</span>
+                <span className="block font-bold text-lg text-white">{pillar3Title}</span>
+                <span className="text-slate-400 text-[10px] tracking-wider uppercase">{pillar3Sub}</span>
               </div>
             </motion.div>
           </div>

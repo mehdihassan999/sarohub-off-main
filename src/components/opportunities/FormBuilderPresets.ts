@@ -34,13 +34,13 @@ export const FIELD_TYPES = [
 export const SCHOLARSHIP_PRESET: OpportunityField[] = [
   { id: 'field_full_name', type: 'full_name', label: 'Full Name', required: true, placeholder: 'Enter your full legal name', description: 'Name exactly as registered on official records.' },
   { id: 'field_email', type: 'email', label: 'Email Address', required: true, placeholder: 'Enter your active email address', description: 'Used for admission announcements.' },
-  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +94 77 123 4567', description: 'Active contact phone number.' },
+  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +92 343 0381473', description: 'Active contact phone number.' },
   { id: 'field_gender', type: 'radio', label: 'Gender', required: true, options: ['Male', 'Female', 'Other'] },
   { id: 'field_qualification', type: 'dropdown', label: 'Qualification', required: true, options: ['Secondary/High School', 'Diploma', 'Bachelors', 'Masters', 'PhD'], placeholder: 'Select highest level achieved' },
-  { id: 'field_institution', type: 'text', label: 'Current Institution', required: true, placeholder: 'e.g., University of Science & Technology' },
+  { id: 'field_institution', type: 'text', label: 'Current Institution', required: true, placeholder: 'e.g., University of Baltistan / KIU / NUST' },
   { id: 'field_cgpa', type: 'number', label: 'CGPA', required: true, placeholder: 'e.g., 3.80', description: 'Cumulative grade point average.', validation: { minValue: 0, maxValue: 100 } },
   { id: 'field_laptop', type: 'yes_no_toggle', label: 'Do you own a laptop?', required: true, description: 'Required for our cloud development sandbox.' },
-  { id: 'field_income', type: 'number', label: 'Family Income', required: true, placeholder: 'e.g., 150000', description: 'Monthly household earnings in LKR.' },
+  { id: 'field_income', type: 'number', label: 'Family Income', required: true, placeholder: 'e.g., 150000', description: 'Monthly household earnings in PKR.' },
   { id: 'field_sop', type: 'textarea', label: 'Statement of Purpose', required: true, placeholder: 'Explain why you should be awarded this scholarship...', description: 'Describe your background and financial context.', validation: { minLength: 50 } },
   { id: 'field_transcript', type: 'transcript', label: 'Transcript Upload', required: true, description: 'Attach certified transcripts (PDF only, Max 5MB).', validation: { allowedFileTypes: ['.pdf'], maxFileSizeMb: 5 } }
 ];
@@ -48,9 +48,9 @@ export const SCHOLARSHIP_PRESET: OpportunityField[] = [
 export const INTERNSHIP_PRESET: OpportunityField[] = [
   { id: 'field_full_name', type: 'full_name', label: 'Full Name', required: true, placeholder: 'Enter your full name' },
   { id: 'field_email', type: 'email', label: 'Email Address', required: true, placeholder: 'Enter your email address' },
-  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +94 77 123 4567' },
-  { id: 'field_university', type: 'text', label: 'University', required: true, placeholder: 'e.g., University of Moratuwa' },
-  { id: 'field_degree', type: 'text', label: 'Degree', required: true, placeholder: 'e.g., BSc in Computer Science' },
+  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +92 343 0381473' },
+  { id: 'field_university', type: 'text', label: 'University', required: true, placeholder: 'e.g., University of Baltistan' },
+  { id: 'field_degree', type: 'text', label: 'Degree', required: true, placeholder: 'e.g., BS in Computer Science' },
   { id: 'field_semester', type: 'dropdown', label: 'Semester', required: true, options: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'], placeholder: 'Select your current semester' },
   { id: 'field_skills', type: 'checkbox_multi', label: 'Skills', required: true, options: ['React/TypeScript', 'NodeJS/Express', 'Python/ML', 'SQL/NoSQL', 'Docker/K8s'], description: 'Primary technical tools you have built projects with.' },
   { id: 'field_portfolio', type: 'url', label: 'Portfolio URL', required: false, placeholder: 'https://portfolio.com' },
@@ -63,10 +63,10 @@ export const INTERNSHIP_PRESET: OpportunityField[] = [
 export const JOB_PRESET: OpportunityField[] = [
   { id: 'field_full_name', type: 'full_name', label: 'Full Name', required: true, placeholder: 'Enter your full name' },
   { id: 'field_email', type: 'email', label: 'Email Address', required: true, placeholder: 'Enter your email address' },
-  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +94 77 123 4567' },
+  { id: 'field_phone', type: 'phone', label: 'Phone Number', required: true, placeholder: 'e.g., +92 343 0381473' },
   { id: 'field_experience', type: 'number', label: 'Years of Experience', required: true, placeholder: 'e.g., 3', validation: { minValue: 0 } },
   { id: 'field_current_company', type: 'text', label: 'Current Company', required: false, placeholder: 'e.g., Acme Technologies' },
-  { id: 'field_expected_salary', type: 'number', label: 'Expected Salary', required: true, placeholder: 'e.g., 250000', description: 'Expected monthly gross in LKR.' },
+  { id: 'field_expected_salary', type: 'number', label: 'Expected Salary', required: true, placeholder: 'e.g., 250000', description: 'Expected monthly gross in PKR.' },
   { id: 'field_notice_period', type: 'dropdown', label: 'Notice Period', required: true, options: ['Immediate', '15 Days', '1 Month', '2 Months', '3 Months'], placeholder: 'Select notice period duration' },
   { id: 'field_resume', type: 'resume', label: 'Resume Upload', required: true, description: 'Attach professional CV (PDF only, Max 5MB).', validation: { allowedFileTypes: ['.pdf'], maxFileSizeMb: 5 } },
   { id: 'field_portfolio', type: 'portfolio_upload', label: 'Portfolio Upload', required: false, description: 'Submit work links, design decks or case studies (PDF/Zip, Max 10MB).', validation: { allowedFileTypes: ['.pdf', '.zip'], maxFileSizeMb: 10 } },

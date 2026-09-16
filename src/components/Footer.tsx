@@ -68,11 +68,11 @@ export default function Footer({ settings }: FooterProps) {
             </Link>
             
             <p className="mt-2 text-xs font-semibold text-blue-400 tracking-wide">
-              Turning Vision Into Ventures.
+              Building Technology That Turns Ideas Into Ventures.
             </p>
 
             <p className="mt-4 text-sm text-slate-400 leading-relaxed">
-              SaroHub Technologies is an entrepreneurship-driven technology company that builds ventures, products, and digital solutions. Founded in Gilgit-Baltistan, Pakistan. Building for a global market.
+              SaroHub Technologies is a technology company that builds digital products, provides technology solutions to businesses, and develops its own ventures. Founded in Gilgit-Baltistan, Pakistan, building for a global market.
             </p>
 
             {/* Dynamic Social Media Icons */}
@@ -99,89 +99,143 @@ export default function Footer({ settings }: FooterProps) {
 
           </div>
 
-          {/* Column 2: Navigation */}
+          {/* Column 2: Solutions */}
           <div>
-            <h4 className="font-display text-sm font-semibold tracking-wide text-white">Explore</h4>
-            <ul className="mt-6 space-y-3">
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-slate-200">Client Engines</h4>
+            <ul className="mt-4 space-y-2.5">
               <li>
-                <Link to="/services" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Solutions & Services</Link>
+                <Link to="/book" className="text-xs text-blue-400 font-semibold hover:text-blue-300 flex items-center gap-1.5 transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Direct Consultation Booking
+                </Link>
               </li>
               <li>
-                <Link to="/ventures" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Our Ventures</Link>
+                <Link to="/estimate" className="text-xs text-cyan-400 font-semibold hover:text-cyan-300 flex items-center gap-1.5 transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                  Scope & Cost Calculator
+                </Link>
               </li>
               <li>
-                <Link to="/projects" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Selected Projects</Link>
+                <Link to="/capabilities" className="text-xs text-indigo-400 font-semibold hover:text-indigo-300 flex items-center gap-1.5 transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                  Executive Deck (PDF One-Pager)
+                </Link>
               </li>
               <li>
-                <Link to="/student-projects" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Student Projects (IT Academy)</Link>
+                <Link to="/trust" className="text-xs text-emerald-400 font-semibold hover:text-emerald-300 flex items-center gap-1.5 transition-colors">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  Trust, 100% IP &amp; Models
+                </Link>
+              </li>
+              <li className="pt-2 border-t border-slate-800/60">
+                <Link to="/services" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">All Engineering Services</Link>
               </li>
               <li>
-                <Link to="/marketplace" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Marketplace</Link>
+                <Link to="/services/custom-software" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Custom Software</Link>
               </li>
               <li>
-                <Link to="/opportunities" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Opportunities</Link>
+                <Link to="/services/saas-development" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">SaaS Development</Link>
               </li>
               <li>
-                <Link to="/careers" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">Careers</Link>
+                <Link to="/services/ai-automation" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">AI & Automation</Link>
+              </li>
+              <li>
+                <Link to="/services/ui-ux-design" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">UI/UX & Design Systems</Link>
+              </li>
+              <li>
+                <Link to="/services/graphic-design" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Graphic Design & Brand</Link>
+              </li>
+              <li>
+                <Link to="/services/digital-marketing" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Digital Marketing & SEO</Link>
+              </li>
+              <li>
+                <Link to="/industries" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Industry Solutions</Link>
+              </li>
+              <li>
+                <Link to="/startups" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">For Startups & MVPs</Link>
+              </li>
+              <li>
+                <Link to="/agency-partners" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Agency Partnerships</Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Contact Details */}
+          {/* Column 3: Ventures & Engineering */}
           <div>
-            <h4 className="font-display text-sm font-semibold tracking-wide text-white">Contact Us</h4>
-            <ul className="mt-6 space-y-4">
-              <li className="flex gap-3 text-sm text-slate-400 leading-relaxed">
-                <MapPin className="h-5 w-5 text-cyan-500 shrink-0" />
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-slate-200">Ventures & Craft</h4>
+            <ul className="mt-4 space-y-2.5">
+              <li>
+                <Link to="/ventures" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Proprietary Ventures</Link>
+              </li>
+              <li>
+                <Link to="/work" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Selected Work & Case Studies</Link>
+              </li>
+              <li>
+                <Link to="/partnerships" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Partnership Programs</Link>
+              </li>
+              <li>
+                <Link to="/process" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Development Process</Link>
+              </li>
+              <li>
+                <Link to="/technology" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Technology Stack</Link>
+              </li>
+              <li>
+                <Link to="/insights" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Insights & Articles</Link>
+              </li>
+              <li>
+                <Link to="/events" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Events & Webinars</Link>
+              </li>
+              <li>
+                <Link to="/student-projects" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">IT Academy Capstones</Link>
+              </li>
+              <li>
+                <Link to="/careers" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Careers at SaroHub</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact & Newsletter */}
+          <div>
+            <h4 className="font-display text-xs font-bold uppercase tracking-wider text-slate-200">Connect With Us</h4>
+            <ul className="mt-4 space-y-3">
+              <li className="flex gap-2.5 text-xs text-slate-400 leading-relaxed">
+                <MapPin className="h-4 w-4 text-blue-400 shrink-0 mt-0.5" />
                 <span>{settings.office_address || 'Roshan Electric Store Building 3rd Floor, Skardu, Gilgit-Baltistan, Pakistan'}</span>
               </li>
-              <li className="flex gap-3 text-sm text-slate-400">
-                <Mail className="h-5 w-5 text-cyan-500 shrink-0" />
-                <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="hover:text-cyan-400 transition-colors">
+              <li className="flex gap-2.5 text-xs text-slate-400">
+                <Mail className="h-4 w-4 text-blue-400 shrink-0" />
+                <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="hover:text-blue-400 transition-colors">
                   {settings.email || 'info@sarohub.com'}
                 </a>
               </li>
-              <li className="flex gap-3 text-sm text-slate-400">
-                <Phone className="h-5 w-5 text-cyan-500 shrink-0" />
+              <li className="flex gap-2.5 text-xs text-slate-400">
+                <Phone className="h-4 w-4 text-blue-400 shrink-0" />
                 <span>{settings.phone || '+92 355 58668 75'}</span>
               </li>
-              {settings.whatsapp && (
-                <li className="flex gap-3 text-sm text-slate-400">
-                  <MessageSquare className="h-5 w-5 text-emerald-500 shrink-0" />
-                  <span>WhatsApp: {settings.whatsapp}</span>
-                </li>
-              )}
             </ul>
-          </div>
 
-          {/* Column 4: Newsletter Subscriber Form */}
-          <div>
-            <h4 className="font-display text-sm font-semibold tracking-wide text-white">Stay Updated</h4>
-            <p className="mt-6 text-sm text-slate-400 leading-relaxed">
-              Subscribe for updates on our latest ventures, technology insights, and products.
-            </p>
-            <form onSubmit={handleSubscribe} className="mt-6 flex flex-col gap-2">
+            <form onSubmit={handleSubscribe} className="mt-5 flex flex-col gap-2">
               <div className="relative">
                 <input
                   type="email"
                   required
-                  placeholder="your.email@company.com"
+                  placeholder="haider.ali@sarohub.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 pr-12 text-sm text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  className="w-full rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 pr-10 text-xs text-white placeholder-slate-500 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
                 />
                 <button
                   type="submit"
                   disabled={loading}
-                  className="absolute right-1 top-1 flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-90 disabled:opacity-50 text-white transition-opacity cursor-pointer"
+                  className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-md bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white transition-opacity cursor-pointer"
                   aria-label="Subscribe"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="h-3 w-3" />
                 </button>
               </div>
 
               {status && (
-                <div className={`text-xs mt-2 font-medium ${status.type === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                <div className={`text-[11px] mt-1 font-medium ${status.type === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}>
                   {status.message}
                 </div>
               )}

@@ -6,15 +6,44 @@ import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 
 export default function VentureSection() {
-  const [ventures, setVentures] = useState<Venture[]>([]);
-  const [loading, setLoading] = useState(true);
+  const cached = api.getCachedVentures();
+  const [ventures, setVentures] = useState<Venture[]>(() => {
+    if (cached && cached.length > 0) {
+      return (cached as Venture[]).filter((v) => v.published);
+    }
+    return [
+      {
+        id: 1,
+        name: 'Alin316 (School Management System)',
+        slug: 'alin316-school-management-system',
+        tagline: 'Comprehensive school and institute management ecosystem',
+        description: 'An enterprise-grade, cloud-based education management system engineered to automate admissions, academics, fee operations, exams, attendance, and multi-campus reporting.',
+        category: 'EdTech • Enterprise SaaS',
+        status: 'In Development',
+        keyCapabilities: ['Multi-Campus Administration', 'Automated Fee Management', 'Student & Parent Portals'],
+        technologies: ['React', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
+        featured: true,
+        order: 1,
+        published: true,
+        coverImage: '/uploads/venture-cover-0-17886',
+        websiteUrl: '',
+        demoUrl: '',
+        industry: 'Education Technology (EdTech)',
+        targetMarket: 'Private Schools, Academies & Multi-Campus Institutions',
+        businessModel: 'B2B SaaS Subscription Model',
+      }
+    ];
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     api
       .getVentures()
       .then((data) => {
         const published = (data as Venture[]).filter((v) => v.published);
-        setVentures(published);
+        if (published.length > 0) {
+          setVentures(published);
+        }
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -23,7 +52,7 @@ export default function VentureSection() {
   return (
     <section
       id="ventures"
-      className="py-24 relative overflow-hidden border-b grid-bg"
+      className="pt-8 pb-14 sm:pt-10 sm:pb-16 relative overflow-hidden border-b grid-bg"
       style={{ backgroundColor: 'var(--bg-app)', borderColor: 'var(--border-app)' }}
     >
       {/* Background glows */}
@@ -32,7 +61,7 @@ export default function VentureSection() {
 
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -36,15 +36,18 @@ const STANDARD_FIELDS_MAP: Record<string, OpportunityField> = {
 };
 
 const downloadDocument = async (fileUrl: string, fileName?: string, onError?: (message: string) => void) => {
+  if (!fileUrl) {
+    onError?.('Document URL is missing.');
+    return;
+  }
   const originalName = (fileName || 'document').replace(/[^a-zA-Z0-9._-]/g, '_');
   const downloadName = /\.pdf$/i.test(originalName) ? originalName : `${originalName}.pdf`;
-  const downloadEndpoint = `/api/download-document?url=${encodeURIComponent(fileUrl)}&filename=${encodeURIComponent(downloadName)}`;
+  const token = getAuthToken() || localStorage.getItem('sarohub_auth_token') || localStorage.getItem('sarohub_token') || '';
+  const downloadEndpoint = `/api/download-document?url=${encodeURIComponent(fileUrl)}&filename=${encodeURIComponent(downloadName)}${token ? `&token=${encodeURIComponent(token)}` : ''}`;
 
   try {
     const response = await fetch(downloadEndpoint, {
-      headers: {
-        Authorization: `Bearer ${getAuthToken() || ''}`
-      }
+      headers: token ? { Authorization: `Bearer ${token}` } : {}
     });
     if (!response.ok) throw new Error(`Download failed with status ${response.status}`);
 
@@ -55,10 +58,20 @@ const downloadDocument = async (fileUrl: string, fileName?: string, onError?: (m
     document.body.appendChild(link);
     link.click();
     link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-  } catch (error) {
-    console.error('Document download failed:', error);
-    onError?.('The CV could not be downloaded. Please restart the server and try again.');
+    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+  } catch (error: any) {
+    console.warn('Proxy download failed, attempting direct download stream:', error);
+    try {
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = downloadEndpoint;
+      fallbackLink.download = downloadName;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      fallbackLink.remove();
+    } catch (fallbackErr) {
+      console.error('All document download attempts failed:', error);
+      onError?.(error.message || 'The document could not be downloaded. Please try again.');
+    }
   }
 };
 
@@ -1843,16 +1856,26 @@ export default function AdminOpportunitiesModule({ onNotify }: AdminOpportunitie
                       {app.uploaded_documents && app.uploaded_documents.length > 0 ? (
                         <div className="flex flex-col items-start gap-1.5">
                           {app.uploaded_documents.map((doc, index) => (
-                            <button
-                              key={`${doc.fileUrl}-${index}`}
-                              type="button"
-                              onClick={() => downloadDocument(doc.fileUrl, doc.fileName || doc.fieldLabel, (message) => triggerAlert('Download Failed', message))}
-                              className="inline-flex max-w-[180px] items-center gap-1.5 rounded border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 text-[10px] font-mono font-bold text-cyan-400 transition-colors hover:bg-cyan-500 hover:text-slate-950"
-                              title={`Download ${doc.fileName || doc.fieldLabel}`}
-                            >
-                              <Download className="h-3 w-3 shrink-0" />
-                              <span className="truncate">{doc.fileName || doc.fieldLabel}</span>
-                            </button>
+                            <div key={`${doc.fileUrl}-${index}`} className="flex items-center gap-1">
+                              <a
+                                href={`/api/documents/view?url=${encodeURIComponent(doc.fileUrl)}&filename=${encodeURIComponent(doc.fileName || doc.fieldLabel || 'document.pdf')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex max-w-[140px] items-center gap-1 rounded border border-cyan-500/30 bg-cyan-500/10 px-2 py-1 text-[10px] font-mono font-bold text-cyan-300 transition-colors hover:bg-cyan-500 hover:text-slate-950"
+                                title={`Preview ${doc.fileName || doc.fieldLabel}`}
+                              >
+                                <Eye className="h-3 w-3 shrink-0" />
+                                <span className="truncate">{doc.fileName || doc.fieldLabel}</span>
+                              </a>
+                              <button
+                                type="button"
+                                onClick={() => downloadDocument(doc.fileUrl, doc.fileName || doc.fieldLabel, (message) => triggerAlert('Download Failed', message))}
+                                className="p-1 rounded border border-slate-700 bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+                                title={`Download ${doc.fileName || doc.fieldLabel}`}
+                              >
+                                <Download className="h-3 w-3 shrink-0" />
+                              </button>
+                            </div>
                           ))}
                         </div>
                       ) : (
@@ -2517,13 +2540,25 @@ export default function AdminOpportunitiesModule({ onNotify }: AdminOpportunitie
                               <FileText className="h-4 w-4 text-cyan-400 shrink-0" />
                               <span className="text-slate-300 font-medium truncate max-w-[200px]">{doc.fileName || doc.fieldLabel}</span>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => downloadDocument(doc.fileUrl, doc.fileName || doc.fieldLabel, (message) => triggerAlert('Download Failed', message))}
-                              className="text-cyan-400 flex items-center gap-1 font-mono text-[10px] bg-slate-900 hover:bg-cyan-500 hover:text-slate-950 px-2.5 py-1 rounded border border-slate-800 transition-all font-bold shrink-0"
-                            >
-                              Download <ExternalLink className="h-3 w-3" />
-                            </button>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <a
+                                href={`/api/documents/view?url=${encodeURIComponent(doc.fileUrl)}&filename=${encodeURIComponent(doc.fileName || doc.fieldLabel || 'document.pdf')}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-mono text-[10px] bg-slate-900 hover:bg-cyan-950 px-2 py-1 rounded border border-cyan-500/30 transition-all font-bold"
+                                title="Open document preview in new tab"
+                              >
+                                <Eye className="h-3 w-3" /> Preview
+                              </a>
+                              <button
+                                type="button"
+                                onClick={() => downloadDocument(doc.fileUrl, doc.fileName || doc.fieldLabel, (message) => triggerAlert('Download Failed', message))}
+                                className="text-slate-200 flex items-center gap-1 font-mono text-[10px] bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 px-2.5 py-1 rounded border border-slate-700 transition-all font-bold cursor-pointer"
+                                title="Download document to device"
+                              >
+                                <Download className="h-3 w-3" /> Download
+                              </button>
+                            </div>
                           </div>
                         ))}
                       </div>

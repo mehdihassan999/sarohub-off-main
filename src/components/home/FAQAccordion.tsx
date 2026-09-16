@@ -7,10 +7,29 @@ interface FAQProps {
 }
 
 export default function FAQAccordion({ faqs }: FAQProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // Initialize open indices with all items by default so content is not hidden
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0, 1, 2, 3, 4]));
 
   const toggleIndex = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
+    setOpenIndices(prev => {
+      const next = new Set(prev);
+      if (next.has(idx)) {
+        next.delete(idx);
+      } else {
+        next.add(idx);
+      }
+      return next;
+    });
+  };
+
+  const allOpen = faqs.length > 0 && openIndices.size === faqs.length;
+
+  const toggleAll = () => {
+    if (allOpen) {
+      setOpenIndices(new Set());
+    } else {
+      setOpenIndices(new Set(faqs.map((_, idx) => idx)));
+    }
   };
 
   return (
@@ -25,22 +44,37 @@ export default function FAQAccordion({ faqs }: FAQProps) {
       <div className="mx-auto max-w-4xl px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/8 border border-blue-500/20 text-blue-400">
-            Knowledge Hub
-          </span>
-          <h2 
-            className="font-display text-3xl sm:text-4xl font-black tracking-tight mt-6"
-            style={{ color: 'var(--text-main)' }}
-          >
-            Frequently Asked Questions
-          </h2>
-          <p 
-            className="mt-4 text-sm font-medium leading-relaxed"
-            style={{ color: 'var(--text-body)' }}
-          >
-            Find immediate answers regarding SaroHub relational database structures, custom SaaS deployment, SLAs, and data security.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+          <div>
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/8 border border-blue-500/20 text-blue-400">
+              Knowledge Hub
+            </span>
+            <h2 
+              className="font-display text-3xl sm:text-4xl font-black tracking-tight mt-3"
+              style={{ color: 'var(--text-main)' }}
+            >
+              Frequently Asked Questions
+            </h2>
+            <p 
+              className="mt-2 text-sm font-medium leading-relaxed max-w-xl"
+              style={{ color: 'var(--text-body)' }}
+            >
+              Find immediate answers regarding SaroHub relational database structures, custom SaaS deployment, SLAs, and data security.
+            </p>
+          </div>
+
+          {faqs.length > 0 && (
+            <button
+              type="button"
+              onClick={toggleAll}
+              className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-slate-900 border border-slate-700/80 text-blue-400 hover:border-blue-500/50 hover:bg-slate-800/80 transition-all cursor-pointer shrink-0 shadow-sm"
+            >
+              <span>{allOpen ? 'Collapse All' : 'Expand All'}</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-950 border border-blue-800/60 text-blue-300">
+                {openIndices.size}/{faqs.length} Open
+              </span>
+            </button>
+          )}
         </div>
 
         {faqs.length === 0 ? (
@@ -57,7 +91,7 @@ export default function FAQAccordion({ faqs }: FAQProps) {
         ) : (
           <div className="space-y-4">
             {faqs.map((faq, idx) => {
-              const isOpen = openIndex === idx;
+              const isOpen = openIndices.has(idx);
 
               return (
                 <div

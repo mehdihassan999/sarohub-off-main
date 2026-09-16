@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, MapPin, ArrowUpRight, X, Sparkles, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { api } from '../../api';
@@ -262,6 +263,16 @@ export default function UpcomingEvents({ events }: EventsProps) {
             })}
           </div>
         )}
+
+        <div className="mt-12 text-center">
+          <Link
+            to="/events"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600/10 border border-blue-500/30 text-blue-400 hover:bg-blue-600 hover:text-white transition-all text-xs font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-blue-500/20"
+          >
+            <span>Explore Full Events Calendar &amp; Schedule</span>
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
 
       </div>
 

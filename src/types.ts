@@ -9,25 +9,49 @@ export interface SEOSettings {
   meta_title: string;
   meta_description: string;
   meta_keywords: string;
+  focus_keyword?: string;
+  canonical_url?: string;
   og_title?: string;
   og_description?: string;
   og_image?: string;
   twitter_card?: string;
-  canonical_url?: string;
+  twitter_image?: string;
+  robots_index?: boolean | string;
+  robots_follow?: boolean | string;
+  no_index?: boolean;
 }
 
 export interface Service {
   id: number;
   title: string;
   slug: string;
+  category?: string;
   banner_url: string;
+  hero_headline?: string;
   short_description: string;
   description: string;
   benefits: string[]; // Handled as array
+  problems_solved?: string[];
+  capabilities?: { title: string; description: string; highlights?: string[] }[];
+  target_audience?: string[];
+  business_benefits?: { title: string; description: string }[];
+  process_steps?: { step: number; title: string; description: string }[];
   technologies: string[]; // Handled as array
   faqs: { question: string; answer: string }[];
+  featured?: boolean;
+  order?: number;
+  published?: boolean;
+  meta_title?: string;
+  meta_description?: string;
+  related_projects?: string[];
   created_at: string;
   updated_at: string;
+}
+
+export interface ProjectResultMetric {
+  metric: string;
+  label: string;
+  detail?: string;
 }
 
 export interface Project {
@@ -36,17 +60,41 @@ export interface Project {
   slug: string;
   client_name: string;
   category: string;
-  technologies: string[];
+  secondary_categories?: string[];
+  industry?: string;
+  project_type?: string;
+  positioning_statement?: string;
+  what_we_solved?: string;
+  engagement?: string;
+  technologies: string[] | any;
   short_description: string;
   description: string;
   case_study?: string;
+  problem_challenge?: string;
+  our_approach?: string;
+  solution?: string;
+  key_features?: string[] | string;
+  features?: string[];
+  challenges?: any[];
+  solutions?: any[];
+  sarohub_role?: string[];
+  overview?: any;
+  results_impact?: string[] | string | ProjectResultMetric[] | any;
+  outcome?: string;
+  testimonial?: any;
+  testimonial_id?: number | null;
   live_url?: string;
   github_url?: string;
   completion_date: string;
+  status?: 'In Production' | 'Completed' | 'Ongoing' | 'Archived' | 'Delivered' | string;
   thumbnail_url: string;
   screenshots?: string[];
-  created_at: string;
-  updated_at: string;
+  gallery?: string[];
+  is_draft?: boolean;
+  featured?: boolean;
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface StudentProject {
@@ -157,6 +205,10 @@ export interface BlogCategory {
   id: number;
   name: string;
   slug: string;
+  description?: string;
+  icon?: string;
+  is_published?: boolean;
+  order?: number;
 }
 
 export interface BlogTag {
@@ -174,10 +226,14 @@ export interface Blog {
   category_id: number;
   featured_image_url: string;
   content: string;
+  short_description?: string;
   reading_time: string;
   is_featured: boolean;
+  is_draft?: boolean;
+  published_at?: string;
   meta_title?: string;
   meta_description?: string;
+  og_image?: string;
   created_at: string;
   tags: number[]; // Array of tag IDs
 }
@@ -200,6 +256,8 @@ export interface Career {
   department: string;
   salary: string;
   experience: string;
+  job_type?: string;
+  location?: string;
   skills: string[];
   description: string;
   banner_url?: string;
@@ -246,11 +304,18 @@ export interface TeamMember {
 export interface Testimonial {
   id: number;
   client_name: string;
+  client_email?: string;
   client_role: string;
   client_company: string;
   client_avatar?: string;
+  company_logo?: string;
   rating: number;
   feedback: string;
+  project_id?: number | null;
+  service_id?: number | null;
+  featured?: boolean;
+  published?: boolean;
+  status?: 'Draft' | 'Pending' | 'Approved' | 'Rejected';
   created_at: string;
 }
 
@@ -276,8 +341,30 @@ export interface ContactMessage {
 export interface NewsletterSubscriber {
   id: number;
   email: string;
+  name?: string;
   is_active: boolean;
+  status?: 'active' | 'unsubscribed';
+  tags?: string[];
+  source?: string;
   subscribed_at: string;
+}
+
+export interface NewsletterCampaign {
+  id: number;
+  name?: string;
+  title?: string;
+  subject: string;
+  content: string;
+  featured_image?: string;
+  recipient_segment?: string;
+  target_audience?: string;
+  scheduled_at?: string;
+  status: 'Draft' | 'Scheduled' | 'Sent';
+  sent_at?: string;
+  sent_count?: number;
+  recipients_count?: number;
+  created_at: string;
+  updated_at?: string;
 }
 
 export interface ActivityLog {
@@ -384,19 +471,49 @@ export interface EventRegistration {
   status?: string;
 }
 
-export type PartnerCategory = 'Partner' | 'Agency' | 'Investor' | 'Collaborator' | 'Sponsor';
+export type PartnerCategory = 
+  | 'Government Sector'
+  | 'Government Collaboration'
+  | 'Agency Partner' 
+  | 'Technology Partner' 
+  | 'Strategic Partner' 
+  | 'Development Partner' 
+  | 'Education Partner' 
+  | 'NGO Collaboration' 
+  | 'Business Partner' 
+  | 'Community Partner' 
+  | 'Research Partner' 
+  | 'Academic & Research'
+  | 'Investor & Venture'
+  | 'Ecosystem Partner'
+  | 'Partner' 
+  | 'Agency' 
+  | 'Investor' 
+  | 'Collaborator' 
+  | string;
 
 export interface Partner {
   id: number;
   name: string;
   category: PartnerCategory;
+  partnership_type?: string;
+  org_type?: string;
   logo_url: string;
+  cover_url?: string;
+  banner_url?: string;
   website_url?: string;
+  short_description?: string;
   description?: string;
+  collaboration_description?: string;
+  start_date?: string;
+  end_date?: string;
+  status?: 'Active' | 'Completed' | 'Ongoing' | string;
   images?: string[];
   gallery?: string[];
   featured: boolean;
+  published?: boolean;
   order: number;
+  slug?: string;
   created_at: string;
 }
 
@@ -591,6 +708,182 @@ export interface NavigationItem {
 export interface NavigationMenu {
   headerMenu: NavigationItem[];
   footerMenu: NavigationItem[];
+}
+
+export interface OutgoingEmailLog {
+  id: number;
+  to: string;
+  subject: string;
+  category: string;
+  status: 'delivered' | 'simulated' | 'failed';
+  error?: string;
+  created_at: string;
+  html?: string;
+}
+
+export interface SmtpConfig {
+  smtp_host?: string;
+  smtp_port?: string;
+  smtp_user?: string;
+  smtp_pass?: string;
+  smtp_secure?: string;
+  smtp_from_name?: string;
+  smtp_from_email?: string;
+}
+
+export interface ConsultationBooking {
+  id: number;
+  client_name: string;
+  client_email: string;
+  client_phone?: string;
+  company_name?: string;
+  consultation_type: string; // e.g. 'Discovery & Technical Feasibility', 'Architecture & Scoping', 'AI & Cloud Strategy', 'Codebase Audit'
+  meeting_platform: string; // 'Google Meet', 'Zoom', 'WhatsApp Call', 'Phone'
+  scheduled_date: string; // 'YYYY-MM-DD'
+  scheduled_time: string; // e.g. '10:00 AM PKT'
+  timezone: string;
+  project_summary?: string;
+  estimated_budget?: string;
+  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled';
+  meeting_link?: string;
+  notes?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface ProjectEstimateQuote {
+  id: number;
+  client_name?: string;
+  client_email?: string;
+  client_phone?: string;
+  company_name?: string;
+  project_type: string;
+  scale_tier: string;
+  selected_modules: string[];
+  timeline_speed: string;
+  currency: 'PKR' | 'USD';
+  estimated_cost_min: number;
+  estimated_cost_max: number;
+  estimated_weeks_min: number;
+  estimated_weeks_max: number;
+  phases_breakdown: {
+    phase: string;
+    weeks: number;
+    description: string;
+  }[];
+  project_notes?: string;
+  status: 'New' | 'Contacted' | 'Proposal Sent' | 'Closed';
+  created_at: string;
+}
+
+export interface TrustBadge {
+  id: number;
+  platform: string;
+  badge_title: string;
+  rating_score: string;
+  review_count: string;
+  badge_icon: string;
+  external_url: string;
+  category: string;
+  is_active: boolean;
+  sort_order: number;
+}
+
+export interface ClientEndorsement {
+  id: number;
+  client_name: string;
+  client_title: string;
+  company_name: string;
+  company_logo?: string;
+  avatar_url?: string;
+  project_title: string;
+  quote: string;
+  outcome_metric?: string;
+  video_url?: string;
+  audio_url?: string;
+  media_type: 'quote' | 'video' | 'audio';
+  rating: number;
+  country?: string;
+  is_featured: boolean;
+  sort_order?: number;
+}
+
+export interface EngagementModel {
+  id: number;
+  title: string;
+  slug: string;
+  tagline: string;
+  badge?: string;
+  turnaround: string;
+  pricing_type: string;
+  ip_ownership: string;
+  team_structure: string;
+  best_for: string;
+  features: string[];
+  sla_guarantee: string;
+  cta_label: string;
+  cta_link: string;
+  is_featured: boolean;
+  sort_order: number;
+}
+
+export interface LeadMagnet {
+  id: number;
+  title: string;
+  slug: string;
+  category: string;
+  pages: string;
+  description: string;
+  cover_image: string;
+  download_url: string;
+  key_takeaways: string[];
+  download_count: number;
+  is_featured: boolean;
+}
+
+export interface FeasibilityAudit {
+  id: number;
+  full_name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  project_name: string;
+  tech_stack?: string;
+  project_stage: string;
+  repo_or_spec_link?: string;
+  timeline?: string;
+  budget_range?: string;
+  challenges?: string;
+  status: 'Pending' | 'In Review' | 'Completed' | 'Archived';
+  admin_notes?: string;
+  created_at: string;
+}
+
+export interface SolutionMatch {
+  id: number;
+  contact_name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  project_type: string;
+  stage: string;
+  timeline: string;
+  budget: string;
+  recommended_stack: string[];
+  recommended_model: string;
+  estimated_weeks: string;
+  created_at: string;
+  status: 'New' | 'Contacted' | 'Closed';
+}
+
+export interface IpGuarantee {
+  guarantee_headline: string;
+  guarantee_subheading: string;
+  bilateral_nda_policy: string;
+  code_ownership_terms: string;
+  escrow_and_repos: string;
+  security_clearance: string;
+  sample_nda_template_url: string;
 }
 
 

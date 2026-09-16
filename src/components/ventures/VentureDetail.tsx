@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Venture } from '../../types';
 import { api } from '../../api';
 import VentureStatus from './VentureStatus';
+import VentureStrategicBlueprint from './VentureStrategicBlueprint';
 import { motion } from 'motion/react';
 import {
   ArrowLeft, ExternalLink, Globe, Cpu, Users, Target, Layers,
@@ -11,18 +12,53 @@ import {
 
 export default function VentureDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const [venture, setVenture] = useState<Venture | null>(null);
-  const [loading, setLoading] = useState(true);
+  const cached = api.getCachedVentures();
+  const initialVenture = (() => {
+    if (cached) {
+      const match = cached.find((v: any) => v.slug === slug || String(v.id) === slug);
+      if (match) return match as Venture;
+    }
+    // Instant fallback if slug is default venture
+    if (slug === 'alin316-school-management-system' || slug === '1') {
+      return {
+        id: 1,
+        name: 'Alin316 (School Management System)',
+        slug: 'alin316-school-management-system',
+        tagline: 'Comprehensive school and institute management ecosystem',
+        description: 'An enterprise-grade, cloud-based education management system engineered to automate admissions, academics, fee operations, exams, attendance, and multi-campus reporting.',
+        category: 'EdTech • Enterprise SaaS',
+        status: 'In Development',
+        keyCapabilities: ['Multi-Campus Administration', 'Automated Fee Management', 'Student & Parent Portals'],
+        technologies: ['React', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
+        featured: true,
+        order: 1,
+        published: true,
+        coverImage: '/uploads/venture-cover-0-17886',
+        websiteUrl: '',
+        demoUrl: '',
+        industry: 'Education Technology (EdTech)',
+        targetMarket: 'Private Schools, Academies & Multi-Campus Institutions',
+        businessModel: 'B2B SaaS Subscription Model',
+      } as Venture;
+    }
+    return null;
+  })();
+
+  const [venture, setVenture] = useState<Venture | null>(initialVenture);
+  const [loading, setLoading] = useState<boolean>(() => !initialVenture);
   const [error, setError] = useState<string | null>(null);
   const [galleryIdx, setGalleryIdx] = useState(0);
 
   useEffect(() => {
     if (!slug) return;
-    setLoading(true);
     api
       .getVentureBySlug(slug)
-      .then((data) => setVenture(data as Venture))
-      .catch(() => setError('Venture not found.'))
+      .then((data) => {
+        if (data) setVenture(data as Venture);
+      })
+      .catch(() => {
+        if (!initialVenture) setError('Venture not found.');
+      })
       .finally(() => setLoading(false));
   }, [slug]);
 
@@ -48,7 +84,7 @@ export default function VentureDetail() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-6" style={{ backgroundColor: 'var(--bg-app)' }}>
         <p className="text-lg font-bold text-red-400">{error || 'Venture not found.'}</p>
-        <Link to="/#ventures" className="text-blue-400 hover:text-blue-300 text-sm font-bold underline">
+        <Link to="/ventures" className="text-blue-400 hover:text-blue-300 text-sm font-bold underline">
           ← Back to Ventures
         </Link>
       </div>
@@ -76,10 +112,10 @@ export default function VentureDetail() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-app)]/80 to-[var(--bg-app)]" />
           </div>
         )}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
-          <div className="mb-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 pt-5 pb-4 sm:pt-6 sm:pb-5">
+          <div className="mb-2.5">
             <Link
-              to="/#ventures"
+              to="/ventures"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
@@ -87,7 +123,7 @@ export default function VentureDetail() {
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 mb-6">
+          <div className="flex flex-wrap items-center gap-3 mb-2.5">
             <span className="text-[11px] font-mono font-bold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
               {ventureLabel}
             </span>
@@ -95,10 +131,10 @@ export default function VentureDetail() {
           </div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+            transition={{ duration: 0.5 }}
+            className="font-display text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight"
             style={{ color: 'var(--text-main)' }}
           >
             {venture.name}
@@ -106,10 +142,10 @@ export default function VentureDetail() {
 
           {venture.tagline && (
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-4 text-lg sm:text-xl font-semibold italic"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="mt-1.5 text-base sm:text-lg font-semibold italic"
               style={{ color: 'var(--text-body)' }}
             >
               "{venture.tagline}"
@@ -117,9 +153,9 @@ export default function VentureDetail() {
           )}
 
           {venture.category && (
-            <div className="mt-5">
+            <div className="mt-2.5">
               <span
-                className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded border"
+                className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded border"
                 style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)', color: 'var(--text-muted)' }}
               >
                 {venture.category}
@@ -128,42 +164,61 @@ export default function VentureDetail() {
           )}
 
           {/* External links */}
-          <div className="mt-8 flex flex-wrap gap-3">
-            {venture.websiteUrl && (
-              <a
-                href={venture.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/20"
-              >
-                <Globe className="h-3.5 w-3.5" />
-                Visit Website
-              </a>
-            )}
-            {venture.demoUrl && (
-              <a
-                href={venture.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider hover:border-blue-400 hover:text-blue-400 transition-all"
-                style={{ borderColor: 'var(--border-app)', color: 'var(--text-main)' }}
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                Live Demo
-              </a>
-            )}
-          </div>
+          {(venture.websiteUrl || venture.demoUrl) && (
+            <div className="mt-4 flex flex-wrap gap-3">
+              {venture.websiteUrl && (
+                <a
+                  href={venture.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/20"
+                >
+                  <Globe className="h-3.5 w-3.5" />
+                  Visit Website
+                </a>
+              )}
+              {venture.demoUrl && (
+                <a
+                  href={venture.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-xs font-bold uppercase tracking-wider hover:border-blue-400 hover:text-blue-400 transition-all"
+                  style={{ borderColor: 'var(--border-app)', color: 'var(--text-main)' }}
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  Live Demo
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-16 space-y-16">
+      <div className="max-w-5xl mx-auto px-6 pt-4 sm:pt-5 pb-16 space-y-7 sm:space-y-8">
 
-        {/* Description */}
+        {/* Description / About */}
         {venture.description && (
-          <section>
-            <h2 className="font-display text-2xl font-bold mb-4" style={{ color: 'var(--text-main)' }}>About</h2>
-            <p className="text-base leading-relaxed" style={{ color: 'var(--text-body)' }}>{venture.description}</p>
+          <section className="rounded-2xl border p-5 sm:p-6" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)' }}>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-400">Venture Overview</span>
+            </div>
+            <h2 className="font-display text-xl sm:text-2xl font-bold mb-2.5" style={{ color: 'var(--text-main)' }}>
+              About {venture.name}
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed whitespace-pre-line font-medium" style={{ color: 'var(--text-body)' }}>
+              {venture.description}
+            </p>
           </section>
+        )}
+
+        {/* Strategic Blueprint: Industry & Sector, Target Market & Business Model */}
+        {(venture.industry || venture.targetMarket || venture.businessModel) && (
+          <VentureStrategicBlueprint
+            industry={venture.industry}
+            targetMarket={venture.targetMarket}
+            businessModel={venture.businessModel}
+            ventureName={venture.name}
+          />
         )}
 
         {/* Problem & Solution */}
@@ -310,30 +365,6 @@ export default function VentureDetail() {
               </div>
             )}
           </section>
-        )}
-
-        {/* Target Market & Business Model */}
-        {(venture.targetMarket || venture.businessModel || venture.industry) && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {venture.industry && (
-              <div className="rounded-xl border p-5" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)' }}>
-                <p className="text-[10px] font-mono font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>Industry</p>
-                <p className="text-sm font-bold" style={{ color: 'var(--text-main)' }}>{venture.industry}</p>
-              </div>
-            )}
-            {venture.targetMarket && (
-              <div className="rounded-xl border p-5" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)' }}>
-                <p className="text-[10px] font-mono font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>Target Market</p>
-                <p className="text-sm font-medium" style={{ color: 'var(--text-body)' }}>{venture.targetMarket}</p>
-              </div>
-            )}
-            {venture.businessModel && (
-              <div className="rounded-xl border p-5" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)' }}>
-                <p className="text-[10px] font-mono font-bold uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)' }}>Business Model</p>
-                <p className="text-sm font-medium" style={{ color: 'var(--text-body)' }}>{venture.businessModel}</p>
-              </div>
-            )}
-          </div>
         )}
 
         {/* Current Status */}

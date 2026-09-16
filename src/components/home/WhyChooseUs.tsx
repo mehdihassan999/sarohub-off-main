@@ -39,27 +39,27 @@ export default function WhyChooseUs({ settings = {} }: WhyChooseUsProps) {
     {
       icon: 'CheckCircle',
       title: settings.why_1_title || 'Business-First Engineering',
-      shortDescription: settings.why_1_desc || 'We solve the business problem before selecting technology.',
+      shortDescription: settings.why_1_desc || 'We understand the business problem before building the technology.',
+    },
+    {
+      icon: 'Target',
+      title: settings.why_2_title || 'Product Mindset',
+      shortDescription: settings.why_2_desc || 'We build with users, scalability and long-term growth in mind.',
     },
     {
       icon: 'Cpu',
-      title: settings.why_2_title || 'AI Where It Matters',
-      shortDescription: settings.why_2_desc || 'Targeted AI models that create measurable impact.',
+      title: settings.why_3_title || 'AI-Ready',
+      shortDescription: settings.why_3_desc || 'We integrate practical AI and automation where it creates real value.',
     },
     {
-      icon: 'TrendingUp',
-      title: settings.why_3_title || 'Product Thinking',
-      shortDescription: settings.why_3_desc || 'Built for usability, retention, and long-term growth.',
-    },
-    {
-      icon: 'Award',
-      title: settings.why_4_title || 'One Technology Partner',
-      shortDescription: settings.why_4_desc || 'Strategy, design, development, and support under one partner.',
+      icon: 'HeartHandshake',
+      title: settings.why_4_title || 'Long-Term Partnership',
+      shortDescription: settings.why_4_desc || 'We support products beyond initial development.',
     },
   ];
 
-  const sectionHeading = settings.why_heading || 'Why Build With SaroHub?';
-  const sectionSubtitle = settings.why_subtitle || 'Combining business-first insight, product-driven engineering, and dedicated long-term partnership.';
+  const sectionHeading = settings.why_heading || 'Why SaroHub';
+  const sectionSubtitle = settings.why_subtitle || 'Combining business-first engineering, product-driven execution, and dedicated long-term partnership.';
 
   const displayPoints = items.length > 0 ? items : defaultFallbackPoints;
 

@@ -76,7 +76,7 @@ export default function LatestBlogs({ blogs }: BlogsProps) {
             {recentBlogs.map((item, idx) => (
               <Link
                 key={item.id || idx}
-                to={`/blog?id=${item.id}`}
+                to={`/blog/${item.slug || item.id}`}
                 className="block"
               >
                 <motion.div

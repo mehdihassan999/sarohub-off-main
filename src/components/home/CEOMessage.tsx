@@ -11,9 +11,9 @@ const CEO_FULL_MESSAGE = `Bismillah ir-Rahman ir-Rahim.
 
 In the Name of Allah, the Most Gracious, the Most Merciful.
 
-When I founded SaroHub Technologies, my vision was clear: to build a world-class technology company that not only creates outstanding software and digital solutions, but also uplifts our community in Gilgit-Baltistan and Pakistan at large. Coming from Skardu, I know firsthand that talent and ambition are not limited by geography—only by opportunity.
+When I founded SaroHub Technologies, my vision was clear: to build a technology company that not only creates reliable software and digital solutions, but also uplifts our community in Gilgit-Baltistan and Pakistan at large. Coming from Skardu, I know firsthand that talent and ambition are not limited by geography—only by opportunity.
 
-SaroHub is our answer to that challenge. We are building ventures, launching products, and delivering enterprise-grade solutions that compete on the global stage, while staying deeply rooted in our local identity and values. We believe that innovation driven by purpose creates lasting impact.
+SaroHub is our answer to that challenge. We build digital products, launch scalable ventures, and deliver modern technology solutions that serve clients worldwide, while staying deeply rooted in our values. We believe that innovation driven by purpose creates lasting impact.
 
 To our clients and partners: thank you for trusting us with your ambitions. We do not take that trust lightly. Every project, every solution, and every line of code we write carries our commitment to excellence, integrity, and your success.
 
@@ -62,9 +62,9 @@ export default function CEOMessage({ settings }: CEOMessageProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-4 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-4 shadow-xs">
             <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-            <span>OFFICIAL EXECUTIVE ADDRESS</span>
+            <span>A Message From Our CEO</span>
           </div>
 
           <h2
@@ -224,7 +224,7 @@ export default function CEOMessage({ settings }: CEOMessageProps) {
                       className="text-sm sm:text-base font-bold leading-snug italic tracking-tight"
                       style={{ color: 'var(--text-main)' }}
                     >
-                      "Building enterprise-grade technology for a global market, deeply rooted in our identity and empowering our region."
+                      "Building world-class technology for global clients, deeply rooted in our values and empowering our community."
                     </p>
                     <p className="text-xs font-mono text-blue-400 mt-2 font-semibold">
                       — Core Vision & Commitment

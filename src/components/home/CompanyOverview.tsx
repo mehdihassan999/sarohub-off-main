@@ -8,35 +8,35 @@ interface CompanyOverviewProps {
 }
 
 export default function CompanyOverview({ settings = {} }: CompanyOverviewProps) {
-  const overviewTitle = settings.overview_title || 'We Turn Ideas Into Ventures.';
+  const overviewTitle = settings.overview_title || 'We Build Technology That Works.';
   const overviewDescription = settings.overview_description ||
-    'SaroHub Technologies is an entrepreneurship-driven technology company focused on transforming ambitious ideas into products, ventures, and impactful digital businesses. We build ventures of our own while partnering with businesses, agencies, and entrepreneurs to develop technology that solves real problems and creates long-term value.';
-  const overviewTagline = settings.overview_tagline || 'Founded in Gilgit-Baltistan, Pakistan. Building for a global market.';
+    'SaroHub Technologies is a technology company focused on building digital products, modern software solutions, and ambitious new ventures. We partner with businesses, startups, agencies, and entrepreneurs to design, develop, and scale technology that solves real problems and creates lasting value.';
+  const overviewTagline = settings.overview_tagline || 'Founded in Gilgit-Baltistan, Pakistan. Building for clients and users worldwide.';
   const missionText = settings.mission_text ||
-    'To turn ambition into ventures by combining entrepreneurship, technology, AI, research, and execution to build products and businesses that solve meaningful problems and create lasting value.';
+    'To turn ideas into impactful technology by combining practical engineering, modern design, and business-focused thinking.';
   const visionText = settings.vision_text ||
-    'To become a global force in venture creation, transforming bold ideas and real-world challenges into technology-driven businesses that shape the future.';
+    'To be a trusted technology partner and a global builder of innovative products and scalable ventures.';
 
   const highlights = [
     {
       icon: Lightbulb,
-      title: settings.highlight_1_title || 'Entrepreneurial Mindset',
-      desc: settings.highlight_1_desc || 'We think beyond development—identifying opportunities, validating ideas, and building businesses.',
+      title: settings.highlight_1_title || 'Business-First Mindset',
+      desc: settings.highlight_1_desc || 'We focus on understanding your business goals and real user needs before choosing technology.',
     },
     {
       icon: Cpu,
-      title: settings.highlight_2_title || 'Technical Capability',
-      desc: settings.highlight_2_desc || 'We turn complex challenges into reliable, scalable technology.',
+      title: settings.highlight_2_title || 'Reliable Engineering',
+      desc: settings.highlight_2_desc || 'We build scalable, secure, and maintainable software designed for long-term use and high performance.',
     },
     {
       icon: Layers,
       title: settings.highlight_3_title || 'Product Thinking',
-      desc: settings.highlight_3_desc || 'We build around real users, real problems, and long-term business value.',
+      desc: settings.highlight_3_desc || 'Every product is built around intuitive user experience, clean interfaces, and measurable outcomes.',
     },
     {
       icon: HeartHandshake,
-      title: settings.highlight_4_title || 'Long-Term Partnership',
-      desc: settings.highlight_4_desc || 'We build relationships designed to create lasting value for entrepreneurs, businesses, and agencies.',
+      title: settings.highlight_4_title || 'Dedicated Partnership',
+      desc: settings.highlight_4_desc || 'We work closely alongside you as a dependable technology partner from concept to launch and beyond.',
     },
   ];
 

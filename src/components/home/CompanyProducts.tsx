@@ -54,7 +54,7 @@ export default function CompanyProducts({ products }: ProductsProps) {
             transition={{ delay: 0.2 }}
             className="text-sm sm:text-base font-medium leading-relaxed text-slate-400 max-w-2xl mx-auto"
           >
-            We don't just build for others. We build ventures of our own. Discover the proprietary platforms and ecosystems designed by SaroHub.
+            Alongside our client work, we develop and scale our own digital products and ventures. We combine design, engineering, and entrepreneurial execution to create sustainable digital businesses.
           </motion.p>
           <p className="mt-2 text-xs text-slate-500">Showing <strong>{displayProducts.length}</strong> ventures</p>
         </div>

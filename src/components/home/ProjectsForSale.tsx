@@ -7,6 +7,10 @@ interface SaleProjectsProps {
 }
 
 export default function ProjectsForSale({ saleProjects }: SaleProjectsProps) {
+  if (!saleProjects || saleProjects.length === 0) {
+    return null;
+  }
+
   const handleInquiry = (title: string) => {
     // Scroll to contact and populate name/subject if possible
     const contactSection = document.getElementById('contact-preview');
@@ -14,7 +18,7 @@ export default function ProjectsForSale({ saleProjects }: SaleProjectsProps) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
       const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
       if (subjectInput) {
-        subjectInput.value = `Inquiry regarding acquisition of "${title}"`;
+        subjectInput.value = `Inquiry regarding "${title}"`;
       }
     }
   };
@@ -33,35 +37,23 @@ export default function ProjectsForSale({ saleProjects }: SaleProjectsProps) {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/8 border border-emerald-500/20 text-emerald-400">
-            Commercial Software Assets
+            Available Software
           </span>
           <h2 
             className="font-display text-3xl sm:text-4xl font-black tracking-tight mt-6"
             style={{ color: 'var(--text-main)' }}
           >
-            Pre-Built Systems for Purchase
+            Ready-to-Deploy Software
           </h2>
           <p 
             className="mt-4 text-sm font-medium leading-relaxed"
             style={{ color: 'var(--text-body)' }}
           >
-            Acquire fully-tested, source-code-complete enterprise software templates to bootstrap your product delivery instantly.
+            Pre-built software and templates available for immediate deployment and customization.
           </p>
         </div>
 
-        {saleProjects.length === 0 ? (
-          <div 
-            className="text-center py-16 rounded-2xl border font-medium text-sm"
-            style={{ 
-              backgroundColor: 'var(--bg-card)', 
-              borderColor: 'var(--border-app)',
-              color: 'var(--text-muted)'
-            }}
-          >
-            No software templates are listed for acquisition at this moment.
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {saleProjects.map((item, idx) => (
               <motion.div
                 key={item.id || idx}
@@ -174,8 +166,7 @@ export default function ProjectsForSale({ saleProjects }: SaleProjectsProps) {
               </motion.div>
             ))}
           </div>
-        )}
-      </div>
-    </section>
-  );
-}
+        </div>
+      </section>
+    );
+  }

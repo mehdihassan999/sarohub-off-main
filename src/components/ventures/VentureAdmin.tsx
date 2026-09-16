@@ -40,6 +40,51 @@ interface Toast {
   message: string;
 }
 
+// Client-side quick compression to ensure lightning-fast gallery uploads
+async function compressVentureImage(file: File, maxWidth = 1920, maxHeight = 1080, quality = 0.85): Promise<File> {
+  if (!file.type.startsWith('image/') || file.type === 'image/svg+xml' || file.type === 'image/gif') {
+    return file;
+  }
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth || height > maxHeight) {
+          if (width / height > maxWidth / maxHeight) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return resolve(file);
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) return resolve(file);
+            const cleanName = file.name.replace(/\.[^.]+$/, '.webp');
+            resolve(new File([blob], cleanName, { type: 'image/webp', lastModified: Date.now() }));
+          },
+          'image/webp',
+          quality
+        );
+      };
+      img.onerror = () => resolve(file);
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => resolve(file);
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function VentureAdmin() {
   const [ventures, setVentures] = useState<Venture[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +92,8 @@ export default function VentureAdmin() {
   const [editingVenture, setEditingVenture] = useState<Partial<Venture> | null>(null);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
+  const [deletingVenture, setDeletingVenture] = useState<Venture | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [capInput, setCapInput] = useState('');
   const [techInput, setTechInput] = useState('');
   const [galleryUrlInput, setGalleryUrlInput] = useState('');
@@ -72,7 +119,7 @@ export default function VentureAdmin() {
     setLoading(true);
     try {
       const data = await api.getVentures();
-      setVentures(data as Venture[]);
+      setVentures(Array.isArray(data) ? (data as Venture[]) : []);
     } catch {
       showToast('error', 'Failed to load ventures.');
     } finally {
@@ -80,7 +127,12 @@ export default function VentureAdmin() {
     }
   };
 
-  useEffect(() => { fetchVentures(); }, []);
+  useEffect(() => {
+    fetchVentures();
+    const handleUpdate = () => { fetchVentures(); };
+    window.addEventListener('sarohub-data-updated', handleUpdate);
+    return () => window.removeEventListener('sarohub-data-updated', handleUpdate);
+  }, []);
 
   const showToast = (type: 'success' | 'error', message: string) => {
     setToast({ type, message });
@@ -154,25 +206,27 @@ export default function VentureAdmin() {
 
   // Gallery handlers
   const handleGalleryFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const rawFile = e.target.files?.[0];
+    if (!rawFile) return;
     setUploadingGallery(true);
     try {
+      const file = await compressVentureImage(rawFile);
       const res = await api.uploadImage(file);
       if (res?.url) {
         setGalleryUrlInput(res.url);
       }
     } catch (err) {
-      console.warn('Backend upload failed, converting to local data URI:', err);
+      console.warn('Backend upload failed, converting to local fallback:', err);
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target?.result) {
           setGalleryUrlInput(String(event.target.result));
         }
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(rawFile);
     } finally {
       setUploadingGallery(false);
+      e.target.value = '';
     }
   };
 
@@ -248,10 +302,12 @@ export default function VentureAdmin() {
         await api.createVenture(payload);
         showToast('success', `${editingVenture.name} created and published!`);
       }
+      window.dispatchEvent(new Event('sarohub-data-updated'));
       await fetchVentures();
       closeModal();
-    } catch {
-      showToast('error', 'Failed to save venture. Please try again.');
+    } catch (err: any) {
+      console.error('Failed to save venture:', err);
+      showToast('error', err?.message || 'Failed to save venture. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -261,9 +317,10 @@ export default function VentureAdmin() {
     try {
       await api.updateVenture(v.id, { ...v, published: !v.published });
       showToast('success', `${v.name} ${!v.published ? 'published' : 'unpublished'}.`);
+      window.dispatchEvent(new Event('sarohub-data-updated'));
       fetchVentures();
-    } catch {
-      showToast('error', 'Failed to update venture.');
+    } catch (err: any) {
+      showToast('error', err?.message || 'Failed to update venture.');
     }
   };
 
@@ -271,20 +328,35 @@ export default function VentureAdmin() {
     try {
       await api.updateVenture(v.id, { ...v, featured: !v.featured });
       showToast('success', `${v.name} ${!v.featured ? 'marked as featured' : 'unmarked'}.`);
+      window.dispatchEvent(new Event('sarohub-data-updated'));
       fetchVentures();
-    } catch {
-      showToast('error', 'Failed to update venture.');
+    } catch (err: any) {
+      showToast('error', err?.message || 'Failed to update venture.');
     }
   };
 
-  const handleDelete = async (v: Venture) => {
-    if (!window.confirm(`Delete "${v.name}"? This action cannot be undone.`)) return;
+  const handleDeleteClick = (v: Venture) => {
+    setDeletingVenture(v);
+  };
+
+  const confirmDelete = async () => {
+    if (!deletingVenture) return;
+    const v = deletingVenture;
+    setIsDeleting(true);
     try {
-      await api.deleteVenture(v.id);
-      showToast('success', `${v.name} deleted.`);
-      fetchVentures();
-    } catch {
-      showToast('error', 'Failed to delete venture.');
+      // Optimistically update list
+      setVentures((prev) => prev.filter((item) => String(item.id) !== String(v.id) && item.slug !== v.slug));
+      const targetIdentifier = v.id !== undefined && v.id !== null ? v.id : v.slug;
+      await api.deleteVenture(targetIdentifier);
+      showToast('success', `"${v.name}" deleted successfully.`);
+      setDeletingVenture(null);
+      window.dispatchEvent(new Event('sarohub-data-updated'));
+      await fetchVentures();
+    } catch (err: any) {
+      showToast('error', err?.response?.data?.error || err?.message || 'Failed to delete venture.');
+      await fetchVentures();
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -441,7 +513,11 @@ export default function VentureAdmin() {
                 </button>
                 {/* Delete */}
                 <button
-                  onClick={() => handleDelete(v)}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteClick(v);
+                  }}
                   className="p-2 rounded-lg hover:bg-red-500/10 transition-colors cursor-pointer text-red-400"
                   title="Delete"
                 >
@@ -912,6 +988,48 @@ export default function VentureAdmin() {
               >
                 {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
                 {editingVenture.id ? 'Update Venture' : 'Publish Venture'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deletingVenture && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: 'rgba(0,0,0,0.75)' }}>
+          <div className="relative w-full max-w-md rounded-2xl border p-6 shadow-2xl space-y-4" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-app)' }}>
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400">
+                <Trash2 className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-base" style={{ color: 'var(--text-main)' }}>Delete Venture?</h3>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>This action cannot be undone.</p>
+              </div>
+            </div>
+
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--text-body)' }}>
+              Are you sure you want to delete <span className="font-bold text-red-400">"{deletingVenture.name}"</span>? It will be permanently removed from your active venture portfolio.
+            </p>
+
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                type="button"
+                onClick={() => setDeletingVenture(null)}
+                disabled={isDeleting}
+                className="px-4 py-2 rounded-xl border text-xs font-semibold uppercase tracking-wider cursor-pointer transition-all hover:bg-slate-800 disabled:opacity-50"
+                style={{ borderColor: 'var(--border-app)', color: 'var(--text-body)' }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDelete}
+                disabled={isDeleting}
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold uppercase tracking-wider transition-all disabled:opacity-50 shadow-lg shadow-red-600/20 cursor-pointer"
+              >
+                {isDeleting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
+                {isDeleting ? 'Deleting...' : 'Delete Venture'}
               </button>
             </div>
           </div>

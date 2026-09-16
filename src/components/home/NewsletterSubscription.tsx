@@ -64,7 +64,7 @@ export default function NewsletterSubscription() {
                 <input
                   type="email"
                   required
-                  placeholder="name@company.com"
+                  placeholder="haider.ali@sarohub.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-xl border px-4 py-3.5 pr-12 text-sm placeholder-slate-500 focus:border-blue-500 focus:bg-white/[0.02] focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all font-medium"
