@@ -272,116 +272,118 @@ export const TrustAndAssuranceSection: React.FC<TrustAndAssuranceSectionProps> =
         </div>
 
         {/* 3. VERIFIED CLIENT ENDORSEMENTS (VIDEO, AUDIO & OUTCOMES) */}
-        <div className="mb-16">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-1">
-                Verifiable Track Record
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                Client Endorsements & Real-World Outcomes
-              </h3>
-            </div>
-            {onOpenConsultation && (
-              <button
-                id="btn-talk-to-team-endorsements"
-                onClick={() => onOpenConsultation('Executive Reference & Architecture Review')}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
-              >
-                Speak with an Executive Reference
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {endorsements.map((item) => (
-              <div
-                key={item.id}
-                id={`client-endorsement-${item.id}`}
-                className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between"
-              >
-                <div>
-                  {/* Rating Stars & Media Pill */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1">
-                      {[...Array(item.rating || 5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                      ))}
-                    </div>
-                    {(item.media_type === 'video' || item.video_url) && item.video_url && (
-                      <button
-                        onClick={() => setActiveVideoUrl(item.video_url || null)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-colors ${
-                          getVideoEmbedInfo(item.video_url).provider === 'loom'
-                            ? 'bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900 text-purple-700 dark:text-purple-300 hover:bg-purple-100'
-                            : 'bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-100'
-                        }`}
-                      >
-                        <Play className="w-3 h-3 fill-current" />
-                        <span>{getVideoEmbedInfo(item.video_url).provider === 'loom' ? 'Watch on Loom' : 'Watch Video'}</span>
-                      </button>
-                    )}
-                    {item.media_type === 'audio' && item.audio_url && (
-                      <button
-                        onClick={() => toggleAudio(item.id, item.audio_url!)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold transition-colors ${
-                          playingAudioId === item.id 
-                            ? 'bg-blue-600 text-white border-blue-600 animate-pulse'
-                            : 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-100'
-                        }`}
-                      >
-                        <Volume2 className="w-3 h-3" />
-                        {playingAudioId === item.id ? 'Playing Snippet' : 'Listen Audio'}
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Outcome Highlight Metric */}
-                  {item.outcome_metric && (
-                    <div className="mb-3 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                      <span>{item.outcome_metric}</span>
-                    </div>
-                  )}
-
-                  {/* Project Context */}
-                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
-                    {item.project_title}
-                  </div>
-
-                  {/* Quote Body */}
-                  <blockquote className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed italic mb-6">
-                    "{item.quote}"
-                  </blockquote>
+        {showAllSections && (
+          <div className="mb-16">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-1">
+                  Verifiable Track Record
                 </div>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  Client Endorsements & Real-World Outcomes
+                </h3>
+              </div>
+              {onOpenConsultation && (
+                <button
+                  id="btn-talk-to-team-endorsements"
+                  onClick={() => onOpenConsultation('Executive Reference & Architecture Review')}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                >
+                  Speak with an Executive Reference
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
-                {/* Author Details */}
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center gap-3">
-                  <img
-                    src={item.avatar_url || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150"}
-                    alt={item.client_name}
-                    className="w-11 h-11 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold text-slate-900 dark:text-white truncate">
-                      {item.client_name}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {endorsements.map((item) => (
+                <div
+                  key={item.id}
+                  id={`client-endorsement-${item.id}`}
+                  className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/90 shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Rating Stars & Media Pill */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-1">
+                        {[...Array(item.rating || 5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                        ))}
+                      </div>
+                      {(item.media_type === 'video' || item.video_url) && item.video_url && (
+                        <button
+                          onClick={() => setActiveVideoUrl(item.video_url || null)}
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold transition-colors ${
+                            getVideoEmbedInfo(item.video_url).provider === 'loom'
+                              ? 'bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900 text-purple-700 dark:text-purple-300 hover:bg-purple-100'
+                              : 'bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 hover:bg-red-100'
+                          }`}
+                        >
+                          <Play className="w-3 h-3 fill-current" />
+                          <span>{getVideoEmbedInfo(item.video_url).provider === 'loom' ? 'Watch on Loom' : 'Watch Video'}</span>
+                        </button>
+                      )}
+                      {item.media_type === 'audio' && item.audio_url && (
+                        <button
+                          onClick={() => toggleAudio(item.id, item.audio_url!)}
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold transition-colors ${
+                            playingAudioId === item.id 
+                              ? 'bg-blue-600 text-white border-blue-600 animate-pulse'
+                              : 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-100'
+                          }`}
+                        >
+                          <Volume2 className="w-3 h-3" />
+                          {playingAudioId === item.id ? 'Playing Snippet' : 'Listen Audio'}
+                        </button>
+                      )}
                     </div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                      {item.client_title} • <span className="font-semibold text-slate-700 dark:text-slate-300">{item.company_name}</span>
-                    </div>
-                    {item.country && (
-                      <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
-                        {item.country}
+
+                    {/* Outcome Highlight Metric */}
+                    {item.outcome_metric && (
+                      <div className="mb-3 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex items-center gap-2">
+                        <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                        <span>{item.outcome_metric}</span>
                       </div>
                     )}
+
+                    {/* Project Context */}
+                    <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {item.project_title}
+                    </div>
+
+                    {/* Quote Body */}
+                    <blockquote className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed italic mb-6">
+                      "{item.quote}"
+                    </blockquote>
+                  </div>
+
+                  {/* Author Details */}
+                  <div className="pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center gap-3">
+                    <img
+                      src={item.avatar_url || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150"}
+                      alt={item.client_name}
+                      className="w-11 h-11 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-slate-900 dark:text-white truncate">
+                        {item.client_name}
+                      </div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                        {item.client_title} • <span className="font-semibold text-slate-700 dark:text-slate-300">{item.company_name}</span>
+                      </div>
+                      {item.country && (
+                        <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
+                          {item.country}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* 4. GLOBAL DELIVERY & COLLABORATION MATRIX */}
         {showAllSections && (

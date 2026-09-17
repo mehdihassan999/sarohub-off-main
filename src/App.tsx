@@ -282,6 +282,7 @@ function HomeView({ settings }: { settings: { [key: string]: string } }) {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [saleProjects, setSaleProjects] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
   const [homeSettings, setHomeSettings] = useState<{ [key: string]: string }>(settings || {});
 
   useEffect(() => {
@@ -299,6 +300,7 @@ function HomeView({ settings }: { settings: { [key: string]: string } }) {
     api.getBlogs().then(setBlogs).catch(console.error);
     api.getSaleProjects().then(setSaleProjects).catch(console.error);
     api.getEvents().then(setEvents).catch(console.error);
+    api.getTestimonials().then(setTestimonials).catch(console.error);
 
     const onDataUpdated = () => {
       api.getSettings().then(setHomeSettings).catch(console.error);
@@ -309,6 +311,7 @@ function HomeView({ settings }: { settings: { [key: string]: string } }) {
       api.getBlogs().then(setBlogs).catch(console.error);
       api.getServices().then(setServices).catch(console.error);
       api.getTeam().then(setTeam).catch(console.error);
+      api.getTestimonials().then(setTestimonials).catch(console.error);
     };
     window.addEventListener('sarohub-data-updated', onDataUpdated);
     return () => window.removeEventListener('sarohub-data-updated', onDataUpdated);
@@ -344,6 +347,9 @@ function HomeView({ settings }: { settings: { [key: string]: string } }) {
 
       {/* Enterprise Trust, Verified Badges & 100% IP Guarantee */}
       <TrustAndAssuranceSection showAllSections={false} />
+
+      {/* Trusted by Global Industry Leaders — Client Reviews CMS */}
+      <ClientTestimonials testimonials={testimonials} />
 
       {/* 06 — SaroHub in Numbers */}
       <CompanyStatistics />
@@ -3751,6 +3757,7 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
       setShowTestimonialForm(false);
       setTestimonialPayload({ client_name: '', client_role: '', client_company: '', feedback: '', rating: '5', client_avatar: '' });
       loadAllAdminData();
+      window.dispatchEvent(new Event('sarohub-data-updated'));
     } catch (err: any) {
       setAdminAlert({ title: 'Error Saving Endorsement', message: err.message });
     }
@@ -3763,6 +3770,7 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
         try {
           await api.deleteTestimonial(id);
           loadAllAdminData();
+          window.dispatchEvent(new Event('sarohub-data-updated'));
         } catch (err: any) {
           setAdminAlert({ title: 'Error Deleting Testimonial', message: err.message });
         }

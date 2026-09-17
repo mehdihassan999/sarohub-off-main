@@ -3,7 +3,7 @@
     "id": 1,
     "username": "admin",
     "email": "cyberm0101noirhat@gmail.com",
-    "password_hash": "$2b$10$.48CmEWSDAeDckTZHFS/g.WECGTv.DRy5dVWCbf9Dhya3nt2XM53S",
+    "password_hash": "$2b$10$/oVQ90NAlr06mQTFgh84Wu76RrFe9b72rqP2HAS16Mad29rT.xPsW",
     "full_name": "Super Admin",
     "profile_pic": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
     "bio": "Primary administrator and content director for SaroHub Technologies.",
@@ -2718,6 +2718,30 @@
       "rating": 5,
       "feedback": "Integrating SaroHub Sentinel and custom AI tools has optimized our administrative throughput by over 40%. Their technical prowess is unmatched.",
       "created_at": "2026-06-27T10:00:00Z"
+    },
+    {
+      "id": 3,
+      "client_name": "Dr. Tariq Mansoor",
+      "client_role": "VP Technology & Infrastructure",
+      "client_company": "Frontier Health Cloud",
+      "client_avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
+      "rating": 5,
+      "feedback": "SaroHub architected our high-concurrency patient telemetry pipeline with zero downtime across migration. Their deep understanding of distributed systems and compliance standards gave our board complete confidence.",
+      "created_at": "2026-07-14T10:00:00Z",
+      "published": true,
+      "status": "Approved"
+    },
+    {
+      "id": 4,
+      "client_name": "Sophia Sterling",
+      "client_role": "Head of Digital Products",
+      "client_company": "Nexus Financial Systems",
+      "client_avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200",
+      "rating": 5,
+      "feedback": "From initial technical discovery to final container deployment, SaroHub executed every sprint with surgical precision. The microservices architecture they delivered processes sub-second ledger syncs flawlessly.",
+      "created_at": "2026-08-02T10:00:00Z",
+      "published": true,
+      "status": "Approved"
     }
   ],
   "faqs": [

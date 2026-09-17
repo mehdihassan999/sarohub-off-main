@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Star, 
@@ -8,57 +8,16 @@ import {
   SlidersHorizontal,
   Sparkles,
   CheckCircle2,
-  Building2
+  Building2,
+  RefreshCw
 } from 'lucide-react';
 import TestimonialCarousel from '../TestimonialCarousel';
 import { Testimonial } from '../../types';
+import { api } from '../../api';
 
 interface TestimonialsProps {
-  testimonials: any[];
+  testimonials?: any[];
 }
-
-const FALLBACK_TESTIMONIALS: Testimonial[] = [
-  {
-    id: 101,
-    client_name: 'Harsha de Silva',
-    client_role: 'Operations Director',
-    client_company: 'Vanguard Industrial Holdings',
-    client_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200',
-    rating: 5,
-    feedback: 'The team at SaroHub engineered an absolute masterpiece for us. Their relational Vanguard ERP module tracks millions of structural parts across our sites with flawless real-time indexing. Highly professional engineering partner!',
-    created_at: '2026-06-26T10:00:00Z',
-  },
-  {
-    id: 102,
-    client_name: 'Anika Fernando',
-    client_role: 'Chief Operations Officer',
-    client_company: 'Aura Advisory',
-    client_avatar: 'https://images.unsplash.com/photo-1534751516642-a131ffd473fd?auto=format&fit=crop&q=80&w=200&h=200',
-    rating: 5,
-    feedback: 'Integrating SaroHub Sentinel and custom AI tools has optimized our administrative throughput by over 40%. Their technical prowess, container security, and responsive team are unmatched.',
-    created_at: '2026-06-27T10:00:00Z',
-  },
-  {
-    id: 103,
-    client_name: 'Dr. Tariq Mansoor',
-    client_role: 'VP Technology & Infrastructure',
-    client_company: 'Frontier Health Cloud',
-    client_avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200',
-    rating: 5,
-    feedback: 'SaroHub architected our high-concurrency patient telemetry pipeline with zero downtime across migration. Their deep understanding of distributed systems and compliance standards gave our board complete confidence.',
-    created_at: '2026-07-14T10:00:00Z',
-  },
-  {
-    id: 104,
-    client_name: 'Sophia Sterling',
-    client_role: 'Head of Digital Products',
-    client_company: 'Nexus Financial Systems',
-    client_avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200',
-    rating: 5,
-    feedback: 'From initial technical discovery to final container deployment, SaroHub executed every sprint with surgical precision. The microservices architecture they delivered processes sub-second ledger syncs flawlessly.',
-    created_at: '2026-08-02T10:00:00Z',
-  }
-];
 
 // Framer Motion Animation Variants
 const containerVariants = {
@@ -104,33 +63,71 @@ const cardVariants = {
 };
 
 export default function ClientTestimonials({ testimonials }: TestimonialsProps) {
+  const [items, setItems] = useState<Testimonial[]>(
+    Array.isArray(testimonials) && testimonials.length > 0 ? testimonials : []
+  );
+  const [loading, setLoading] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'carousel'>('grid');
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'enterprise' | 'ai'>('all');
 
-  // Prepare active list: DB testimonials merged with fallbacks if fewer than 3
-  const rawList: Testimonial[] = Array.isArray(testimonials) && testimonials.length > 0 
-    ? testimonials 
-    : FALLBACK_TESTIMONIALS;
+  const fetchTestimonials = async () => {
+    try {
+      setLoading(true);
+      const data = await api.getTestimonials();
+      if (Array.isArray(data)) {
+        setItems(data);
+      }
+    } catch (err) {
+      console.error('Failed to load testimonials:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const displayList: Testimonial[] = rawList.length < 3 
-    ? [
-        ...rawList,
-        ...FALLBACK_TESTIMONIALS.filter(
-          f => !rawList.some(r => r.client_name?.toLowerCase() === f.client_name?.toLowerCase())
-        )
-      ].slice(0, 4)
-    : rawList;
+  useEffect(() => {
+    if (Array.isArray(testimonials)) {
+      setItems(testimonials);
+    } else {
+      fetchTestimonials();
+    }
+  }, [testimonials]);
 
-  // Filter items if user selects specific focus
+  // Synchronize live with Admin Panel changes via custom event
+  useEffect(() => {
+    const handleDataUpdated = () => {
+      fetchTestimonials();
+    };
+    window.addEventListener('sarohub-data-updated', handleDataUpdated);
+    return () => window.removeEventListener('sarohub-data-updated', handleDataUpdated);
+  }, []);
+
+  // Use dynamic items from database (admin panel) directly
+  const displayList: Testimonial[] = items;
+
+  // Calculate dynamic rating average
+  const avgRating = displayList.length > 0
+    ? (displayList.reduce((acc, cur) => acc + (cur.rating || 5), 0) / displayList.length).toFixed(2)
+    : '5.00';
+
+  // Filter items dynamically if user selects specific focus
   const filteredList = displayList.filter(item => {
     if (selectedFilter === 'all') return true;
+    const text = `${item.client_company || ''} ${item.feedback || ''} ${item.client_role || ''} ${item.client_name || ''}`.toLowerCase();
     if (selectedFilter === 'enterprise') {
-      const text = `${item.client_company} ${item.feedback} ${item.client_role}`.toLowerCase();
-      return text.includes('vanguard') || text.includes('erp') || text.includes('industrial') || text.includes('nexus') || text.includes('financial');
+      return (
+        text.includes('enterprise') || text.includes('vanguard') || text.includes('erp') || 
+        text.includes('industrial') || text.includes('nexus') || text.includes('financial') || 
+        text.includes('director') || text.includes('operations') || text.includes('infrastructure') ||
+        text.includes('systems') || (item.rating && item.rating >= 5)
+      );
     }
     if (selectedFilter === 'ai') {
-      const text = `${item.client_company} ${item.feedback} ${item.client_role}`.toLowerCase();
-      return text.includes('ai') || text.includes('sentinel') || text.includes('cloud') || text.includes('telemetry');
+      return (
+        text.includes('ai') || text.includes('sentinel') || text.includes('cloud') || 
+        text.includes('telemetry') || text.includes('technology') || text.includes('digital') ||
+        text.includes('automation') || text.includes('software') || text.includes('platform') ||
+        text.includes('pipeline') || text.includes('developer')
+      );
     }
     return true;
   });
@@ -181,17 +178,17 @@ export default function ClientTestimonials({ testimonials }: TestimonialsProps) 
           <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 px-5 py-2.5 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
             <div className="flex items-center gap-1.5 text-amber-400 font-bold">
               <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-              <span>4.98 / 5.0 Rating</span>
+              <span>{avgRating} / 5.0 Rating</span>
             </div>
             <span className="text-slate-700 hidden sm:inline">&bull;</span>
             <div className="flex items-center gap-1.5 text-emerald-400 font-medium">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>100% Verified Corporate Partners</span>
+              <span>{displayList.length} Verified Reviews</span>
             </div>
             <span className="text-slate-700 hidden sm:inline">&bull;</span>
             <div className="flex items-center gap-1.5 text-cyan-400 font-medium">
               <Building2 className="w-4 h-4 text-cyan-400" />
-              <span>Global Deployments</span>
+              <span>Global Enterprise Deployments</span>
             </div>
           </div>
         </motion.div>
@@ -218,7 +215,7 @@ export default function ClientTestimonials({ testimonials }: TestimonialsProps) 
                   : 'text-slate-400 hover:text-white bg-slate-900/50 border border-slate-800 hover:bg-slate-800'
               }`}
             >
-              Enterprise & ERP
+              Enterprise & Core Systems
             </button>
             <button
               onClick={() => setSelectedFilter('ai')}
@@ -262,7 +259,23 @@ export default function ClientTestimonials({ testimonials }: TestimonialsProps) 
         </div>
 
         {/* Content Section */}
-        {viewMode === 'carousel' ? (
+        {displayList.length === 0 ? (
+          <div className="text-center py-16 px-6 rounded-3xl border border-slate-800/80 bg-slate-900/40 max-w-lg mx-auto">
+            <Sparkles className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-white">Client Reviews</h3>
+            <p className="text-xs text-slate-400 mt-1">Verified partner testimonials will appear here once published from the Admin Panel.</p>
+          </div>
+        ) : filteredList.length === 0 ? (
+          <div className="text-center py-12 px-6 rounded-2xl border border-slate-800/60 bg-slate-900/30 max-w-md mx-auto">
+            <p className="text-xs text-slate-400">No reviews found matching this filter category.</p>
+            <button
+              onClick={() => setSelectedFilter('all')}
+              className="mt-3 text-xs font-semibold text-blue-400 hover:text-blue-300 underline cursor-pointer"
+            >
+              View all testimonials ({displayList.length})
+            </button>
+          </div>
+        ) : viewMode === 'carousel' ? (
           <TestimonialCarousel items={filteredList} />
         ) : (
           /* Staggered Entrance Animation Grid */

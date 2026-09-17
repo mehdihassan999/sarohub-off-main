@@ -659,20 +659,10 @@ const INITIAL_DB: DBState = {
       client_name: 'Harsha de Silva',
       client_role: 'Operations Director',
       client_company: 'Vanguard Industrial Holdings',
-      client_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150',
+      client_avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200',
       rating: 5,
-      feedback: 'The team at SaroHub engineered an absolute masterpiece for us. Their relational Vanguard ERP module tracks millions of structural parts across our sites with flawless real-time indexing. Highly professional!',
+      feedback: 'The team at SaroHub engineered an absolute masterpiece for us. Their relational Vanguard ERP module tracks millions of structural parts across our sites with flawless real-time indexing. Highly professional engineering partner!',
       created_at: '2026-06-26T10:00:00Z'
-    },
-    {
-      id: 2,
-      client_name: 'Anika Fernando',
-      client_role: 'Chief Operations Officer',
-      client_company: 'Aura Advisory',
-      client_avatar: 'https://images.unsplash.com/photo-1534751516642-a131ffd473fd?auto=format&fit=crop&q=80&w=150&h=150',
-      rating: 5,
-      feedback: 'Integrating SaroHub Sentinel and custom AI tools has optimized our administrative throughput by over 40%. Their technical prowess is unmatched.',
-      created_at: '2026-06-27T10:00:00Z'
     }
   ],
   faqs: [
