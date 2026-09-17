@@ -627,7 +627,7 @@ export default function ChatWidget() {
                         required
                         value={visitorName}
                         onChange={e => setVisitorName(e.target.value)}
-                        placeholder="Haider Ali"
+                        placeholder="Your Full Name"
                         className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-500/60 transition-all"
                       />
                     </div>
@@ -652,7 +652,7 @@ export default function ChatWidget() {
                         type="email"
                         value={visitorEmail}
                         onChange={e => setVisitorEmail(e.target.value)}
-                        placeholder="haider.ali@sarohub.com"
+                        placeholder="you@company.com"
                         className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-500/60 transition-all"
                       />
                     </div>

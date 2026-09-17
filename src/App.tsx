@@ -20,7 +20,7 @@ import {
   CheckCircle, Clock, ArrowRight, Search, FileText, Check, Lock, User,
   TrendingUp, Briefcase, Grid, Tag, Activity, Eye, BookOpen, AlertCircle, ChevronDown, X,
   Star, ChevronLeft, ChevronRight, Sparkles, Code, RefreshCw, Package, ExternalLink,
-  Download, Loader2, Server, ShieldCheck, Camera
+  Download, Loader2, Server, ShieldCheck, Camera, Hash
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { api, getAuthToken, setAuthToken } from './api';
@@ -96,6 +96,7 @@ import { TrustAndAssuranceView } from './views/TrustAndAssuranceView';
 import { TrustAndAssuranceSection } from './components/trust/TrustAndAssuranceSection';
 import { AdminTrustModule } from './components/admin/AdminTrustModule';
 import { AdminGalleryModule } from './components/admin/AdminGalleryModule';
+import { AdminCompanyMetricsModule } from './components/admin/AdminCompanyMetricsModule';
 import { CompanyGalleryView } from './views/CompanyGalleryView';
 import { CompanyGallerySlider } from './components/home/CompanyGallerySlider';
 import SEOHead from './components/seo/SEOHead';
@@ -822,7 +823,7 @@ function MarketplaceView() {
                             <input
                               type="text"
                               required
-                              placeholder="Haider Ali"
+                              placeholder="Your Name (e.g. John Doe)"
                               value={inquiryForm.name}
                               onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
                               className="w-full rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
@@ -830,7 +831,7 @@ function MarketplaceView() {
                             <input
                               type="email"
                               required
-                              placeholder="Corporate Email"
+                              placeholder="Your Email (e.g. you@company.com)"
                               value={inquiryForm.email}
                               onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
                               className="w-full rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
@@ -1489,7 +1490,12 @@ function ContactView({ settings }: { settings: { [key: string]: string } }) {
                 </div>
                 <div>
                   <h4 className="font-display font-bold text-slate-900 text-sm">Email Inquiries</h4>
-                  <p className="text-xs text-slate-500 mt-1">{settings.email || 'info@sarohub.com'}</p>
+                  <p className="text-xs font-semibold mt-1">
+                    <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="text-blue-600 hover:text-blue-700 hover:underline">
+                      {settings.email || 'info@sarohub.com'}
+                    </a>
+                  </p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Send RFPs, proposals & direct emails</p>
                 </div>
               </li>
               <li className="flex gap-4">
@@ -1530,7 +1536,7 @@ function ContactView({ settings }: { settings: { [key: string]: string } }) {
                   <input
                     type="text"
                     required
-                    placeholder="Haider Ali"
+                    placeholder="Your Full Name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className="w-full rounded-lg bg-slate-50 border border-slate-200 px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
@@ -1541,7 +1547,7 @@ function ContactView({ settings }: { settings: { [key: string]: string } }) {
                   <input
                     type="email"
                     required
-                    placeholder="haider.ali@sarohub.com"
+                    placeholder="you@company.com"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className="w-full rounded-lg bg-slate-50 border border-slate-200 px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white transition-colors"
@@ -3900,12 +3906,23 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
 
             <div className="glass rounded-2xl p-4 space-y-4">
               {/* Overview */}
-              <div>
+              <div className="space-y-1">
                 <button
                   onClick={() => setActiveModule('stats')}
                   className={`w-full text-left rounded-xl px-3.5 py-2.5 text-xs font-mono flex items-center gap-2.5 transition-all ${activeModule === 'stats' ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-900/60'}`}
                 >
                   <TrendingUp className="h-4 w-4" /> Overview & Telemetry
+                </button>
+                <button
+                  onClick={() => setActiveModule('company_metrics')}
+                  className={`w-full text-left rounded-xl px-3.5 py-2 text-xs font-mono flex items-center justify-between transition-all ${activeModule === 'company_metrics' ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-900/60'}`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Hash className="h-4 w-4 text-blue-400" /> SaroHub in Numbers
+                  </span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    Live Stats
+                  </span>
                 </button>
               </div>
 
@@ -4170,6 +4187,11 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
                   </div>
                 </div>
 
+                {/* SaroHub in Numbers Management Section */}
+                <div className="border-t border-slate-900 pt-8">
+                  <AdminCompanyMetricsModule />
+                </div>
+
                 {/* Opportunities Module Statistics Section */}
                 <div className="border-t border-slate-900 pt-8">
                   <h3 className="font-display font-bold text-white mb-4">Scholarship & Internship Portal Telemetry</h3>
@@ -4246,6 +4268,11 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
                   </div>
                 </div>
               </div>
+            )}
+
+            {/* Module: SaroHub in Numbers Dedicated View */}
+            {activeModule === 'company_metrics' && (
+              <AdminCompanyMetricsModule />
             )}
 
             {/* Module: Consultations */}

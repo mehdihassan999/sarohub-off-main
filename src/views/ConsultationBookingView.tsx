@@ -1083,7 +1083,7 @@ export default function ConsultationBookingView({ settings = {} }: ConsultationB
                           required
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Haider Ali"
+                          placeholder="Your Full Name"
                           className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-700 bg-slate-950/80 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors min-w-0"
                         />
                       </div>
@@ -1101,7 +1101,7 @@ export default function ConsultationBookingView({ settings = {} }: ConsultationB
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="haider.ali@sarohub.com"
+                          placeholder="you@company.com"
                           className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-700 bg-slate-950/80 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors min-w-0"
                         />
                       </div>
@@ -1242,6 +1242,13 @@ export default function ConsultationBookingView({ settings = {} }: ConsultationB
                     <div className="text-center text-[10px] text-slate-500 flex items-center justify-center gap-1.5 pt-1 min-w-0">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span className="break-words">Instant email confirmation to you & auto-alert to leadership desk</span>
+                    </div>
+
+                    <div className="text-center text-[11px] text-slate-400 pt-2 border-t border-slate-800/60">
+                      Prefer manual email? Reach us directly at{' '}
+                      <a href="mailto:info@sarohub.com" className="text-cyan-400 font-bold hover:underline">
+                        info@sarohub.com
+                      </a>
                     </div>
                   </form>
                 </div>

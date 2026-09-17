@@ -34,6 +34,7 @@ interface SystemEmailOptions {
   category: 'shortlist' | 'career_application' | 'opportunity_application' | 'contact_inquiry' | 'event_registration' | 'newsletter' | 'system';
   fromName?: string;
   fromEmail?: string;
+  replyTo?: string;
 }
 
 function getEffectiveSmtpConfig() {
@@ -158,6 +159,7 @@ async function sendSystemEmail(options: SystemEmailOptions): Promise<{ success: 
       const info = await transporter.sendMail({
         from: fromAddress,
         to: options.to,
+        replyTo: options.replyTo,
         subject: options.subject,
         html: options.html,
         text: options.text || options.html.replace(/<[^>]*>/g, ' ')
@@ -220,6 +222,43 @@ async function sendSystemEmail(options: SystemEmailOptions): Promise<{ success: 
     error: deliveryError,
     messageId
   };
+}
+
+const PRIMARY_COMPANY_EMAIL = 'mehdi.sarohub@gmail.com';
+
+function getCompanyNotificationRecipients(): string[] {
+  const recipients = new Set<string>();
+  recipients.add(PRIMARY_COMPANY_EMAIL);
+  const settings = db.getState().settings || {};
+  if (settings.email && typeof settings.email === 'string' && settings.email.trim()) {
+    const candidate = settings.email.trim();
+    if (!candidate.includes('example.com') && !candidate.includes('haider.ali')) {
+      recipients.add(candidate);
+    }
+  }
+  return Array.from(recipients);
+}
+
+async function dispatchCompanyAlert(options: {
+  subject: string;
+  html: string;
+  replyTo?: string;
+  category?: SystemEmailOptions['category'];
+}) {
+  const recipients = getCompanyNotificationRecipients();
+  for (const to of recipients) {
+    try {
+      await sendSystemEmail({
+        to,
+        subject: options.subject,
+        html: options.html,
+        replyTo: options.replyTo,
+        category: options.category || 'system'
+      });
+    } catch (err) {
+      console.error(`[COMPANY ALERT DISPATCH ERROR] Failed to deliver alert to ${to}:`, err);
+    }
+  }
 }
 
 
@@ -1705,14 +1744,41 @@ app.post('/api/events/:id/register', async (req, res) => {
     emailStatus = 'failed';
   }
 
-  // Alert corporate team
-  sendSystemEmail({
-    to: companyEmail,
-    subject: `[Event Registration] ${body.applicant_name} for ${targetEvent.title}`,
-    category: 'system',
+  // Alert corporate team at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `🎟️ [Event Registration] ${body.applicant_name} - ${targetEvent.title}`,
+    replyTo: body.applicant_email,
+    category: 'event_registration',
     html: `
-      <p>New attendee registered for <strong>${targetEvent.title}</strong>:</p>
-      <p><strong>Attendee:</strong> ${body.applicant_name} (${body.applicant_email})</p>
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">New Event Registration</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${targetEvent.title}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Attendee Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${body.applicant_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Attendee Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${body.applicant_email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${body.applicant_email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Event Date:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${targetEvent.event_date || 'Upcoming'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Venue / Format:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${targetEvent.venue || 'Virtual / Hybrid'}</td>
+          </tr>
+        </table>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${body.applicant_email}?subject=Regarding Your Registration for ${encodeURIComponent(targetEvent.title)} - SaroHub Technologies" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply to Attendee (${body.applicant_email})</a>
+        </div>
+      </div>
     `
   }).catch(e => console.error('Admin event alert error:', e));
 
@@ -2017,20 +2083,57 @@ app.post('/api/applications', async (req, res) => {
     `
   }).catch(e => console.error('Application confirmation email error:', e));
 
-  // 2. Send alert notification to corporate recruiter
-  sendSystemEmail({
-    to: companyEmail,
-    subject: `[New Candidate Application] ${body.full_name} - ${jobPosition}`,
-    category: 'system',
+  // 2. Send alert notification to corporate recruiter at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `💼 [New Career Application] ${body.full_name} - ${jobPosition}`,
+    replyTo: body.email,
+    category: 'career_application',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <h3 style="color: #0f172a; margin-top: 0;">New Job Application Received</h3>
-        <p><strong>Position:</strong> ${jobPosition}</p>
-        <p><strong>Candidate Name:</strong> ${body.full_name}</p>
-        <p><strong>Email:</strong> ${body.email}</p>
-        <p><strong>Phone:</strong> ${body.phone}</p>
-        ${body.cover_letter ? `<p><strong>Cover Letter:</strong><br/><em>${body.cover_letter}</em></p>` : ''}
-        <p>Login to the SaroHub Admin Dashboard to review the candidate's CV and manage hiring status.</p>
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">New Career Application</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${jobPosition}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Candidate Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${body.full_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Candidate Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${body.email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${body.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone Number:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${body.phone || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Applied Role:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${jobPosition}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Resume / CV File:</td>
+            <td style="padding: 8px 0;">
+              ${body.resume_url ? `<a href="${body.resume_url}" target="_blank" style="color: #0284c7; font-weight: 700; text-decoration: underline;">Download/View ${body.resume_filename || 'CV'}</a>` : `<span style="color: #64748b;">${body.resume_filename || 'Uploaded File'}</span>`}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Applied At:</td>
+            <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</td>
+          </tr>
+        </table>
+
+        ${body.cover_letter ? `
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+          <h4 style="margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Cover Letter:</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;">${body.cover_letter}</p>
+        </div>
+        ` : ''}
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${body.email}?subject=Regarding Your Application for ${encodeURIComponent(jobPosition)} - SaroHub Technologies" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply to Candidate (${body.email})</a>
+        </div>
       </div>
     `
   }).catch(e => console.error('Admin application alert email error:', e));
@@ -2459,18 +2562,50 @@ app.post('/api/opportunities/:id/apply', async (req, res) => {
     `
   }).catch(e => console.error('Opportunity confirmation email error:', e));
 
-  // 2. Alert corporate admin
-  sendSystemEmail({
-    to: companyEmail,
-    subject: `[New Opportunity Submission] ${applicant_name} - ${opp.title}`,
-    category: 'system',
+  // 2. Alert corporate admin at mehdi.sarohub@gmail.com
+  const formDataRows = Object.entries(form_data || {})
+    .map(([k, v]) => `<tr><td style="padding: 6px 0; color: #64748b; font-weight: 600; width: 140px;">${k}:</td><td style="padding: 6px 0; color: #0f172a;">${String(v)}</td></tr>`)
+    .join('');
+
+  dispatchCompanyAlert({
+    subject: `🎓 [Opportunity Application] ${applicant_name} - ${opp.title}`,
+    replyTo: applicant_email,
+    category: 'opportunity_application',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <h3 style="color: #0f172a; margin-top: 0;">New Opportunity Application Received</h3>
-        <p><strong>Opportunity:</strong> ${opp.title} (${opp.type || 'Standard'})</p>
-        <p><strong>Applicant Name:</strong> ${applicant_name}</p>
-        <p><strong>Email:</strong> ${applicant_email}</p>
-        <p>Review the application in the Admin Opportunities &amp; Grants section.</p>
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">New Opportunity Application</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${opp.title} (${opp.type || 'Program'})</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Applicant Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${applicant_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Applicant Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${applicant_email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${applicant_email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Submitted At:</td>
+            <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</td>
+          </tr>
+          ${formDataRows}
+        </table>
+
+        ${Array.isArray(uploaded_documents) && uploaded_documents.length > 0 ? `
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; border-radius: 8px; margin-bottom: 20px;">
+          <h4 style="margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase;">Uploaded Documents:</h4>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13px; color: #0284c7;">
+            ${uploaded_documents.map((d: any) => `<li><a href="${d.url}" target="_blank" style="color: #0284c7;">${d.fieldLabel || 'Document'}: ${d.name}</a></li>`).join('')}
+          </ul>
+        </div>
+        ` : ''}
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${applicant_email}?subject=Regarding Your Application for ${encodeURIComponent(opp.title)} - SaroHub Technologies" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply to Applicant (${applicant_email})</a>
+        </div>
       </div>
     `
   }).catch(e => console.error('Opportunity admin alert email error:', e));
@@ -3508,19 +3643,49 @@ app.post('/api/contact', async (req, res) => {
     `
   }).catch(e => console.error('Contact confirmation email error:', e));
 
-  // 2. Alert corporate admin
-  sendSystemEmail({
-    to: companyEmail,
-    subject: `[New Website Inquiry] ${name} - ${subject}`,
-    category: 'system',
+  // 2. Alert corporate admin at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `🔔 [Website Message] ${name} - ${subject}`,
+    replyTo: email,
+    category: 'contact_inquiry',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <h3 style="color: #0f172a; margin-top: 0;">New Contact Form Message</h3>
-        <p><strong>From:</strong> ${name} (${email})</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <div style="background: #f1f5f9; padding: 12px; border-radius: 6px;">${message}</div>
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">New Website Contact Message</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${subject}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">User Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">User Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone / WhatsApp:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${phone || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Subject:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${subject}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Received At:</td>
+            <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</td>
+          </tr>
+        </table>
+
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+          <h4 style="margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Message Content:</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;">${message}</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)} - SaroHub Technologies" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply Directly to ${name} (${email})</a>
+        </div>
       </div>
     `
   }).catch(e => console.error('Contact admin alert email error:', e));
@@ -3985,6 +4150,7 @@ app.post('/api/consultations', async (req, res) => {
     sendSystemEmail({
       to: recipient,
       subject: `🚨 [New Consultation Booked] ${client_name} - ${scheduled_date} (${scheduled_time})`,
+      replyTo: client_email,
       category: 'system',
       html: `
         <div style="font-family: Arial, sans-serif; padding: 24px; color: #1e293b; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; max-width: 600px;">
@@ -4251,22 +4417,53 @@ app.post('/api/estimates', async (req, res) => {
       `
     }).catch(e => console.error('Estimate client email error:', e));
 
-    // Alert team of high-intent estimation
-    sendSystemEmail({
-      to: companyEmail,
-      subject: `[High-Intent Lead] ${client_name || 'Visitor'} calculated estimate for ${project_type}`,
-      category: 'system',
+    // Alert team at mehdi.sarohub@gmail.com of high-intent estimation
+    dispatchCompanyAlert({
+      subject: `💰 [Project Cost Estimate] ${client_name || 'Visitor'} (${project_type} - ${currSymbol}${finalMin.toLocaleString()})`,
+      replyTo: client_email,
+      category: 'contact_inquiry',
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h3>New Scope Estimate Generated</h3>
-          <p><strong>Name:</strong> ${client_name || 'N/A'}</p>
-          <p><strong>Email:</strong> ${client_email}</p>
-          <p><strong>Phone:</strong> ${client_phone || 'N/A'}</p>
-          <p><strong>Type:</strong> ${project_type}</p>
-          <p><strong>Scale:</strong> ${scale_tier}</p>
-          <p><strong>Investment:</strong> ${currSymbol}${finalMin.toLocaleString()} - ${currSymbol}${finalMax.toLocaleString()}</p>
-          <p><strong>Delivery:</strong> ${finalWeeksMin}-${finalWeeksMax} Weeks</p>
-          <p><strong>Modules:</strong> ${modules.join(', ')}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+          <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+            <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">Interactive Estimate Submission</span>
+            <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${project_type} (${scale_tier})</h2>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Client Name:</td>
+              <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${client_name || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Client Email:</td>
+              <td style="padding: 8px 0;"><a href="mailto:${client_email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${client_email}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${client_phone || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Estimated Range:</td>
+              <td style="padding: 8px 0; color: #0284c7; font-weight: 700; font-size: 16px;">${currSymbol}${finalMin.toLocaleString()} – ${currSymbol}${finalMax.toLocaleString()}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Delivery Timeline:</td>
+              <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${finalWeeksMin} to ${finalWeeksMax} Weeks (${timeline_speed || 'Standard'})</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Modules:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${modules.length > 0 ? modules.join(', ') : 'Core Architecture Only'}</td>
+            </tr>
+            ${project_notes ? `
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Client Notes:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${project_notes}</td>
+            </tr>` : ''}
+          </table>
+
+          <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+            <a href="mailto:${client_email}?subject=Regarding Your SaroHub Scope Estimate (${encodeURIComponent(project_type)})" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply Directly to Client (${client_email})</a>
+          </div>
         </div>
       `
     }).catch(e => console.error('Estimate admin notification error:', e));
@@ -4519,6 +4716,21 @@ app.post('/api/newsletter', async (req, res) => {
       </div>
     `
   }).catch(err => console.error('Failed to send newsletter welcome email:', err));
+
+  // Alert corporate admin at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `📰 [New Newsletter Subscriber] ${emailLower}`,
+    replyTo: emailLower,
+    category: 'newsletter',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px;">
+        <h3 style="color: #0f172a; margin-top: 0;">New Newsletter Subscriber</h3>
+        <p>A new visitor has subscribed to the SaroHub newsletter:</p>
+        <p><strong>Subscriber Email:</strong> <a href="mailto:${emailLower}">${emailLower}</a></p>
+        <p><strong>Subscribed At:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</p>
+      </div>
+    `
+  }).catch(e => console.error('Newsletter subscriber alert error:', e));
 
   res.json({ success: true, message: 'Thank you for subscribing to SaroHub updates!' });
 });
@@ -5365,7 +5577,7 @@ app.get('/api/leads', authenticateToken, (req, res) => {
   res.json((db.getState() as any).leads || []);
 });
 
-app.post('/api/leads', (req, res) => {
+app.post('/api/leads', async (req, res) => {
   const body = req.body;
   if (!body.name || !body.email || !body.projectDescription) {
     return res.status(400).json({ error: 'Name, email, and project description are required.' });
@@ -5396,7 +5608,96 @@ app.post('/api/leads', (req, res) => {
     state.leads.unshift(newLead);
   });
 
-  res.status(201).json({ success: true, message: 'Inquiry received successfully!', lead: newLead });
+  const settingsState = db.getState().settings || {};
+  const companyName = settingsState.company_name || 'SaroHub Technologies';
+
+  // 1. Dispatch form data directly to Mehdi at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `🚀 [New Project Lead] ${body.name} (${body.serviceRequired || 'Software Inquiry'})`,
+    replyTo: body.email,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">New Project Scope Inquiry</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${body.serviceRequired || 'Custom Software Inquiry'}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 150px; font-weight: 600;">Client Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${body.name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Client Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${body.email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${body.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone / WhatsApp:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${body.phone || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Company / Org:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${body.company || 'Not specified'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Service Required:</td>
+            <td style="padding: 8px 0; color: #0284c7; font-weight: 600;">${body.serviceRequired || 'Custom Software'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Estimated Budget:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${body.estimatedBudget || 'Flexible'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Timeline:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${body.timeline || 'Immediate'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Source:</td>
+            <td style="padding: 8px 0; color: #64748b;">${body.source || 'Website Contact Preview'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Submitted At:</td>
+            <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</td>
+          </tr>
+        </table>
+
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+          <h4 style="margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Project Requirements & Scope:</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;">${body.projectDescription}</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${body.email}?subject=Re: SaroHub Project Inquiry (${encodeURIComponent(body.serviceRequired || 'Engineering')})" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply Directly to ${body.name} (${body.email})</a>
+        </div>
+      </div>
+    `
+  }).catch(e => console.error('Lead admin alert error:', e));
+
+  // 2. Send automated confirmation receipt to the prospective client
+  sendSystemEmail({
+    to: body.email,
+    subject: `Project Inquiry Received: ${body.serviceRequired || 'Engineering Consultation'} - ${companyName}`,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="color: #0284c7; margin: 0; font-size: 20px;">${companyName}</h2>
+          <p style="color: #64748b; font-size: 12px; margin-top: 4px;">Technical Architecture &amp; Client Solutions</p>
+        </div>
+        <p style="font-size: 15px; line-height: 1.6;">Dear <strong>${body.name}</strong>,</p>
+        <p style="font-size: 14px; line-height: 1.6;">Thank you for reaching out to ${companyName}. We have successfully received your project inquiry for <strong>${body.serviceRequired || 'Custom Software Solutions'}</strong>.</p>
+        <div style="background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;">
+          <p style="margin: 0; font-size: 13px; color: #475569;"><strong>Budget:</strong> ${body.estimatedBudget || 'Flexible'}</p>
+          <p style="margin: 4px 0 0 0; font-size: 13px; color: #475569;"><strong>Timeline:</strong> ${body.timeline || 'Immediate'}</p>
+        </div>
+        <p style="font-size: 14px; line-height: 1.6;">Our engineering team has received your project parameters and will respond to <strong>${body.email}</strong> within 24 hours.</p>
+        <p style="font-size: 14px; line-height: 1.6; margin-top: 24px;">Best regards,<br/><strong>Solutions Architecture Team</strong><br/>${companyName}</p>
+      </div>
+    `
+  }).catch(e => console.error('Lead confirmation error:', e));
+
+  res.status(201).json({ success: true, message: 'Inquiry received successfully! Direct alert dispatched to company email.', lead: newLead });
 });
 
 app.put('/api/leads/:id', authenticateToken, (req: any, res) => {
@@ -5714,6 +6015,49 @@ app.post('/api/lead-magnets/:id/download', (req, res) => {
     }
   });
 
+  if (email) {
+    dispatchCompanyAlert({
+      subject: `📥 [Resource Downloaded] ${full_name || 'Visitor'} downloaded "${magnet?.title || 'Resource'}"`,
+      replyTo: email,
+      category: 'contact_inquiry',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+          <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+            <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">Executive Resource Download</span>
+            <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${magnet?.title || 'Whitepaper / Guide'}</h2>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Full Name:</td>
+              <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${full_name || 'Visitor'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Email:</td>
+              <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${email}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Company:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${company || 'Not specified'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Resource Title:</td>
+              <td style="padding: 8px 0; color: #0284c7; font-weight: 600;">${magnet?.title || 'Resource'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Downloaded At:</td>
+              <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' })} (PKT)</td>
+            </tr>
+          </table>
+
+          <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+            <a href="mailto:${email}?subject=Thank you for downloading ${encodeURIComponent(magnet?.title || 'our whitepaper')} - SaroHub" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Follow Up with ${full_name || 'Lead'} (${email})</a>
+          </div>
+        </div>
+      `
+    }).catch(e => console.error('Lead magnet alert error:', e));
+  }
+
   res.json({
     success: true,
     message: 'Resource download authorized.',
@@ -5782,7 +6126,91 @@ app.post('/api/feasibility-audits', (req, res) => {
     });
   });
 
-  console.log(`[AUDIT DISPATCH] New 48-Hour Feasibility Audit requested by ${full_name} (${email}) for project "${project_name}".`);
+  const settingsState = db.getState().settings || {};
+  const companyName = settingsState.company_name || 'SaroHub Technologies';
+
+  // 1. Alert corporate leadership at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `🔍 [48-Hour Feasibility Audit Request] ${full_name} - ${project_name}`,
+    replyTo: email,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">48-Hour Technical Feasibility Request</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${project_name}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;">Requestor Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${full_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">User Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Company / Org:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${company || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone / WhatsApp:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${phone || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Project Stage:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${project_stage}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Tech Stack:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${tech_stack || 'To be determined'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Target Timeline:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${timeline}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Budget Range:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${budget_range}</td>
+          </tr>
+          ${repo_or_spec_link ? `
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Repo / Spec Link:</td>
+            <td style="padding: 8px 0;"><a href="${repo_or_spec_link}" target="_blank" style="color: #0284c7;">${repo_or_spec_link}</a></td>
+          </tr>` : ''}
+        </table>
+
+        ${challenges ? `
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+          <h4 style="margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Known Technical Roadblocks & Questions:</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;">${challenges}</p>
+        </div>` : ''}
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${email}?subject=Regarding Your 48-Hour Technical Feasibility Audit for ${encodeURIComponent(project_name)} - SaroHub" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply Directly to ${full_name} (${email})</a>
+        </div>
+      </div>
+    `
+  }).catch(e => console.error('Audit company alert error:', e));
+
+  // 2. Automated receipt to requestor
+  sendSystemEmail({
+    to: email,
+    subject: `Audit Request Confirmed: 48-Hour Technical Feasibility for ${project_name} - ${companyName}`,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;">
+        <h2 style="color: #0284c7; margin-top: 0;">${companyName}</h2>
+        <p>Dear <strong>${full_name}</strong>,</p>
+        <p>We have safely received your request for a <strong>48-Hour Technical Feasibility &amp; Architecture Audit</strong> for <strong>${project_name}</strong>.</p>
+        <p>Our Principal Software Architect has been notified at <strong>mehdi.sarohub@gmail.com</strong> and will compile your architecture assessment report within 48 business hours.</p>
+        <p style="margin-top: 24px;">Best regards,<br/><strong>Solutions Architecture Practice</strong><br/>${companyName}</p>
+      </div>
+    `
+  }).catch(e => console.error('Audit receipt email error:', e));
+
+  console.log(`[AUDIT DISPATCH] New 48-Hour Feasibility Audit requested by ${full_name} (${email}) for project "${project_name}". Alert dispatched to mehdi.sarohub@gmail.com.`);
   res.status(201).json({
     success: true,
     message: 'Your 48-Hour Technical Feasibility & Architecture Audit request has been registered. Our Principal Architect will review your specifications and deliver an actionable technical blueprint within 48 hours.',
@@ -5871,6 +6299,79 @@ app.post('/api/solution-matches', (req, res) => {
       createdAt: new Date().toISOString()
     });
   });
+
+  const settingsState = db.getState().settings || {};
+  const companyName = settingsState.company_name || 'SaroHub Technologies';
+
+  // 1. Alert corporate lead team at mehdi.sarohub@gmail.com
+  dispatchCompanyAlert({
+    subject: `🎯 [Solution Diagnostic Match] ${contact_name} - ${project_type}`,
+    replyTo: email,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;">
+        <div style="border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;">
+          <span style="background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;">Solution Match Diagnostic Result</span>
+          <h2 style="color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;">${project_type}</h2>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; width: 150px; font-weight: 600;">Contact Name:</td>
+            <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${contact_name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">User Email:</td>
+            <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none; font-weight: 700;">${email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Phone:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${phone || 'Not provided'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Company:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${company || 'Not specified'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Recommended Model:</td>
+            <td style="padding: 8px 0; color: #0284c7; font-weight: 700;">${recommended_model}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Estimated Delivery:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${estimated_weeks}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Budget Tier:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${budget}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #64748b; font-weight: 600;">Recommended Stack:</td>
+            <td style="padding: 8px 0; color: #0f172a;">${(recommended_stack || []).join(', ')}</td>
+          </tr>
+        </table>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+          <a href="mailto:${email}?subject=Regarding Your SaroHub Solution Diagnostic for ${encodeURIComponent(project_type)}" style="display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;">Reply Directly to ${contact_name} (${email})</a>
+        </div>
+      </div>
+    `
+  }).catch(e => console.error('Solution match alert error:', e));
+
+  // 2. Confirmation to user
+  sendSystemEmail({
+    to: email,
+    subject: `Your Solution Diagnostic Blueprint: ${project_type} - ${companyName}`,
+    category: 'contact_inquiry',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;">
+        <h2 style="color: #0284c7; margin-top: 0;">${companyName}</h2>
+        <p>Dear <strong>${contact_name}</strong>,</p>
+        <p>Thank you for using our interactive solution matcher. Based on your project parameters, our recommended architecture model is <strong>${recommended_model}</strong> with a target timeline of <strong>${estimated_weeks}</strong>.</p>
+        <p>Our solutions lead at <strong>mehdi.sarohub@gmail.com</strong> has received your diagnostic profile and can assist in tailoring an exact sprint breakdown.</p>
+        <p style="margin-top: 24px;">Best regards,<br/><strong>Solutions Architecture Team</strong><br/>${companyName}</p>
+      </div>
+    `
+  }).catch(e => console.error('Solution match user email error:', e));
 
   res.status(201).json({
     success: true,

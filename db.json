@@ -3,7 +3,7 @@
     "id": 1,
     "username": "admin",
     "email": "cyberm0101noirhat@gmail.com",
-    "password_hash": "$2b$10$n6l1MESAIbJTwzGAYVOMGua5sUY9JDyfY8MmiSpVXvqSySBIG6y56",
+    "password_hash": "$2b$10$exIbq3Gxc3tC3uZJwg.FDeQtSe2iOdCP4s1eapak0QvEq0SKpXmbK",
     "full_name": "Super Admin",
     "profile_pic": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
     "bio": "Primary administrator and content director for SaroHub Technologies.",
@@ -2220,265 +2220,6 @@
       "order": 6,
       "created_at": "2026-06-20T10:00:00Z",
       "updated_at": "2026-09-05T16:36:28.527Z"
-    },
-    {
-      "id": 7,
-      "title": "Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign",
-      "slug": "apex-growth-marketing",
-      "client_name": "Apex Retail Group",
-      "industry": "E-Commerce & Consumer Retail",
-      "category": "Digital Marketing",
-      "secondary_categories": [
-        "E-commerce / Commerce",
-        "Web Applications"
-      ],
-      "project_type": "Multi-Channel Performance Marketing, Technical SEO & Paid Ads Campaign",
-      "positioning_statement": "High-ROAS Google & Meta performance ad engine with conversion rate optimization and technical SEO.",
-      "short_description": "Full-funnel digital marketing campaign executed by SaroHub: restructured Google Search/Shopping ads, deployed Meta lookalike funnels, resolved critical SEO indexation bottlenecks, and configured automated email recovery workflows.",
-      "description": "Apex Retail Group, an expanding digital consumer goods brand, partnered with SaroHub Technologies to overhaul their customer acquisition engine across Google and Meta paid channels, technical search optimization, and conversion analytics.",
-      "what_we_solved": "Eliminated wasted ad spend by restructuring campaigns, resolving technical SEO crawl errors, and engineering high-converting landing pages that elevated ROAS from 1.4x to 4.6x.",
-      "status": "Delivered",
-      "engagement": "Client Project",
-      "completion_date": "2026-07-10",
-      "thumbnail_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
-      "screenshots": [
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200&h=675"
-      ],
-      "gallery": [
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1200&h=675"
-      ],
-      "live_url": "https://apexretail.com",
-      "github_url": "",
-      "technologies": [
-        "Google Ads",
-        "Meta Ads",
-        "Google Analytics 4",
-        "Google Tag Manager",
-        "SEMrush",
-        "Technical SEO",
-        "Klaviyo",
-        "CRO"
-      ],
-      "case_study": "Eliminated wasted ad spend by restructuring campaigns, resolving technical SEO crawl errors, and engineering high-converting landing pages that elevated ROAS from 1.4x to 4.6x.",
-      "problem_challenge": "Unprofitable Ad Spend: Stagnant 1.4x ROAS on generic ad campaigns.\nHigh Landing Page Bounce Rates: Over 65% mobile drop-off.\nAttribution Gaps: Inaccurate tracking from iOS cookie restrictions.\nTechnical SEO Drag: Thousands of orphan products and poor indexation.",
-      "solution": "Full-Funnel Paid Ads: Google Search, Performance Max, and Meta retargeting.\nConversion Rate Optimization: High-speed checkout and landing page UX.\nServer-Side Tracking: GTM Server containers and Meta CAPI.\nTechnical SEO: Schema markup, crawl budget remediation, and buying guides.",
-      "key_features": [
-        "Google Search, Shopping & Performance Max Campaigns",
-        "Meta (Facebook & Instagram) Dynamic Product Retargeting",
-        "Server-Side Conversion API (CAPI) & GA4 Attribution",
-        "Technical SEO Audit, Schema Markup & Crawl Optimization",
-        "High-Converting Landing Page UI/UX & A/B Testing",
-        "Automated Klaviyo Email Abandoned Cart Sequences"
-      ],
-      "features": [
-        "Google Search, Shopping & Performance Max Campaigns",
-        "Meta (Facebook & Instagram) Dynamic Product Retargeting",
-        "Server-Side Conversion API (CAPI) & GA4 Attribution",
-        "Technical SEO Audit, Schema Markup & Crawl Optimization",
-        "High-Converting Landing Page UI/UX & A/B Testing",
-        "Automated Klaviyo Email Abandoned Cart Sequences"
-      ],
-      "overview": {
-        "client_background": "Apex Retail Group is a fast-scaling multi-category consumer e-commerce retailer offering lifestyle goods, electronics, and home essentials.",
-        "industry_context": "Digital Commerce, Paid Media & Multi-Channel Acquisition",
-        "what_sarohub_built": "SaroHub architected and executed an end-to-end digital marketing growth engine: paid media restructuring across Google Ads and Meta, server-side Conversion API (CAPI) attribution, technical SEO remediation, and high-converting landing page redesigns.",
-        "project_importance": "Rising customer acquisition costs and low organic visibility were eroding margins. Apex required a proven digital growth partner to optimize paid spend, maximize ROAS, and establish sustainable organic search dominance."
-      },
-      "challenges": [
-        {
-          "title": "Unprofitable Ad Spend (1.4x ROAS)",
-          "description": "Previous ad campaigns targeted broad, unqualified keywords and unsegmented audiences, burning budget without generating profitable purchases."
-        },
-        {
-          "title": "High Landing Page Bounce Rates",
-          "description": "Visitors were bouncing within 5 seconds due to slow mobile loading speeds, cluttered navigation, and friction in the checkout funnel."
-        }
-      ],
-      "solutions": [
-        {
-          "title": "Full-Funnel Paid Advertising Engine",
-          "description": "Restructured Google Search, Shopping, Performance Max, and Meta lookalike audience funnels with strict negative keyword lists and creative testing sprints."
-        },
-        {
-          "title": "Conversion Rate Optimization (CRO)",
-          "description": "Engineered lightweight, mobile-first product landing pages and a streamlined single-page checkout that improved conversion rate from 1.2% to 3.4%."
-        }
-      ],
-      "sarohub_role": [
-        "Digital Marketing Strategy",
-        "Paid Ads Campaign Architecture",
-        "Technical SEO Implementation",
-        "Conversion Rate Optimization (CRO)",
-        "Server-Side Event Tagging & Analytics"
-      ],
-      "results_impact": {
-        "metrics": [
-          {
-            "metric": "4.6x",
-            "label": "Average ROAS",
-            "detail": "Increased return on ad spend across Google and Meta paid channels."
-          },
-          {
-            "metric": "+340%",
-            "label": "Organic Traffic Growth",
-            "detail": "Substantial surge in non-branded organic search impressions and clicks."
-          },
-          {
-            "metric": "-42%",
-            "label": "Reduced CAC",
-            "detail": "Lowered customer acquisition cost through conversion rate optimization."
-          },
-          {
-            "metric": "18,500+",
-            "label": "Orders Generated",
-            "detail": "Direct purchase conversions driven through optimized campaigns."
-          }
-        ],
-        "qualitative_outcomes": [
-          {
-            "title": "Predictable Customer Acquisition",
-            "description": "Replaced erratic ad results with a predictable, scalable customer acquisition machine that consistently delivers positive unit economics."
-          },
-          {
-            "title": "Authoritative Organic Ranking",
-            "description": "Achieved first-page rankings on Google for high-converting category keywords, creating an evergreen stream of free customer traffic."
-          }
-        ]
-      },
-      "testimonial": {
-        "quote": "SaroHub revolutionized our customer acquisition. In three months, our ROAS climbed from 1.4x to over 4.6x while our organic search traffic tripled. They do not just run ads—they understand unit economics, conversion psychology, and technical tracking.",
-        "author": "Marcus Vance",
-        "role": "Chief Commercial Officer",
-        "company": "Apex Retail Group"
-      },
-      "featured": true,
-      "order": 2,
-      "created_at": "2026-07-10T10:00:00Z",
-      "updated_at": "2026-07-10T10:00:00Z"
-    },
-    {
-      "id": 8,
-      "title": "The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign",
-      "slug": "crescent-digital-marketing",
-      "client_name": "The Crescent Resorts & Hospitality",
-      "industry": "Hospitality & Luxury Tourism",
-      "category": "Digital Marketing",
-      "secondary_categories": [
-        "Hospitality",
-        "Websites"
-      ],
-      "project_type": "Local SEO, Google Travel Ads & Social Media Marketing Campaign",
-      "positioning_statement": "Targeted hospitality marketing driving a 210% increase in direct resort bookings.",
-      "short_description": "A multi-channel tourism marketing campaign combining Google Local 3-Pack optimization, Google Travel ads, high-intent travel keyword content, and targeted Meta video campaigns to acquire direct guests with zero OTA commission.",
-      "description": "The Crescent Resorts partnered with SaroHub Technologies to spearhead a hyper-targeted digital marketing and local SEO offensive to capture direct reservations and reduce high online travel agency fees.",
-      "what_we_solved": "Freed the resort from paying 18-22% commissions to third-party travel agencies (OTAs) by establishing a high-converting direct booking acquisition engine.",
-      "status": "Delivered",
-      "engagement": "Client Project",
-      "completion_date": "2026-06-18",
-      "thumbnail_url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
-      "screenshots": [
-        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200&h=675"
-      ],
-      "gallery": [
-        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
-        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200&h=675"
-      ],
-      "live_url": "https://thecrescentresorts.com",
-      "github_url": "",
-      "technologies": [
-        "Local SEO",
-        "Google Ads",
-        "Meta Ads",
-        "Tourism Marketing",
-        "Google Maps",
-        "Hospitality Growth"
-      ],
-      "case_study": "Freed the resort from paying 18-22% commissions to third-party travel agencies (OTAs) by establishing a high-converting direct booking acquisition engine.",
-      "problem_challenge": "Heavy OTA Dependency: 80% of bookings paid 18-22% commission.\nLow Search Visibility: Resort missing from Google Maps luxury tourist searches.\nSeasonality: Unfilled rooms during shoulder travel months.",
-      "solution": "Local SEO Domination: #1 rank in Google Local 3-Pack and Maps citations.\nGoogle Travel Ads: Targeted keywords like \"luxury resort Skardu\" and \"honeymoon suites\".\nExperiential Video Reels: High-converting visual reels on Instagram and Facebook.\nWhatsApp Direct Booking: One-click mobile reservations with instant concierge replies.",
-      "key_features": [
-        "Google Business Profile & Local 3-Pack Domination",
-        "Targeted Google Search & Travel Hotel Campaigns",
-        "Meta Experiential Video & Story Ads",
-        "Direct WhatsApp Booking Fast-Track Integration"
-      ],
-      "features": [
-        "Google Business Profile & Local 3-Pack Domination",
-        "Targeted Google Search & Travel Hotel Campaigns",
-        "Meta Experiential Video & Story Ads",
-        "Direct WhatsApp Booking Fast-Track Integration"
-      ],
-      "overview": {
-        "client_background": "The Crescent Resorts operates luxury boutique resort destinations in northern Pakistan, catering to domestic travelers, international adventurers, and corporate retreats.",
-        "industry_context": "Hospitality Digital Marketing, Local SEO & Travel Acquisition",
-        "what_sarohub_built": "SaroHub implemented a regional and international digital marketing campaign combining Google Business Profile optimization, localized high-intent travel keyword SEO, targeted Meta travel reels, and automated booking inquiry routing.",
-        "project_importance": "The resort was losing significant profit margins to third-party online travel agencies (OTAs) taking up to 22% in commission fees. They needed a high-performance direct digital marketing channel."
-      },
-      "challenges": [
-        {
-          "title": "Heavy OTA Commission Dependency",
-          "description": "Over 80% of bookings came through third-party platforms charging exorbitant 18-22% commissions per stay."
-        }
-      ],
-      "solutions": [
-        {
-          "title": "Local SEO & Google 3-Pack Optimization",
-          "description": "Optimized Google Business Profiles, citation directories, and localized hotel schema markup, securing #1 rankings for northern resort searches."
-        }
-      ],
-      "sarohub_role": [
-        "Tourism Marketing Strategy",
-        "Local SEO & Google Maps Optimization",
-        "Paid Search & Social Media Advertising",
-        "Ad Creative Direction & Video Reels Production"
-      ],
-      "results_impact": {
-        "metrics": [
-          {
-            "metric": "+210%",
-            "label": "Direct Bookings Boost",
-            "detail": "Dramatic growth in commission-free guest reservations."
-          },
-          {
-            "metric": "#1 Rank",
-            "label": "Google Local 3-Pack",
-            "detail": "Top position for primary regional luxury hospitality searches."
-          },
-          {
-            "metric": "3.8x",
-            "label": "Ad Spend ROAS",
-            "detail": "Return on ad spend across seasonal holiday campaigns."
-          },
-          {
-            "metric": "120k+",
-            "label": "Targeted Video Views",
-            "detail": "Engaged potential luxury travelers across Instagram and Facebook."
-          }
-        ],
-        "qualitative_outcomes": [
-          {
-            "title": "Direct Revenue Independence",
-            "description": "Reduced reliance on costly travel agencies, saving substantial commission fees each tourist season."
-          }
-        ]
-      },
-      "testimonial": {
-        "quote": "SaroHub's digital marketing and local SEO strategy transformed our revenue model. Over 65% of our seasonal suite reservations now come directly through our own channels rather than costly travel agency portals.",
-        "author": "Karim Shah",
-        "role": "General Manager",
-        "company": "The Crescent Resorts"
-      },
-      "featured": true,
-      "order": 3,
-      "created_at": "2026-06-18T10:00:00Z",
-      "updated_at": "2026-06-18T10:00:00Z"
     }
   ],
   "products": [
@@ -2985,7 +2726,68 @@
       "created_at": "2026-06-25T10:00:00Z"
     }
   ],
-  "contact_messages": [],
+  "contact_messages": [
+    {
+      "id": 6,
+      "name": "Manual Email Test",
+      "email": "visitor.client@example.com",
+      "phone": "+92 300 9876543",
+      "subject": "Testing Form with info@sarohub.com display",
+      "message": "Form alerts must reach mehdi.sarohub@gmail.com, while website displays info@sarohub.com.",
+      "is_read": false,
+      "created_at": "2026-09-17T07:46:37.703Z"
+    },
+    {
+      "id": 5,
+      "name": "rehana mehdi",
+      "email": "rehana@gmail.com",
+      "phone": "",
+      "subject": "hi mehdi",
+      "message": "mehdi",
+      "is_read": false,
+      "created_at": "2026-09-17T07:41:28.181Z"
+    },
+    {
+      "id": 4,
+      "name": "rehana ",
+      "email": "rehana123@gmail.com",
+      "phone": "95824785435",
+      "subject": "rina test",
+      "message": "ttt",
+      "is_read": false,
+      "created_at": "2026-09-17T07:40:25.946Z"
+    },
+    {
+      "id": 3,
+      "name": "Verification Test",
+      "email": "visitor.test@example.com",
+      "phone": "+92 300 1234567",
+      "subject": "Website Inquiries Route Test",
+      "message": "Testing routing directly to mehdi.sarohub@gmail.com with visitor reply-to.",
+      "is_read": false,
+      "created_at": "2026-09-17T07:38:43.414Z"
+    },
+    {
+      "id": 2,
+      "name": "Irshad Khaliq haqqani",
+      "email": "mehdi.sarohub@gmail.com",
+      "phone": "474358452",
+      "subject": "nnb",
+      "message": "jgjb",
+      "is_read": false,
+      "created_at": "2026-09-17T07:18:55.798Z"
+    },
+    {
+      "id": 1,
+      "name": "Rehana wazir",
+      "email": "cyberm0101noirhat@gmail.com",
+      "phone": "03555866875",
+      "subject": "send us a messege",
+      "message": "test first btn",
+      "is_read": false,
+      "created_at": "2026-09-17T07:17:45.044Z"
+    }
+  ],
   "newsletter_subscribers": [
     {
       "id": 1,
@@ -3032,7 +2834,7 @@
     "smtp_port": "465",
     "smtp_user": "mehdi.sarohub@gmail.com",
     "smtp_pass": "oeap oskj qcwm offb",
-    "smtp_from_name": "SaroHub Talent Acquisition",
+    "smtp_from_name": "SaroHub Technologies",
     "smtp_from_email": "mehdi.sarohub@gmail.com",
     "custom_socials": "[]",
     "hero_badge": "Full-Stack Technology Studio & Venture Partner",
@@ -3074,6 +2876,86 @@
     "cta_tertiary_link": "/capabilities"
   },
   "activity_logs": [
+    {
+      "id": 147,
+      "admin_id": 1,
+      "action_type": "LOGIN_SUCCESS",
+      "details": "Administrator authenticated successfully.",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T07:15:28.923Z"
+    },
+    {
+      "id": 146,
+      "admin_id": 1,
+      "action_type": "UPDATE_GALLERY_ITEM",
+      "details": "Updated gallery item: E-Commerce Growth & Conversion Optimization Partner Workshop",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T05:29:53.587Z"
+    },
+    {
+      "id": 145,
+      "admin_id": 1,
+      "action_type": "UPDATE_GALLERY_ITEM",
+      "details": "Updated gallery item: E-Commerce Growth & Conversion Optimization Partner Workshop",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T05:29:51.925Z"
+    },
+    {
+      "id": 144,
+      "admin_id": 1,
+      "action_type": "DELETE_GALLERY_ITEM",
+      "details": "Deleted gallery item: Design Thinking & Collaborative UI/UX Sprint",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T05:29:47.947Z"
+    },
+    {
+      "id": 143,
+      "admin_id": 1,
+      "action_type": "DELETE_TRUST_BADGE",
+      "details": "Deleted trust badge #4",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:56:13.875Z"
+    },
+    {
+      "id": 142,
+      "admin_id": 1,
+      "action_type": "DELETE_TRUST_BADGE",
+      "details": "Deleted trust badge #5",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:56:11.668Z"
+    },
+    {
+      "id": 141,
+      "admin_id": 1,
+      "action_type": "DELETE_TRUST_BADGE",
+      "details": "Deleted trust badge #6",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:56:08.510Z"
+    },
+    {
+      "id": 140,
+      "admin_id": 1,
+      "action_type": "DELETE_PROJECT",
+      "details": "Deleted project: The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:55:31.350Z"
+    },
+    {
+      "id": 139,
+      "admin_id": 1,
+      "action_type": "DELETE_PROJECT",
+      "details": "Deleted project: Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:55:20.449Z"
+    },
+    {
+      "id": 138,
+      "admin_id": 1,
+      "action_type": "LOGIN_SUCCESS",
+      "details": "Administrator authenticated successfully.",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:55:08.043Z"
+    },
     {
       "id": 137,
       "admin_id": 1,
@@ -5140,6 +5022,96 @@
   ],
   "outgoing_emails": [
     {
+      "id": 31,
+      "to": "rehana@gmail.com",
+      "subject": "Inquiry Received: hi mehdi - SaroHub Technologies (Private) Limited",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:41:31.073Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;\">\n        <div style=\"text-align: center; margin-bottom: 20px;\">\n          <h2 style=\"color: #0284c7; margin: 0; font-size: 20px;\">SaroHub Technologies (Private) Limited</h2>\n          <p style=\"color: #64748b; font-size: 12px; margin-top: 4px;\">Client Relations &amp; Enterprise Solutions</p>\n        </div>\n        <p style=\"font-size: 15px; line-height: 1.6;\">Dear <strong>rehana mehdi</strong>,</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">Thank you for contacting SaroHub Technologies (Private) Limited. We have received your message regarding: <strong>hi mehdi</strong>.</p>\n        <div style=\"background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;\">\n          <p style=\"margin: 0; font-size: 13px; color: #475569; font-style: italic;\">\"mehdi\"</p>\n        </div>\n        <p style=\"font-size: 14px; line-height: 1.6;\">A member of our engineering or client consultation team will review your inquiry and respond within 24 business hours.</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">If urgent assistance is required:</p>\n        <p style=\"font-size: 13px; color: #334155;\">\n          Email: <a href=\"mailto:mehdi.sarohub@gmail.com\">mehdi.sarohub@gmail.com</a><br/>\n          WhatsApp: <a href=\"https://wa.me/923430381473\">+92 3430381473</a>\n        </p>\n        <p style=\"font-size: 14px; line-height: 1.6; margin-top: 24px;\">Best regards,<br/><strong>Client Relations Team</strong><br/>SaroHub Technologies (Private) Limited</p>\n      </div>\n    "
+    },
+    {
+      "id": 30,
+      "to": "mehdi.sarohub@gmail.com",
+      "subject": "🔔 [Website Message] rehana mehdi - hi mehdi",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:41:30.452Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;\">\n        <div style=\"border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;\">\n          <span style=\"background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;\">New Website Contact Message</span>\n          <h2 style=\"color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;\">hi mehdi</h2>\n        </div>\n\n        <table style=\"width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;\">\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;\">User Name:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 700;\">rehana mehdi</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">User Email:</td>\n            <td style=\"padding: 8px 0;\"><a href=\"mailto:rehana@gmail.com\" style=\"color: #0284c7; text-decoration: none; font-weight: 700;\">rehana@gmail.com</a></td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Phone / WhatsApp:</td>\n            <td style=\"padding: 8px 0; color: #0f172a;\">Not provided</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Subject:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 600;\">hi mehdi</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Received At:</td>\n            <td style=\"padding: 8px 0; color: #64748b;\">9/17/2026, 12:41:28 PM (PKT)</td>\n          </tr>\n        </table>\n\n        <div style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;\">\n          <h4 style=\"margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;\">Message Content:</h4>\n          <p style=\"margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;\">mehdi</p>\n        </div>\n\n        <div style=\"text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;\">\n          <a href=\"mailto:rehana@gmail.com?subject=Re: hi%20mehdi - SaroHub Technologies\" style=\"display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;\">Reply Directly to rehana mehdi (rehana@gmail.com)</a>\n        </div>\n      </div>\n    "
+    },
+    {
+      "id": 29,
+      "to": "rehana123@gmail.com",
+      "subject": "Inquiry Received: rina test - SaroHub Technologies (Private) Limited",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:40:29.279Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;\">\n        <div style=\"text-align: center; margin-bottom: 20px;\">\n          <h2 style=\"color: #0284c7; margin: 0; font-size: 20px;\">SaroHub Technologies (Private) Limited</h2>\n          <p style=\"color: #64748b; font-size: 12px; margin-top: 4px;\">Client Relations &amp; Enterprise Solutions</p>\n        </div>\n        <p style=\"font-size: 15px; line-height: 1.6;\">Dear <strong>rehana </strong>,</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">Thank you for contacting SaroHub Technologies (Private) Limited. We have received your message regarding: <strong>rina test</strong>.</p>\n        <div style=\"background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;\">\n          <p style=\"margin: 0; font-size: 13px; color: #475569; font-style: italic;\">\"ttt\"</p>\n        </div>\n        <p style=\"font-size: 14px; line-height: 1.6;\">A member of our engineering or client consultation team will review your inquiry and respond within 24 business hours.</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">If urgent assistance is required:</p>\n        <p style=\"font-size: 13px; color: #334155;\">\n          Email: <a href=\"mailto:mehdi.sarohub@gmail.com\">mehdi.sarohub@gmail.com</a><br/>\n          WhatsApp: <a href=\"https://wa.me/923430381473\">+92 3430381473</a>\n        </p>\n        <p style=\"font-size: 14px; line-height: 1.6; margin-top: 24px;\">Best regards,<br/><strong>Client Relations Team</strong><br/>SaroHub Technologies (Private) Limited</p>\n      </div>\n    "
+    },
+    {
+      "id": 28,
+      "to": "mehdi.sarohub@gmail.com",
+      "subject": "🔔 [Website Message] rehana  - rina test",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:40:28.744Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;\">\n        <div style=\"border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;\">\n          <span style=\"background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;\">New Website Contact Message</span>\n          <h2 style=\"color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;\">rina test</h2>\n        </div>\n\n        <table style=\"width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;\">\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;\">User Name:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 700;\">rehana </td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">User Email:</td>\n            <td style=\"padding: 8px 0;\"><a href=\"mailto:rehana123@gmail.com\" style=\"color: #0284c7; text-decoration: none; font-weight: 700;\">rehana123@gmail.com</a></td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Phone / WhatsApp:</td>\n            <td style=\"padding: 8px 0; color: #0f172a;\">95824785435</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Subject:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 600;\">rina test</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Received At:</td>\n            <td style=\"padding: 8px 0; color: #64748b;\">9/17/2026, 12:40:25 PM (PKT)</td>\n          </tr>\n        </table>\n\n        <div style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;\">\n          <h4 style=\"margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;\">Message Content:</h4>\n          <p style=\"margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;\">ttt</p>\n        </div>\n\n        <div style=\"text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;\">\n          <a href=\"mailto:rehana123@gmail.com?subject=Re: rina%20test - SaroHub Technologies\" style=\"display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;\">Reply Directly to rehana  (rehana123@gmail.com)</a>\n        </div>\n      </div>\n    "
+    },
+    {
+      "id": 27,
+      "to": "mehdi.sarohub@gmail.com",
+      "subject": "🔔 [Website Message] Verification Test - Website Inquiries Route Test",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:38:46.151Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #cbd5e1; border-radius: 12px; background-color: #ffffff; color: #0f172a;\">\n        <div style=\"border-bottom: 2px solid #0284c7; padding-bottom: 14px; margin-bottom: 20px;\">\n          <span style=\"background-color: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 6px;\">New Website Contact Message</span>\n          <h2 style=\"color: #0f172a; margin: 10px 0 0 0; font-size: 20px; font-weight: 800;\">Website Inquiries Route Test</h2>\n        </div>\n\n        <table style=\"width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;\">\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; width: 140px; font-weight: 600;\">User Name:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 700;\">Verification Test</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">User Email:</td>\n            <td style=\"padding: 8px 0;\"><a href=\"mailto:visitor.test@example.com\" style=\"color: #0284c7; text-decoration: none; font-weight: 700;\">visitor.test@example.com</a></td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Phone / WhatsApp:</td>\n            <td style=\"padding: 8px 0; color: #0f172a;\">+92 300 1234567</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Subject:</td>\n            <td style=\"padding: 8px 0; color: #0f172a; font-weight: 600;\">Website Inquiries Route Test</td>\n          </tr>\n          <tr>\n            <td style=\"padding: 8px 0; color: #64748b; font-weight: 600;\">Received At:</td>\n            <td style=\"padding: 8px 0; color: #64748b;\">9/17/2026, 12:38:43 PM (PKT)</td>\n          </tr>\n        </table>\n\n        <div style=\"background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; padding: 16px; border-radius: 8px; margin-bottom: 24px;\">\n          <h4 style=\"margin: 0 0 8px 0; color: #334155; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;\">Message Content:</h4>\n          <p style=\"margin: 0; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-line;\">Testing routing directly to mehdi.sarohub@gmail.com with visitor reply-to.</p>\n        </div>\n\n        <div style=\"text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;\">\n          <a href=\"mailto:visitor.test@example.com?subject=Re: Website%20Inquiries%20Route%20Test - SaroHub Technologies\" style=\"display: inline-block; background-color: #0284c7; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 13px; padding: 10px 20px; border-radius: 8px;\">Reply Directly to Verification Test (visitor.test@example.com)</a>\n        </div>\n      </div>\n    "
+    },
+    {
+      "id": 26,
+      "to": "visitor.test@example.com",
+      "subject": "Inquiry Received: Website Inquiries Route Test - SaroHub Technologies (Private) Limited",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:38:45.510Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;\">\n        <div style=\"text-align: center; margin-bottom: 20px;\">\n          <h2 style=\"color: #0284c7; margin: 0; font-size: 20px;\">SaroHub Technologies (Private) Limited</h2>\n          <p style=\"color: #64748b; font-size: 12px; margin-top: 4px;\">Client Relations &amp; Enterprise Solutions</p>\n        </div>\n        <p style=\"font-size: 15px; line-height: 1.6;\">Dear <strong>Verification Test</strong>,</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">Thank you for contacting SaroHub Technologies (Private) Limited. We have received your message regarding: <strong>Website Inquiries Route Test</strong>.</p>\n        <div style=\"background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;\">\n          <p style=\"margin: 0; font-size: 13px; color: #475569; font-style: italic;\">\"Testing routing directly to mehdi.sarohub@gmail.com with visitor reply-to.\"</p>\n        </div>\n        <p style=\"font-size: 14px; line-height: 1.6;\">A member of our engineering or client consultation team will review your inquiry and respond within 24 business hours.</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">If urgent assistance is required:</p>\n        <p style=\"font-size: 13px; color: #334155;\">\n          Email: <a href=\"mailto:mehdi.sarohub@gmail.com\">mehdi.sarohub@gmail.com</a><br/>\n          WhatsApp: <a href=\"https://wa.me/923430381473\">+92 3430381473</a>\n        </p>\n        <p style=\"font-size: 14px; line-height: 1.6; margin-top: 24px;\">Best regards,<br/><strong>Client Relations Team</strong><br/>SaroHub Technologies (Private) Limited</p>\n      </div>\n    "
+    },
+    {
+      "id": 25,
+      "to": "info@sarohub.com",
+      "subject": "[New Website Inquiry] Irshad Khaliq haqqani - nnb",
+      "category": "system",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:18:58.749Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;\">\n        <h3 style=\"color: #0f172a; margin-top: 0;\">New Contact Form Message</h3>\n        <p><strong>From:</strong> Irshad Khaliq haqqani (mehdi.sarohub@gmail.com)</p>\n        <p><strong>Phone:</strong> 474358452</p>\n        <p><strong>Subject:</strong> nnb</p>\n        <p><strong>Message:</strong></p>\n        <div style=\"background: #f1f5f9; padding: 12px; border-radius: 6px;\">jgjb</div>\n      </div>\n    "
+    },
+    {
+      "id": 24,
+      "to": "mehdi.sarohub@gmail.com",
+      "subject": "Inquiry Received: nnb - SaroHub Technologies (Private) Limited",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:18:58.266Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;\">\n        <div style=\"text-align: center; margin-bottom: 20px;\">\n          <h2 style=\"color: #0284c7; margin: 0; font-size: 20px;\">SaroHub Technologies (Private) Limited</h2>\n          <p style=\"color: #64748b; font-size: 12px; margin-top: 4px;\">Client Relations &amp; Enterprise Solutions</p>\n        </div>\n        <p style=\"font-size: 15px; line-height: 1.6;\">Dear <strong>Irshad Khaliq haqqani</strong>,</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">Thank you for contacting SaroHub Technologies (Private) Limited. We have received your message regarding: <strong>nnb</strong>.</p>\n        <div style=\"background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;\">\n          <p style=\"margin: 0; font-size: 13px; color: #475569; font-style: italic;\">\"jgjb\"</p>\n        </div>\n        <p style=\"font-size: 14px; line-height: 1.6;\">A member of our engineering or client consultation team will review your inquiry and respond within 24 business hours.</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">If urgent assistance is required:</p>\n        <p style=\"font-size: 13px; color: #334155;\">\n          Email: <a href=\"mailto:info@sarohub.com\">info@sarohub.com</a><br/>\n          WhatsApp: <a href=\"https://wa.me/923430381473\">+92 3430381473</a>\n        </p>\n        <p style=\"font-size: 14px; line-height: 1.6; margin-top: 24px;\">Best regards,<br/><strong>Client Relations Team</strong><br/>SaroHub Technologies (Private) Limited</p>\n      </div>\n    "
+    },
+    {
+      "id": 23,
+      "to": "cyberm0101noirhat@gmail.com",
+      "subject": "Inquiry Received: send us a messege - SaroHub Technologies (Private) Limited",
+      "category": "contact_inquiry",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:17:48.016Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff; color: #1e293b;\">\n        <div style=\"text-align: center; margin-bottom: 20px;\">\n          <h2 style=\"color: #0284c7; margin: 0; font-size: 20px;\">SaroHub Technologies (Private) Limited</h2>\n          <p style=\"color: #64748b; font-size: 12px; margin-top: 4px;\">Client Relations &amp; Enterprise Solutions</p>\n        </div>\n        <p style=\"font-size: 15px; line-height: 1.6;\">Dear <strong>Rehana wazir</strong>,</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">Thank you for contacting SaroHub Technologies (Private) Limited. We have received your message regarding: <strong>send us a messege</strong>.</p>\n        <div style=\"background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px 16px; margin: 16px 0; border-radius: 4px;\">\n          <p style=\"margin: 0; font-size: 13px; color: #475569; font-style: italic;\">\"test first btn\"</p>\n        </div>\n        <p style=\"font-size: 14px; line-height: 1.6;\">A member of our engineering or client consultation team will review your inquiry and respond within 24 business hours.</p>\n        <p style=\"font-size: 14px; line-height: 1.6;\">If urgent assistance is required:</p>\n        <p style=\"font-size: 13px; color: #334155;\">\n          Email: <a href=\"mailto:info@sarohub.com\">info@sarohub.com</a><br/>\n          WhatsApp: <a href=\"https://wa.me/923430381473\">+92 3430381473</a>\n        </p>\n        <p style=\"font-size: 14px; line-height: 1.6; margin-top: 24px;\">Best regards,<br/><strong>Client Relations Team</strong><br/>SaroHub Technologies (Private) Limited</p>\n      </div>\n    "
+    },
+    {
+      "id": 22,
+      "to": "info@sarohub.com",
+      "subject": "[New Website Inquiry] Rehana wazir - send us a messege",
+      "category": "system",
+      "status": "delivered",
+      "created_at": "2026-09-17T07:17:47.430Z",
+      "html": "\n      <div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;\">\n        <h3 style=\"color: #0f172a; margin-top: 0;\">New Contact Form Message</h3>\n        <p><strong>From:</strong> Rehana wazir (cyberm0101noirhat@gmail.com)</p>\n        <p><strong>Phone:</strong> 03555866875</p>\n        <p><strong>Subject:</strong> send us a messege</p>\n        <p><strong>Message:</strong></p>\n        <div style=\"background: #f1f5f9; padding: 12px; border-radius: 6px;\">test first btn</div>\n      </div>\n    "
+    },
+    {
       "id": 21,
       "to": "mehdi.sarohub@gmail.com",
       "subject": "🚨 [New Consultation Booked] Test Delete - 2026-09-15 (02:00 PM PKT)",
@@ -5413,42 +5385,6 @@
       "category": "Client Satisfaction",
       "is_active": true,
       "sort_order": 3
-    },
-    {
-      "id": 4,
-      "platform": "Upwork Enterprise",
-      "badge_title": "Top Rated Plus Engineering Agency",
-      "rating_score": "100% Job Success",
-      "review_count": "Top 1% Global Talent",
-      "badge_icon": "ShieldCheck",
-      "external_url": "https://upwork.com",
-      "category": "Delivery Track Record",
-      "is_active": true,
-      "sort_order": 4
-    },
-    {
-      "id": 5,
-      "platform": "SOC 2 Type II",
-      "badge_title": "Security Compliant Processes & Audit Ready",
-      "rating_score": "Enterprise Grade",
-      "review_count": "Zero-Trust Protocol",
-      "badge_icon": "Lock",
-      "external_url": "#security-compliance",
-      "category": "Compliance & Security",
-      "is_active": true,
-      "sort_order": 5
-    },
-    {
-      "id": 6,
-      "platform": "ISO 27001",
-      "badge_title": "Information Security Architecture Aligned",
-      "rating_score": "Strict Data Privacy",
-      "review_count": "GDPR & OWASP Aligned",
-      "badge_icon": "Shield",
-      "external_url": "#security-compliance",
-      "category": "Compliance & Security",
-      "is_active": true,
-      "sort_order": 6
     }
   ],
   "client_endorsements": [
@@ -5781,29 +5717,7 @@
       "published": true,
       "order": 5,
       "created_at": "2026-06-10T11:00:00Z",
-      "updated_at": "2026-06-10T11:00:00Z"
-    },
-    {
-      "id": 6,
-      "title": "Design Thinking & Collaborative UI/UX Sprint",
-      "category": "Office Culture",
-      "image_url": "https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&q=80&w=1200&h=750",
-      "caption": "Cross-functional design critique, accessibility audits, and design token standardization.",
-      "description": "Our design squad and frontend developers gathering around whiteboard wireframes and interactive Figma prototypes, refining our client design systems and guaranteeing WCAG AA accessibility compliance.",
-      "event_date": "2026-05-18",
-      "location": "SaroHub Creative Studio",
-      "attendees_count": "Design & Frontend Teams",
-      "tags": [
-        "Office Culture",
-        "UI/UX",
-        "Design Thinking",
-        "Accessibility"
-      ],
-      "featured": false,
-      "published": true,
-      "order": 6,
-      "created_at": "2026-05-18T16:00:00Z",
-      "updated_at": "2026-05-18T16:00:00Z"
+      "updated_at": "2026-09-17T05:29:53.587Z"
     }
   ]
 }

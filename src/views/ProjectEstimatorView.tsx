@@ -641,7 +641,7 @@ export default function ProjectEstimatorView({ settings = {} }: ProjectEstimator
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input
                         type="text"
-                        placeholder="Haider Ali"
+                        placeholder="Your Full Name"
                         value={clientName}
                         onChange={(e) => setClientName(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
@@ -649,7 +649,7 @@ export default function ProjectEstimatorView({ settings = {} }: ProjectEstimator
                       <input
                         type="email"
                         required
-                        placeholder="haider.ali@sarohub.com *"
+                        placeholder="you@company.com *"
                         value={clientEmail}
                         onChange={(e) => setClientEmail(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-950 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
@@ -677,11 +677,19 @@ export default function ProjectEstimatorView({ settings = {} }: ProjectEstimator
                 )}
               </div>
 
-              <div className="mt-4 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400 text-center leading-relaxed">
-                Need customized contract structures? Reach our engineering desk on WhatsApp:{' '}
-                <a href={`https://wa.me/${whatsappNumber.replace(/\D/g, '')}`} className="text-emerald-400 hover:underline">
-                  {whatsappNumber}
-                </a>
+              <div className="mt-4 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400 text-center leading-relaxed space-y-1">
+                <div>
+                  Need customized contract structures? Reach our engineering desk on WhatsApp:{' '}
+                  <a href={`https://wa.me/${whatsappNumber.replace(/\D/g, '')}`} className="text-emerald-400 hover:underline">
+                    {whatsappNumber}
+                  </a>
+                </div>
+                <div>
+                  Or email your project scope directly to:{' '}
+                  <a href={`mailto:${companyEmail}`} className="text-blue-400 hover:underline font-semibold">
+                    {companyEmail}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

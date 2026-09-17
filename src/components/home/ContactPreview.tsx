@@ -138,7 +138,7 @@ export default function ContactPreview({ settings }: ContactPreviewProps) {
                     <input
                       type="text"
                       required
-                      placeholder="Haider Ali"
+                      placeholder="Your Full Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full rounded-lg border p-3.5 text-xs sm:text-sm placeholder-slate-500 focus:border-blue-500 bg-slate-950/80 border-white/10 text-white focus:outline-none transition-all font-medium"
@@ -149,7 +149,7 @@ export default function ContactPreview({ settings }: ContactPreviewProps) {
                     <input
                       type="email"
                       required
-                      placeholder="haider.ali@sarohub.com"
+                      placeholder="you@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full rounded-lg border p-3.5 text-xs sm:text-sm placeholder-slate-500 focus:border-blue-500 bg-slate-950/80 border-white/10 text-white focus:outline-none transition-all font-medium"
@@ -293,7 +293,7 @@ export default function ContactPreview({ settings }: ContactPreviewProps) {
                     <Mail className="h-4.5 w-4.5 stroke-[1.8]" />
                   </div>
                   <div className="text-left">
-                    <span className="text-[9px] font-bold font-mono text-slate-500 block uppercase">Email</span>
+                    <span className="text-[9px] font-bold font-mono text-slate-500 block uppercase">Direct Email / RFPs</span>
                     <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="text-xs sm:text-sm text-blue-400 font-bold hover:underline">
                       {settings.email || 'info@sarohub.com'}
                     </a>

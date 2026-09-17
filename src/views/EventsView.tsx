@@ -668,7 +668,7 @@ export default function EventsView() {
                             required
                             value={rsvpPayload.applicant_name}
                             onChange={(e) => setRsvpPayload({ ...rsvpPayload, applicant_name: e.target.value })}
-                            placeholder="Haider Ali"
+                            placeholder="Your Full Name"
                             className="w-full text-xs bg-slate-950/80 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                           />
                         </div>
@@ -688,7 +688,7 @@ export default function EventsView() {
                             required
                             value={rsvpPayload.applicant_email}
                             onChange={(e) => setRsvpPayload({ ...rsvpPayload, applicant_email: e.target.value })}
-                            placeholder="haider.ali@sarohub.com"
+                            placeholder="you@company.com"
                             className="w-full text-xs bg-slate-950/80 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                           />
                         </div>

@@ -207,7 +207,7 @@ export default function Footer({ settings }: FooterProps) {
               </li>
               <li className="flex gap-2.5 text-xs text-slate-400">
                 <Mail className="h-4 w-4 text-blue-400 shrink-0" />
-                <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="hover:text-blue-400 transition-colors">
+                <a href={`mailto:${settings.email || 'info@sarohub.com'}`} className="hover:text-blue-400 text-slate-300 font-medium transition-colors" title="Send direct manual email">
                   {settings.email || 'info@sarohub.com'}
                 </a>
               </li>
@@ -222,7 +222,7 @@ export default function Footer({ settings }: FooterProps) {
                 <input
                   type="email"
                   required
-                  placeholder="haider.ali@sarohub.com"
+                  placeholder="you@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-lg bg-white/5 border border-white/10 px-3.5 py-2 pr-10 text-xs text-white placeholder-slate-500 focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
