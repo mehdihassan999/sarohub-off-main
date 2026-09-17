@@ -186,6 +186,9 @@ export default function Footer({ settings }: FooterProps) {
                 <Link to="/events" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Events & Webinars</Link>
               </li>
               <li>
+                <Link to="/gallery" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">Company Gallery &amp; Culture</Link>
+              </li>
+              <li>
                 <Link to="/student-projects" className="text-xs text-slate-400 hover:text-blue-400 transition-colors">IT Academy Capstones</Link>
               </li>
               <li>

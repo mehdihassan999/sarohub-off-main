@@ -1395,6 +1395,94 @@ export const CASE_STUDIES_DATA: CaseStudyData[] = [
     ],
     relevantServiceSlugs: ['ecommerce-development', 'web-development', 'custom-software-development'],
     completionDate: '2026-06-15'
+  },
+  {
+    slug: 'apex-growth-marketing',
+    title: 'Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign',
+    clientName: 'Apex Retail Group',
+    industry: 'E-Commerce & Digital Commerce',
+    metaTitle: 'Apex Digital Marketing & SEO Case Study | SaroHub Technologies',
+    metaDescription: 'Discover how SaroHub Technologies scaled Apex Retail Group with high-ROAS Google & Meta ads, technical SEO, and conversion rate optimization delivering a 4.6x average ROAS.',
+    bannerImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=600',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800&h=450',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=450',
+      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=800&h=450'
+    ],
+    shortDescription: 'Full-funnel digital marketing campaign executed by SaroHub: restructured Google Search/Shopping ads, deployed Meta lookalike funnels, resolved critical SEO indexation bottlenecks, and configured automated email recovery workflows.',
+    overview: 'Apex Retail Group, an expanding digital consumer goods brand, partnered with SaroHub Technologies to overhaul their digital acquisition engine. SaroHub designed and executed a multi-channel performance marketing strategy spanning Google Search & Shopping, Meta Ads, technical SEO crawl optimization, and server-side Conversion API tracking.',
+    clientProblem: 'Apex was struggling with stagnant 1.4x ROAS on paid media, high customer acquisition costs (CAC), and severe attribution blindspots caused by iOS cookie degradation. Over 4,000 product pages were also failing to rank organically due to technical SEO errors.',
+    sarohubSolution: 'We re-architected their entire digital marketing funnel: implemented GTM server-side containers for 100% signal recovery, restructured Google Ads into high-intent search and Performance Max tiers, launched behavioral Meta video funnels, and optimized Core Web Vitals to boost conversion rates.',
+    keyFeatures: [
+      'Full-funnel Google Ads management (High-Intent Search, Shopping, Performance Max)',
+      'Meta (Facebook & Instagram) dynamic catalog retargeting and creative testing',
+      'Server-side Meta Conversions API (CAPI) & GA4 attribution infrastructure',
+      'Technical SEO audit, Product schema JSON-LD, and crawl error remediation',
+      'Conversion Rate Optimization (CRO) and mobile checkout speed engineering',
+      'Automated Klaviyo abandoned cart and post-purchase customer retention flows'
+    ],
+    technologies: ['Google Ads', 'Meta Business Suite', 'Google Analytics 4', 'Google Tag Manager', 'SEMrush', 'Ahrefs', 'Klaviyo', 'BigQuery'],
+    developmentApproach: [
+      'Conducted a full-funnel audit of previous ad spend, finding 38% wasted budget on negative keywords.',
+      'Configured server-side event tracking to ensure 98%+ Meta match quality score.',
+      'Redesigned mobile product pages and simplified the checkout flow to reduce bounce rate.',
+      'Deployed weekly agile creative testing sprints for ad copy, hooks, and video reels.'
+    ],
+    verifiedResults: [
+      { metric: '4.6x', label: 'Average ROAS', detail: 'Increased return on ad spend across Google and Meta paid channels.' },
+      { metric: '+340%', label: 'Organic Traffic Growth', detail: 'Tripled organic search impressions on non-branded category queries.' },
+      { metric: '-42%', label: 'CAC Reduction', detail: 'Substantially lowered customer acquisition cost via conversion rate optimization.' },
+      { metric: '18,500+', label: 'Orders Generated', detail: 'Direct purchase conversions driven through optimized campaigns.' }
+    ],
+    challengesOvercome: [
+      'Overcoming iOS browser cookie blocking through robust first-party server-side tracking.',
+      'Achieving immediate profitability while phasing out legacy unsegmented ad groups.'
+    ],
+    relevantServiceSlugs: ['digital-marketing', 'ecommerce-development', 'web-development'],
+    completionDate: '2026-07-10'
+  },
+  {
+    slug: 'crescent-digital-marketing',
+    title: 'The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign',
+    clientName: 'The Crescent Resorts & Hospitality',
+    industry: 'Hospitality & Tourism',
+    metaTitle: 'The Crescent Resorts Digital Marketing & SEO Case Study | SaroHub Technologies',
+    metaDescription: 'How SaroHub Technologies drove a 210% increase in direct resort bookings through local SEO, Google Travel ads, and Meta video campaigns.',
+    bannerImage: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=600',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=800&h=450',
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800&h=450'
+    ],
+    shortDescription: 'A multi-channel tourism marketing campaign combining Google Local 3-Pack optimization, Google Travel ads, high-intent travel keyword content, and targeted Meta video campaigns.',
+    overview: 'The Crescent Resorts sought to dramatically reduce its reliance on third-party online travel agencies (OTAs) that consumed 18-22% in booking commissions. SaroHub Technologies spearheaded a hyper-targeted digital marketing and local SEO offensive to capture direct reservations.',
+    clientProblem: 'The resort had minimal organic search presence for high-intent travel terms and relied almost exclusively on third-party aggregators, draining profit margins during peak seasonal tourism.',
+    sarohubSolution: 'We executed a synchronized hospitality marketing strategy: complete Google Business Profile optimization, localized travel search SEO, Google Hotel/Travel PPC ads, and captivating Meta video reels that drove visitors to a frictionless direct booking page.',
+    keyFeatures: [
+      'Google Local 3-Pack and Google Maps search dominance for regional luxury resorts',
+      'Targeted pay-per-click Google Travel and Search ads capturing active travelers',
+      'High-converting Meta video reels showcasing mountain views and luxury amenities',
+      'Direct WhatsApp booking fast-track integration reducing inquiry response time',
+      'Automated seasonal retreat and honeymoon email campaign funnels'
+    ],
+    technologies: ['Google Ads', 'Google Business Profile', 'Meta Ads Manager', 'Google Analytics 4', 'Local SEO', 'WhatsApp API'],
+    developmentApproach: [
+      'Audited regional tourism search intent to target high-yield holiday queries.',
+      'Optimized local directory citations and schema markup for Google Maps ranking.',
+      'Launched micro-targeted Facebook & Instagram campaigns in key urban feeder markets.',
+      'Integrated direct WhatsApp booking prompts for immediate customer conversion.'
+    ],
+    verifiedResults: [
+      { metric: '+210%', label: 'Direct Bookings Boost', detail: 'Dramatic growth in commission-free guest reservations.' },
+      { metric: '#1 Rank', label: 'Google Local 3-Pack', detail: 'Top position for primary regional luxury hospitality searches.' },
+      { metric: '3.8x', label: 'Campaign ROAS', detail: 'Return on ad spend across seasonal holiday ad promotions.' },
+      { metric: '120,000+', label: 'Video Reel Views', detail: 'Targeted reach across luxury travel prospects.' }
+    ],
+    challengesOvercome: [
+      'Outranking well-funded third-party travel aggregators on key regional destination queries.',
+      'Converting mobile social media viewers into direct room booking deposits.'
+    ],
+    relevantServiceSlugs: ['digital-marketing', 'web-development'],
+    completionDate: '2026-06-18'
   }
 ];
 

@@ -3,9 +3,10 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { 
   CheckCircle2, ArrowRight, ChevronDown, Cpu, Sparkles, Rocket, 
   Code, Globe, Layers, MessageSquare, Shield, Zap, Check, HelpCircle, 
-  Send, Phone, Mail, Clock, RefreshCw, Terminal, Star
+  Send, Phone, Mail, Clock, RefreshCw, Terminal, Star, TrendingUp, BarChart3
 } from 'lucide-react';
 import { getServiceBySlug, SERVICES_DATA, ServiceData } from '../data/seoContent';
+import { getAllClientProjects } from '../data/clientProjectsData';
 import SEOHead from '../components/seo/SEOHead';
 import Breadcrumbs from '../components/seo/Breadcrumbs';
 import { api } from '../api';
@@ -266,6 +267,35 @@ export default function ServiceDetailView() {
     relatedServiceSlugs: baseBlueprint?.relatedServiceSlugs || ['web-development', 'custom-software-development', 'saas-development', 'digital-solutions'],
     faqs: activeFaqs
   };
+
+  // Dynamically correlate delivered client projects to this service
+  const relatedProjects = useMemo(() => {
+    const all = getAllClientProjects();
+    const target = cleanSlug.toLowerCase();
+
+    const filtered = all.filter((p: any) => {
+      const cat = (p.category || '').toLowerCase();
+      const type = (p.project_type || '').toLowerCase();
+      const secs = Array.isArray(p.secondary_categories) ? p.secondary_categories.map((s: string) => s.toLowerCase()) : [];
+
+      if (target.includes('market') || target.includes('growth') || target.includes('seo')) {
+        return cat.includes('market') || secs.some(s => s.includes('market'));
+      }
+      if (target.includes('ecommerce') || target.includes('commerce')) {
+        return cat.includes('commerce') || cat.includes('retail') || secs.some(s => s.includes('commerce'));
+      }
+      if (target.includes('mobile')) {
+        return type.includes('mobile') || type.includes('app') || secs.some(s => s.includes('app'));
+      }
+      if (target.includes('custom') || target.includes('software')) {
+        return cat.includes('software') || cat.includes('saas');
+      }
+      return cat.includes(target) || type.includes(target);
+    });
+
+    if (filtered.length > 0) return filtered;
+    return all.slice(0, 2);
+  }, [cleanSlug]);
 
   // Keep all FAQs open by default so no content is hidden inside accordions
   useEffect(() => {
@@ -574,6 +604,116 @@ export default function ServiceDetailView() {
                 </span>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Delivered Projects & Previous Work Section */}
+      <section id="delivered-case-studies" className="py-20 border-b border-slate-800/80 bg-slate-950/60">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+                <TrendingUp className="h-3.5 w-3.5" /> Proven Track Record & Previous Work
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                Previous {activeService.shortTitle} Work & Proven Campaigns
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-400 max-w-2xl">
+                Explore real-world campaigns and solutions delivered by SaroHub. Inspect verified performance metrics, technical execution, and business impact.
+              </p>
+            </div>
+            
+            <Link
+              to="/work"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors shrink-0 group"
+            >
+              <span>View All Selected Work</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {relatedProjects.map((proj: any, idx: number) => {
+              const metrics = proj.results_impact?.metrics || [];
+              const projUrl = `/projects/${proj.slug || proj.id}`;
+              return (
+                <div
+                  key={proj.id || idx}
+                  className="rounded-3xl border border-slate-800 bg-slate-900/80 overflow-hidden hover:border-cyan-500/40 transition-all flex flex-col group shadow-xl"
+                >
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950">
+                    <img
+                      src={proj.thumbnail_url}
+                      alt={proj.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                    
+                    <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
+                      <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-cyan-500/30 text-cyan-400">
+                        {proj.category}
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 backdrop-blur-md flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        {proj.status || 'Delivered'}
+                      </span>
+                    </div>
+
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="text-xs font-mono text-cyan-300 font-bold uppercase tracking-wider">
+                        Client: {proj.client_name}
+                      </p>
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-white mt-1 group-hover:text-cyan-300 transition-colors line-clamp-1">
+                        {proj.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between gap-6">
+                    <div>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3 mb-4">
+                        {proj.short_description || proj.what_we_solved}
+                      </p>
+
+                      {metrics.length > 0 && (
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 border-t border-slate-800/80">
+                          {metrics.slice(0, 4).map((m: any, mi: number) => (
+                            <div key={mi} className="rounded-xl bg-slate-950/80 border border-slate-800/60 p-2.5">
+                              <span className="font-mono text-base sm:text-lg font-black text-cyan-400 block leading-tight">
+                                {m.metric}
+                              </span>
+                              <span className="text-[10px] font-medium text-slate-400 line-clamp-1 mt-0.5 block">
+                                {m.label}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
+                      <div className="flex flex-wrap gap-1.5 max-w-[65%]">
+                        {(proj.technologies?.tags || (Array.isArray(proj.technologies) ? proj.technologies : [])).slice(0, 3).map((t: string, ti: number) => (
+                          <span key={ti} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <Link
+                        to={projUrl}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition-all cursor-pointer group/btn"
+                      >
+                        <span>Case Study</span>
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

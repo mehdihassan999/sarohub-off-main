@@ -3,7 +3,7 @@
     "id": 1,
     "username": "admin",
     "email": "cyberm0101noirhat@gmail.com",
-    "password_hash": "$2b$10$/oVQ90NAlr06mQTFgh84Wu76RrFe9b72rqP2HAS16Mad29rT.xPsW",
+    "password_hash": "$2b$10$n6l1MESAIbJTwzGAYVOMGua5sUY9JDyfY8MmiSpVXvqSySBIG6y56",
     "full_name": "Super Admin",
     "profile_pic": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
     "bio": "Primary administrator and content director for SaroHub Technologies.",
@@ -2220,6 +2220,265 @@
       "order": 6,
       "created_at": "2026-06-20T10:00:00Z",
       "updated_at": "2026-09-05T16:36:28.527Z"
+    },
+    {
+      "id": 7,
+      "title": "Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign",
+      "slug": "apex-growth-marketing",
+      "client_name": "Apex Retail Group",
+      "industry": "E-Commerce & Consumer Retail",
+      "category": "Digital Marketing",
+      "secondary_categories": [
+        "E-commerce / Commerce",
+        "Web Applications"
+      ],
+      "project_type": "Multi-Channel Performance Marketing, Technical SEO & Paid Ads Campaign",
+      "positioning_statement": "High-ROAS Google & Meta performance ad engine with conversion rate optimization and technical SEO.",
+      "short_description": "Full-funnel digital marketing campaign executed by SaroHub: restructured Google Search/Shopping ads, deployed Meta lookalike funnels, resolved critical SEO indexation bottlenecks, and configured automated email recovery workflows.",
+      "description": "Apex Retail Group, an expanding digital consumer goods brand, partnered with SaroHub Technologies to overhaul their customer acquisition engine across Google and Meta paid channels, technical search optimization, and conversion analytics.",
+      "what_we_solved": "Eliminated wasted ad spend by restructuring campaigns, resolving technical SEO crawl errors, and engineering high-converting landing pages that elevated ROAS from 1.4x to 4.6x.",
+      "status": "Delivered",
+      "engagement": "Client Project",
+      "completion_date": "2026-07-10",
+      "thumbnail_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
+      "screenshots": [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200&h=675"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1200&h=675"
+      ],
+      "live_url": "https://apexretail.com",
+      "github_url": "",
+      "technologies": [
+        "Google Ads",
+        "Meta Ads",
+        "Google Analytics 4",
+        "Google Tag Manager",
+        "SEMrush",
+        "Technical SEO",
+        "Klaviyo",
+        "CRO"
+      ],
+      "case_study": "Eliminated wasted ad spend by restructuring campaigns, resolving technical SEO crawl errors, and engineering high-converting landing pages that elevated ROAS from 1.4x to 4.6x.",
+      "problem_challenge": "Unprofitable Ad Spend: Stagnant 1.4x ROAS on generic ad campaigns.\nHigh Landing Page Bounce Rates: Over 65% mobile drop-off.\nAttribution Gaps: Inaccurate tracking from iOS cookie restrictions.\nTechnical SEO Drag: Thousands of orphan products and poor indexation.",
+      "solution": "Full-Funnel Paid Ads: Google Search, Performance Max, and Meta retargeting.\nConversion Rate Optimization: High-speed checkout and landing page UX.\nServer-Side Tracking: GTM Server containers and Meta CAPI.\nTechnical SEO: Schema markup, crawl budget remediation, and buying guides.",
+      "key_features": [
+        "Google Search, Shopping & Performance Max Campaigns",
+        "Meta (Facebook & Instagram) Dynamic Product Retargeting",
+        "Server-Side Conversion API (CAPI) & GA4 Attribution",
+        "Technical SEO Audit, Schema Markup & Crawl Optimization",
+        "High-Converting Landing Page UI/UX & A/B Testing",
+        "Automated Klaviyo Email Abandoned Cart Sequences"
+      ],
+      "features": [
+        "Google Search, Shopping & Performance Max Campaigns",
+        "Meta (Facebook & Instagram) Dynamic Product Retargeting",
+        "Server-Side Conversion API (CAPI) & GA4 Attribution",
+        "Technical SEO Audit, Schema Markup & Crawl Optimization",
+        "High-Converting Landing Page UI/UX & A/B Testing",
+        "Automated Klaviyo Email Abandoned Cart Sequences"
+      ],
+      "overview": {
+        "client_background": "Apex Retail Group is a fast-scaling multi-category consumer e-commerce retailer offering lifestyle goods, electronics, and home essentials.",
+        "industry_context": "Digital Commerce, Paid Media & Multi-Channel Acquisition",
+        "what_sarohub_built": "SaroHub architected and executed an end-to-end digital marketing growth engine: paid media restructuring across Google Ads and Meta, server-side Conversion API (CAPI) attribution, technical SEO remediation, and high-converting landing page redesigns.",
+        "project_importance": "Rising customer acquisition costs and low organic visibility were eroding margins. Apex required a proven digital growth partner to optimize paid spend, maximize ROAS, and establish sustainable organic search dominance."
+      },
+      "challenges": [
+        {
+          "title": "Unprofitable Ad Spend (1.4x ROAS)",
+          "description": "Previous ad campaigns targeted broad, unqualified keywords and unsegmented audiences, burning budget without generating profitable purchases."
+        },
+        {
+          "title": "High Landing Page Bounce Rates",
+          "description": "Visitors were bouncing within 5 seconds due to slow mobile loading speeds, cluttered navigation, and friction in the checkout funnel."
+        }
+      ],
+      "solutions": [
+        {
+          "title": "Full-Funnel Paid Advertising Engine",
+          "description": "Restructured Google Search, Shopping, Performance Max, and Meta lookalike audience funnels with strict negative keyword lists and creative testing sprints."
+        },
+        {
+          "title": "Conversion Rate Optimization (CRO)",
+          "description": "Engineered lightweight, mobile-first product landing pages and a streamlined single-page checkout that improved conversion rate from 1.2% to 3.4%."
+        }
+      ],
+      "sarohub_role": [
+        "Digital Marketing Strategy",
+        "Paid Ads Campaign Architecture",
+        "Technical SEO Implementation",
+        "Conversion Rate Optimization (CRO)",
+        "Server-Side Event Tagging & Analytics"
+      ],
+      "results_impact": {
+        "metrics": [
+          {
+            "metric": "4.6x",
+            "label": "Average ROAS",
+            "detail": "Increased return on ad spend across Google and Meta paid channels."
+          },
+          {
+            "metric": "+340%",
+            "label": "Organic Traffic Growth",
+            "detail": "Substantial surge in non-branded organic search impressions and clicks."
+          },
+          {
+            "metric": "-42%",
+            "label": "Reduced CAC",
+            "detail": "Lowered customer acquisition cost through conversion rate optimization."
+          },
+          {
+            "metric": "18,500+",
+            "label": "Orders Generated",
+            "detail": "Direct purchase conversions driven through optimized campaigns."
+          }
+        ],
+        "qualitative_outcomes": [
+          {
+            "title": "Predictable Customer Acquisition",
+            "description": "Replaced erratic ad results with a predictable, scalable customer acquisition machine that consistently delivers positive unit economics."
+          },
+          {
+            "title": "Authoritative Organic Ranking",
+            "description": "Achieved first-page rankings on Google for high-converting category keywords, creating an evergreen stream of free customer traffic."
+          }
+        ]
+      },
+      "testimonial": {
+        "quote": "SaroHub revolutionized our customer acquisition. In three months, our ROAS climbed from 1.4x to over 4.6x while our organic search traffic tripled. They do not just run ads—they understand unit economics, conversion psychology, and technical tracking.",
+        "author": "Marcus Vance",
+        "role": "Chief Commercial Officer",
+        "company": "Apex Retail Group"
+      },
+      "featured": true,
+      "order": 2,
+      "created_at": "2026-07-10T10:00:00Z",
+      "updated_at": "2026-07-10T10:00:00Z"
+    },
+    {
+      "id": 8,
+      "title": "The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign",
+      "slug": "crescent-digital-marketing",
+      "client_name": "The Crescent Resorts & Hospitality",
+      "industry": "Hospitality & Luxury Tourism",
+      "category": "Digital Marketing",
+      "secondary_categories": [
+        "Hospitality",
+        "Websites"
+      ],
+      "project_type": "Local SEO, Google Travel Ads & Social Media Marketing Campaign",
+      "positioning_statement": "Targeted hospitality marketing driving a 210% increase in direct resort bookings.",
+      "short_description": "A multi-channel tourism marketing campaign combining Google Local 3-Pack optimization, Google Travel ads, high-intent travel keyword content, and targeted Meta video campaigns to acquire direct guests with zero OTA commission.",
+      "description": "The Crescent Resorts partnered with SaroHub Technologies to spearhead a hyper-targeted digital marketing and local SEO offensive to capture direct reservations and reduce high online travel agency fees.",
+      "what_we_solved": "Freed the resort from paying 18-22% commissions to third-party travel agencies (OTAs) by establishing a high-converting direct booking acquisition engine.",
+      "status": "Delivered",
+      "engagement": "Client Project",
+      "completion_date": "2026-06-18",
+      "thumbnail_url": "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
+      "screenshots": [
+        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200&h=675"
+      ],
+      "gallery": [
+        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675",
+        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200&h=675"
+      ],
+      "live_url": "https://thecrescentresorts.com",
+      "github_url": "",
+      "technologies": [
+        "Local SEO",
+        "Google Ads",
+        "Meta Ads",
+        "Tourism Marketing",
+        "Google Maps",
+        "Hospitality Growth"
+      ],
+      "case_study": "Freed the resort from paying 18-22% commissions to third-party travel agencies (OTAs) by establishing a high-converting direct booking acquisition engine.",
+      "problem_challenge": "Heavy OTA Dependency: 80% of bookings paid 18-22% commission.\nLow Search Visibility: Resort missing from Google Maps luxury tourist searches.\nSeasonality: Unfilled rooms during shoulder travel months.",
+      "solution": "Local SEO Domination: #1 rank in Google Local 3-Pack and Maps citations.\nGoogle Travel Ads: Targeted keywords like \"luxury resort Skardu\" and \"honeymoon suites\".\nExperiential Video Reels: High-converting visual reels on Instagram and Facebook.\nWhatsApp Direct Booking: One-click mobile reservations with instant concierge replies.",
+      "key_features": [
+        "Google Business Profile & Local 3-Pack Domination",
+        "Targeted Google Search & Travel Hotel Campaigns",
+        "Meta Experiential Video & Story Ads",
+        "Direct WhatsApp Booking Fast-Track Integration"
+      ],
+      "features": [
+        "Google Business Profile & Local 3-Pack Domination",
+        "Targeted Google Search & Travel Hotel Campaigns",
+        "Meta Experiential Video & Story Ads",
+        "Direct WhatsApp Booking Fast-Track Integration"
+      ],
+      "overview": {
+        "client_background": "The Crescent Resorts operates luxury boutique resort destinations in northern Pakistan, catering to domestic travelers, international adventurers, and corporate retreats.",
+        "industry_context": "Hospitality Digital Marketing, Local SEO & Travel Acquisition",
+        "what_sarohub_built": "SaroHub implemented a regional and international digital marketing campaign combining Google Business Profile optimization, localized high-intent travel keyword SEO, targeted Meta travel reels, and automated booking inquiry routing.",
+        "project_importance": "The resort was losing significant profit margins to third-party online travel agencies (OTAs) taking up to 22% in commission fees. They needed a high-performance direct digital marketing channel."
+      },
+      "challenges": [
+        {
+          "title": "Heavy OTA Commission Dependency",
+          "description": "Over 80% of bookings came through third-party platforms charging exorbitant 18-22% commissions per stay."
+        }
+      ],
+      "solutions": [
+        {
+          "title": "Local SEO & Google 3-Pack Optimization",
+          "description": "Optimized Google Business Profiles, citation directories, and localized hotel schema markup, securing #1 rankings for northern resort searches."
+        }
+      ],
+      "sarohub_role": [
+        "Tourism Marketing Strategy",
+        "Local SEO & Google Maps Optimization",
+        "Paid Search & Social Media Advertising",
+        "Ad Creative Direction & Video Reels Production"
+      ],
+      "results_impact": {
+        "metrics": [
+          {
+            "metric": "+210%",
+            "label": "Direct Bookings Boost",
+            "detail": "Dramatic growth in commission-free guest reservations."
+          },
+          {
+            "metric": "#1 Rank",
+            "label": "Google Local 3-Pack",
+            "detail": "Top position for primary regional luxury hospitality searches."
+          },
+          {
+            "metric": "3.8x",
+            "label": "Ad Spend ROAS",
+            "detail": "Return on ad spend across seasonal holiday campaigns."
+          },
+          {
+            "metric": "120k+",
+            "label": "Targeted Video Views",
+            "detail": "Engaged potential luxury travelers across Instagram and Facebook."
+          }
+        ],
+        "qualitative_outcomes": [
+          {
+            "title": "Direct Revenue Independence",
+            "description": "Reduced reliance on costly travel agencies, saving substantial commission fees each tourist season."
+          }
+        ]
+      },
+      "testimonial": {
+        "quote": "SaroHub's digital marketing and local SEO strategy transformed our revenue model. Over 65% of our seasonal suite reservations now come directly through our own channels rather than costly travel agency portals.",
+        "author": "Karim Shah",
+        "role": "General Manager",
+        "company": "The Crescent Resorts"
+      },
+      "featured": true,
+      "order": 3,
+      "created_at": "2026-06-18T10:00:00Z",
+      "updated_at": "2026-06-18T10:00:00Z"
     }
   ],
   "products": [
@@ -2708,40 +2967,6 @@
       "rating": 5,
       "feedback": "The team at SaroHub engineered an absolute masterpiece for us. Their relational Vanguard ERP module tracks millions of structural parts across our sites with flawless real-time indexing. Highly professional!",
       "created_at": "2026-06-26T10:00:00Z"
-    },
-    {
-      "id": 2,
-      "client_name": "Anika Fernando",
-      "client_role": "Chief Operations Officer",
-      "client_company": "Aura Advisory",
-      "client_avatar": "https://images.unsplash.com/photo-1534751516642-a131ffd473fd?auto=format&fit=crop&q=80&w=150&h=150",
-      "rating": 5,
-      "feedback": "Integrating SaroHub Sentinel and custom AI tools has optimized our administrative throughput by over 40%. Their technical prowess is unmatched.",
-      "created_at": "2026-06-27T10:00:00Z"
-    },
-    {
-      "id": 3,
-      "client_name": "Dr. Tariq Mansoor",
-      "client_role": "VP Technology & Infrastructure",
-      "client_company": "Frontier Health Cloud",
-      "client_avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
-      "rating": 5,
-      "feedback": "SaroHub architected our high-concurrency patient telemetry pipeline with zero downtime across migration. Their deep understanding of distributed systems and compliance standards gave our board complete confidence.",
-      "created_at": "2026-07-14T10:00:00Z",
-      "published": true,
-      "status": "Approved"
-    },
-    {
-      "id": 4,
-      "client_name": "Sophia Sterling",
-      "client_role": "Head of Digital Products",
-      "client_company": "Nexus Financial Systems",
-      "client_avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200",
-      "rating": 5,
-      "feedback": "From initial technical discovery to final container deployment, SaroHub executed every sprint with surgical precision. The microservices architecture they delivered processes sub-second ledger syncs flawlessly.",
-      "created_at": "2026-08-02T10:00:00Z",
-      "published": true,
-      "status": "Approved"
     }
   ],
   "faqs": [
@@ -2849,6 +3074,14 @@
     "cta_tertiary_link": "/capabilities"
   },
   "activity_logs": [
+    {
+      "id": 137,
+      "admin_id": 1,
+      "action_type": "LOGIN_SUCCESS",
+      "details": "Administrator authenticated successfully.",
+      "ip_address": "ADMIN_SECURE",
+      "created_at": "2026-09-17T04:08:12.965Z"
+    },
     {
       "id": 136,
       "admin_id": 1,
@@ -5438,5 +5671,139 @@
     "escrow_and_repos": "All active code is committed to private, client-owned GitHub/GitLab repositories with continuous integration access, ensuring you retain uninterrupted visibility and control from day one.",
     "security_clearance": "All engineers sign strict confidentiality covenants and adhere to OWASP Top-10 secure coding guidelines, containerized sandboxes, and clean relational database schemas.",
     "sample_nda_template_url": "/api/nda/download-template"
-  }
+  },
+  "company_gallery": [
+    {
+      "id": 1,
+      "title": "Full-Stack Cloud Architecture & AI Keynote Seminar",
+      "category": "Seminars",
+      "image_url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "Keynote presentation on microservices architecture, serverless scalability, and AI agent workflows.",
+      "description": "SaroHub senior engineering leads delivered an intensive keynote and interactive technical seminar at the regional technology center. The presentation covered containerization, distributed cloud deployments on Google Cloud and AWS, and productionizing Gemini LLM agents for business operations.",
+      "event_date": "2026-08-20",
+      "location": "Regional IT Center Auditorium & Tech Hub",
+      "attendees_count": "150+ Developers & University Students",
+      "tags": [
+        "Cloud Architecture",
+        "AI Workflows",
+        "Keynote",
+        "Tech Community"
+      ],
+      "featured": true,
+      "published": true,
+      "order": 1,
+      "created_at": "2026-08-20T10:00:00Z",
+      "updated_at": "2026-08-20T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "SEO & Technical Growth Strategy Collaboration with IT Center",
+      "category": "SEO Collaborations",
+      "image_url": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "Joint technical sprint reviewing international search crawling, Schema JSON-LD markup, and Core Web Vitals.",
+      "description": "A focused technical collaboration between SaroHub SEO engineers and the regional IT Center digital team. Together, we analyzed real-time Google Search Console performance data, resolved indexation crawl budgets, and audited high-intent digital commerce funnels.",
+      "event_date": "2026-07-28",
+      "location": "Center of Excellence Digital Lab, Skardu",
+      "attendees_count": "45 Growth Strategists & Engineers",
+      "tags": [
+        "SEO Collaboration",
+        "Technical Audit",
+        "Google Analytics 4",
+        "Core Web Vitals"
+      ],
+      "featured": true,
+      "published": true,
+      "order": 2,
+      "created_at": "2026-07-28T14:30:00Z",
+      "updated_at": "2026-07-28T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Quarterly Innovation Hackathon & Sprint Review",
+      "category": "Office Culture",
+      "image_url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "48-hour internal build sprint showcasing AI prototypes, design system updates, and team demo day.",
+      "description": "Inside SaroHub headquarters: our full-stack engineers, UI/UX researchers, and cloud architects teamed up for our quarterly 48-hour build challenge. Teams presented working software proofs-of-concept, followed by product reviews, team awards, and celebrations.",
+      "event_date": "2026-07-15",
+      "location": "SaroHub Central Tech Campus",
+      "attendees_count": "Full Engineering & Product Squads",
+      "tags": [
+        "Office Culture",
+        "Hackathon",
+        "Team Spirit",
+        "Sprint Demo"
+      ],
+      "featured": true,
+      "published": true,
+      "order": 3,
+      "created_at": "2026-07-15T18:00:00Z",
+      "updated_at": "2026-07-15T18:00:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Next-Gen Web & TypeScript Masterclass for Aspiring Engineers",
+      "category": "Seminars",
+      "image_url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "Live coding workshop guiding participants through TypeScript, React 19, and full-stack API design.",
+      "description": "Organized under the SaroHub IT Academy initiative, our team hosted an intensive 3-day hands-on masterclass. Students and junior developers built end-to-end full-stack applications with state management, unit tests, and production CI/CD pipelines.",
+      "event_date": "2026-06-25",
+      "location": "SaroHub Innovation Hall & Coding Lab",
+      "attendees_count": "90+ Enrolled Students",
+      "tags": [
+        "Masterclass",
+        "TypeScript",
+        "React",
+        "IT Academy"
+      ],
+      "featured": false,
+      "published": true,
+      "order": 4,
+      "created_at": "2026-06-25T09:00:00Z",
+      "updated_at": "2026-06-25T09:00:00Z"
+    },
+    {
+      "id": 5,
+      "title": "E-Commerce Growth & Conversion Optimization Partner Workshop",
+      "category": "SEO Collaborations",
+      "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "Strategic deep-dive into Meta CAPI attribution, Google Ads Performance Max, and conversion rate optimization.",
+      "description": "A collaborative session with local enterprise founders, digital merchants, and IT center fellows. We demonstrated real-time telemetry setup, server-side conversion tracking, and high-converting landing page optimization strategies.",
+      "event_date": "2026-06-10",
+      "location": "Executive Boardroom, Technology Complex",
+      "attendees_count": "35 Founders & Marketing Directors",
+      "tags": [
+        "SEO Collaborations",
+        "Conversion Rate Optimization",
+        "Digital Commerce",
+        "Attribution"
+      ],
+      "featured": false,
+      "published": true,
+      "order": 5,
+      "created_at": "2026-06-10T11:00:00Z",
+      "updated_at": "2026-06-10T11:00:00Z"
+    },
+    {
+      "id": 6,
+      "title": "Design Thinking & Collaborative UI/UX Sprint",
+      "category": "Office Culture",
+      "image_url": "https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&q=80&w=1200&h=750",
+      "caption": "Cross-functional design critique, accessibility audits, and design token standardization.",
+      "description": "Our design squad and frontend developers gathering around whiteboard wireframes and interactive Figma prototypes, refining our client design systems and guaranteeing WCAG AA accessibility compliance.",
+      "event_date": "2026-05-18",
+      "location": "SaroHub Creative Studio",
+      "attendees_count": "Design & Frontend Teams",
+      "tags": [
+        "Office Culture",
+        "UI/UX",
+        "Design Thinking",
+        "Accessibility"
+      ],
+      "featured": false,
+      "published": true,
+      "order": 6,
+      "created_at": "2026-05-18T16:00:00Z",
+      "updated_at": "2026-05-18T16:00:00Z"
+    }
+  ]
 }

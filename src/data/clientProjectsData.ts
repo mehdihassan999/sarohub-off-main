@@ -763,6 +763,233 @@ export const CLIENT_PROJECTS: ClientProject[] = [
     },
     featured: false,
     order: 6
+  },
+  {
+    id: 7,
+    title: 'Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign',
+    slug: 'apex-growth-marketing',
+    client_name: 'Apex Retail Group',
+    industry: 'E-Commerce & Consumer Retail',
+    category: 'Digital Marketing',
+    secondary_categories: ['E-commerce / Commerce', 'Web Applications'],
+    project_type: 'Multi-Channel Performance Marketing, Technical SEO & Paid Ads Campaign',
+    positioning_statement: 'High-ROAS Google & Meta performance ad engine with conversion rate optimization and technical SEO.',
+    short_description: 'Full-funnel digital marketing campaign executed by SaroHub: restructured Google Search/Shopping ads, deployed Meta lookalike funnels, resolved critical SEO indexation bottlenecks, and configured automated email recovery workflows.',
+    what_we_solved: 'Eliminated wasted ad spend by restructuring campaigns, resolving technical SEO crawl errors, and engineering high-converting landing pages that elevated ROAS from 1.4x to 4.6x.',
+    status: 'Delivered',
+    engagement: 'Client Project',
+    completion_date: '2026-07-10',
+    thumbnail_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675',
+    screenshots: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=675',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200&h=675',
+      'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1200&h=675',
+      'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200&h=675'
+    ],
+    live_url: 'https://apexretail.com',
+    overview: {
+      client_background: 'Apex Retail Group is a fast-scaling multi-category consumer e-commerce retailer offering lifestyle goods, electronics, and home essentials.',
+      industry_context: 'Digital Commerce, Paid Media & Multi-Channel Acquisition',
+      what_sarohub_built: 'SaroHub architected and executed an end-to-end digital marketing growth engine: paid media restructuring across Google Ads and Meta, server-side Conversion API (CAPI) attribution, technical SEO remediation, and high-converting landing page redesigns.',
+      project_importance: 'Rising customer acquisition costs and low organic visibility were eroding margins. Apex required a proven digital growth partner to optimize paid spend, maximize ROAS, and establish sustainable organic search dominance.'
+    },
+    challenges: [
+      {
+        title: 'Unprofitable Ad Spend (1.4x ROAS)',
+        description: 'Previous ad campaigns targeted broad, unqualified keywords and unsegmented audiences, burning budget without generating profitable purchases.'
+      },
+      {
+        title: 'High Landing Page Bounce Rates',
+        description: 'Visitors were bouncing within 5 seconds due to slow mobile loading speeds, cluttered navigation, and friction in the checkout funnel.'
+      },
+      {
+        title: 'Inaccurate Conversion Attribution',
+        description: 'Browser cookie blocking and missing server-side event tracking caused significant data loss in Google Analytics and Meta Ads Manager.'
+      },
+      {
+        title: 'Depressed Organic Visibility',
+        description: 'Over 4,000 product pages were poorly indexed due to canonicalization issues, missing schema markup, and sluggish Core Web Vitals.'
+      }
+    ],
+    solutions: [
+      {
+        title: 'Full-Funnel Paid Advertising Engine',
+        description: 'Restructured Google Search, Shopping, Performance Max, and Meta lookalike audience funnels with strict negative keyword lists and creative testing sprints.'
+      },
+      {
+        title: 'Conversion Rate Optimization (CRO)',
+        description: 'Engineered lightweight, mobile-first product landing pages and a streamlined single-page checkout that improved conversion rate from 1.2% to 3.4%.'
+      },
+      {
+        title: 'Server-Side CAPI & GA4 Attribution',
+        description: 'Deployed Google Tag Manager server-side containers and Meta Conversions API to recover 100% of purchase event signals with zero cookie loss.'
+      },
+      {
+        title: 'Technical SEO & Content Architecture',
+        description: 'Audited and fixed crawl errors, deployed rich Product and Breadcrumb JSON-LD schema, and targeted high-intent commercial search terms.'
+      }
+    ],
+    features: [
+      'Google Search, Shopping & Performance Max Campaigns',
+      'Meta (Facebook & Instagram) Dynamic Product Retargeting',
+      'Server-Side Conversion API (CAPI) & GA4 Attribution',
+      'Technical SEO Audit, Schema Markup & Crawl Optimization',
+      'High-Converting Landing Page UI/UX & A/B Testing',
+      'Automated Klaviyo Email Abandoned Cart Sequences',
+      'Weekly Transparent ROAS, CPA & Spend Analytics Portal',
+      'Iterative Creative Ad Copy & Video Reels Production'
+    ],
+    sarohub_role: [
+      'Digital Marketing Strategy',
+      'Paid Ads Campaign Architecture',
+      'Technical SEO Implementation',
+      'Conversion Rate Optimization (CRO)',
+      'Server-Side Event Tagging & Analytics',
+      'Landing Page UX Engineering',
+      'Performance Reporting & Optimization'
+    ],
+    technologies: {
+      frontend: 'Google Ads, Meta Ads Manager',
+      backend: 'Google Tag Manager Server Container',
+      database: 'Google Analytics 4 & BigQuery',
+      architecture: 'Full-Funnel Growth & Multi-Touch Attribution Engine',
+      tags: ['Google Ads', 'Meta Ads', 'Google Analytics 4', 'Google Tag Manager', 'SEMrush', 'Technical SEO', 'Klaviyo', 'CRO']
+    },
+    results_impact: {
+      metrics: [
+        { metric: '4.6x', label: 'Average ROAS', detail: 'Increased return on ad spend across Google and Meta paid channels.' },
+        { metric: '+340%', label: 'Organic Traffic Growth', detail: 'Substantial surge in non-branded organic search impressions and clicks.' },
+        { metric: '-42%', label: 'Reduced CAC', detail: 'Lowered customer acquisition cost through conversion rate optimization.' },
+        { metric: '18,500+', label: 'Orders Generated', detail: 'Direct purchase conversions driven through optimized campaigns.' }
+      ],
+      qualitative_outcomes: [
+        {
+          title: 'Predictable Customer Acquisition',
+          description: 'Replaced erratic ad results with a predictable, scalable customer acquisition machine that consistently delivers positive unit economics.'
+        },
+        {
+          title: 'Authoritative Organic Ranking',
+          description: 'Achieved first-page rankings on Google for high-converting category keywords, creating an evergreen stream of free customer traffic.'
+        },
+        {
+          title: 'Complete Data Transparency',
+          description: 'Empowered executive leadership with real-time attribution dashboards showing exact ROAS, CPA, and customer lifetime value per ad dollar.'
+        }
+      ]
+    },
+    testimonial: {
+      quote: 'SaroHub revolutionized our customer acquisition. In three months, our ROAS climbed from 1.4x to over 4.6x while our organic search traffic tripled. They don\'t just run ads—they understand unit economics, conversion psychology, and technical tracking.',
+      author: 'Marcus Vance',
+      role: 'Chief Commercial Officer',
+      company: 'Apex Retail Group'
+    },
+    featured: true,
+    order: 2
+  },
+  {
+    id: 8,
+    title: 'The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign',
+    slug: 'crescent-digital-marketing',
+    client_name: 'The Crescent Resorts & Hospitality',
+    industry: 'Hospitality & Luxury Tourism',
+    category: 'Digital Marketing',
+    secondary_categories: ['Hospitality', 'Websites'],
+    project_type: 'Local SEO, Google Travel Ads & Social Media Marketing Campaign',
+    positioning_statement: 'Targeted hospitality marketing driving a 210% increase in direct resort bookings.',
+    short_description: 'A multi-channel tourism marketing campaign combining Google Local 3-Pack optimization, Google Travel ads, high-intent travel keyword content, and targeted Meta video campaigns to acquire direct guests with zero OTA commission.',
+    what_we_solved: 'Freed the resort from paying 18-22% commissions to third-party travel agencies (OTAs) by establishing a high-converting direct booking acquisition engine.',
+    status: 'Delivered',
+    engagement: 'Client Project',
+    completion_date: '2026-06-18',
+    thumbnail_url: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675',
+    screenshots: [
+      'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=1200&h=675',
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=1200&h=675',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200&h=675'
+    ],
+    live_url: 'https://thecrescentresorts.com',
+    overview: {
+      client_background: 'The Crescent Resorts operates luxury boutique resort destinations in northern Pakistan, catering to domestic travelers, international adventurers, and corporate retreats.',
+      industry_context: 'Hospitality Digital Marketing, Local SEO & Travel Acquisition',
+      what_sarohub_built: 'SaroHub implemented a regional and international digital marketing campaign combining Google Business Profile optimization, localized high-intent travel keyword SEO, targeted Meta travel reels, and automated booking inquiry routing.',
+      project_importance: 'The resort was losing significant profit margins to third-party online travel agencies (OTAs) taking up to 22% in commission fees. They needed a high-performance direct digital marketing channel.'
+    },
+    challenges: [
+      {
+        title: 'Heavy OTA Commission Dependency',
+        description: 'Over 80% of bookings came through third-party platforms charging exorbitant 18-22% commissions per stay.'
+      },
+      {
+        title: 'Underdeveloped Local & Regional Search Presence',
+        description: 'The resort was missing out on travelers searching for luxury resort stays, honeymoon packages, and mountain retreats on Google Maps.'
+      },
+      {
+        title: 'Seasonal Demand Volatility',
+        description: 'Inconsistent off-season bookings led to unoptimized occupancy rates during shoulder months.'
+      }
+    ],
+    solutions: [
+      {
+        title: 'Local SEO & Google 3-Pack Optimization',
+        description: 'Optimized Google Business Profiles, citation directories, and localized hotel schema markup, securing #1 rankings for northern resort searches.'
+      },
+      {
+        title: 'Google Travel & Search Ads',
+        description: 'Launched targeted pay-per-click ads for high-intent search terms (e.g. "luxury resort Skardu", "best hotel Shangrila", "honeymoon suites").'
+      },
+      {
+        title: 'Meta Visual Storytelling & Reels Ads',
+        description: 'Created scenic, experiential video reels targeting adventure travelers and corporate event planners in major metropolitan cities.'
+      }
+    ],
+    features: [
+      'Google Business Profile & Local 3-Pack Domination',
+      'Targeted Google Search & Travel Hotel Campaigns',
+      'Meta Experiential Video & Story Ads',
+      'Direct WhatsApp Booking Fast-Track Integration',
+      'Seasonal Corporate Retreat & Honeymoon Campaign Funnels',
+      'Review Management & Reputation Growth Workflow'
+    ],
+    sarohub_role: [
+      'Tourism Marketing Strategy',
+      'Local SEO & Google Maps Optimization',
+      'Paid Search & Social Media Advertising',
+      'Ad Creative Direction & Video Reels Production',
+      'Lead Generation & Booking Optimization'
+    ],
+    technologies: {
+      frontend: 'Google Ads, Meta Business Manager',
+      backend: 'Google Business Profile API',
+      database: 'Google Analytics 4 & Looker Studio',
+      architecture: 'Direct Hospitality Booking Funnel',
+      tags: ['Local SEO', 'Google Ads', 'Meta Ads', 'Tourism Marketing', 'Google Maps', 'Hospitality Growth']
+    },
+    results_impact: {
+      metrics: [
+        { metric: '+210%', label: 'Direct Bookings Boost', detail: 'Dramatic growth in commission-free guest reservations.' },
+        { metric: '#1 Rank', label: 'Google Local 3-Pack', detail: 'Top position for primary regional luxury hospitality searches.' },
+        { metric: '3.8x', label: 'Ad Spend ROAS', detail: 'Return on ad spend across seasonal holiday campaigns.' },
+        { metric: '120k+', label: 'Targeted Video Views', detail: 'Engaged potential luxury travelers across Instagram and Facebook.' }
+      ],
+      qualitative_outcomes: [
+        {
+          title: 'Direct Revenue Independence',
+          description: 'Reduced reliance on costly travel agencies, saving substantial commission fees each tourist season.'
+        },
+        {
+          title: 'Elevated Brand Prestige',
+          description: 'Established the resort as the premier luxury destination in the region through consistent, high-aesthetic visual marketing.'
+        }
+      ]
+    },
+    testimonial: {
+      quote: 'SaroHub\'s digital marketing and local SEO strategy transformed our revenue model. Over 65% of our seasonal suite reservations now come directly through our own channels rather than costly travel agency portals.',
+      author: 'Karim Shah',
+      role: 'General Manager',
+      company: 'The Crescent Resorts'
+    },
+    featured: true,
+    order: 3
   }
 ];
 
@@ -783,6 +1010,7 @@ export function getClientProjectBySlug(slug: string): ClientProject | undefined 
 // Available categories that actually have projects
 export const STANDARD_CATEGORIES = [
   'All',
+  'Digital Marketing',
   'Web Applications',
   'Websites',
   'SaaS',

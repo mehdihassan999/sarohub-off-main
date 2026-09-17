@@ -7,7 +7,7 @@ import {
   ContactMessage, NewsletterSubscriber, NewsletterCampaign, SEOSettings, ActivityLog,
   ChatSession, Opportunity, OpportunityApplication, EventRegistration, Partner, StudentProject, Venture,
   HeroSectionSettings, CompanyMetric, WhySaroHubItem, IndustrySolution, CaseStudy, ProcessStep, TechStackItem, SecurityStandard, CompanyTimelineItem, Lead, MediaItem,
-  ConsultationBooking, ProjectEstimateQuote
+  ConsultationBooking, ProjectEstimateQuote, CompanyGalleryItem
 } from './types';
 
 const DB_FILE = path.join(process.cwd(), 'db.json');
@@ -232,6 +232,7 @@ export interface DBState {
   outgoing_emails?: any[];
   consultations?: ConsultationBooking[];
   estimates?: ProjectEstimateQuote[];
+  company_gallery?: CompanyGalleryItem[];
 }
 
 // Default/Initial Seed Data for Enterprise Look
@@ -387,6 +388,40 @@ const INITIAL_DB: DBState = {
       thumbnail_url: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=600&h=400',
       created_at: '2026-06-22T10:00:00Z',
       updated_at: '2026-06-22T10:00:00Z'
+    },
+    {
+      id: 7,
+      title: 'Apex Performance & Growth — Multi-Channel Digital Marketing & SEO Campaign',
+      slug: 'apex-growth-marketing',
+      client_name: 'Apex Retail Group',
+      category: 'Digital Marketing',
+      technologies: ['Google Ads', 'Meta Ads', 'Google Analytics 4', 'Google Tag Manager', 'SEMrush', 'Technical SEO', 'Klaviyo', 'CRO'],
+      short_description: 'Full-funnel performance marketing, technical SEO, and conversion optimization delivering 4.6x average ROAS.',
+      description: 'Apex partnered with SaroHub to scale customer acquisition across Google and Meta paid media, repair technical SEO crawl errors, and implement server-side Conversion API tracking.',
+      case_study: 'Elevated ROAS from 1.4x to 4.6x, reduced customer acquisition cost by 42%, and surged organic search traffic by 340% within 90 days.',
+      live_url: 'https://apexretail.com',
+      github_url: '',
+      completion_date: '2026-07-10',
+      thumbnail_url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600&h=400',
+      created_at: '2026-07-10T10:00:00Z',
+      updated_at: '2026-07-10T10:00:00Z'
+    },
+    {
+      id: 8,
+      title: 'The Crescent Hospitality — Tourism SEO & Paid Booking Acquisition Campaign',
+      slug: 'crescent-digital-marketing',
+      client_name: 'The Crescent Resorts',
+      category: 'Digital Marketing',
+      technologies: ['Local SEO', 'Google Ads', 'Meta Ads', 'Tourism Marketing', 'Google Maps'],
+      short_description: 'Hyper-targeted local SEO, Google Travel PPC, and Meta video reels driving a 210% surge in direct resort bookings.',
+      description: 'A multi-channel tourism acquisition campaign that decoupled the resort from expensive online travel agency commissions by dominating Google Local 3-Pack and targeted search ads.',
+      case_study: 'Achieved #1 Google Local 3-Pack ranking, 3.8x campaign ROAS, and generated over 210% increase in commission-free direct reservations.',
+      live_url: 'https://thecrescentresorts.com',
+      github_url: '',
+      completion_date: '2026-06-18',
+      thumbnail_url: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&q=80&w=600&h=400',
+      created_at: '2026-06-18T10:00:00Z',
+      updated_at: '2026-06-18T10:00:00Z'
     }
   ],
   products: [
@@ -1127,6 +1162,11 @@ class JSONDatabase {
 
         if (!this.data.estimates) {
           this.data.estimates = [];
+          hasChanges = true;
+        }
+
+        if (!this.data.company_gallery) {
+          this.data.company_gallery = [];
           hasChanges = true;
         }
 

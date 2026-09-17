@@ -20,7 +20,7 @@ import {
   CheckCircle, Clock, ArrowRight, Search, FileText, Check, Lock, User,
   TrendingUp, Briefcase, Grid, Tag, Activity, Eye, BookOpen, AlertCircle, ChevronDown, X,
   Star, ChevronLeft, ChevronRight, Sparkles, Code, RefreshCw, Package, ExternalLink,
-  Download, Loader2, Server, ShieldCheck
+  Download, Loader2, Server, ShieldCheck, Camera
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { api, getAuthToken, setAuthToken } from './api';
@@ -95,6 +95,9 @@ import ConsultationsAdminModule from './components/admin/ConsultationsAdminModul
 import { TrustAndAssuranceView } from './views/TrustAndAssuranceView';
 import { TrustAndAssuranceSection } from './components/trust/TrustAndAssuranceSection';
 import { AdminTrustModule } from './components/admin/AdminTrustModule';
+import { AdminGalleryModule } from './components/admin/AdminGalleryModule';
+import { CompanyGalleryView } from './views/CompanyGalleryView';
+import { CompanyGallerySlider } from './components/home/CompanyGallerySlider';
 import SEOHead from './components/seo/SEOHead';
 import Breadcrumbs from './components/seo/Breadcrumbs';
 import { getServiceBySlug } from './data/seoContent';
@@ -191,6 +194,9 @@ export default function App() {
             <Route path="/blog" element={<BlogView />} />
             <Route path="/blog/:slug" element={<BlogDetailView />} />
             <Route path="/events" element={<EventsView />} />
+            <Route path="/gallery" element={<CompanyGalleryView />} />
+            <Route path="/company-gallery" element={<Navigate to="/gallery" replace />} />
+            <Route path="/life" element={<Navigate to="/gallery" replace />} />
             <Route path="/careers" element={<CareersView />} />
             <Route path="/opportunities" element={<PublicOpportunitiesView />} />
             <Route path="/contact" element={<ContactView settings={globalSettings} />} />
@@ -350,6 +356,9 @@ function HomeView({ settings }: { settings: { [key: string]: string } }) {
 
       {/* Trusted by Global Industry Leaders — Client Reviews CMS */}
       <ClientTestimonials testimonials={testimonials} />
+
+      {/* Image Gallery — Modern Professional Slider */}
+      <CompanyGallerySlider />
 
       {/* 06 — SaroHub in Numbers */}
       <CompanyStatistics />
@@ -4070,6 +4079,18 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
                   </span>
                   <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold">
                     CMS
+                  </span>
+                </button>
+                <button
+                  id="nav-module-gallery"
+                  onClick={() => setActiveModule('gallery')}
+                  className={`w-full text-left rounded-xl px-3.5 py-2 text-xs font-mono flex items-center justify-between transition-all ${activeModule === 'gallery' ? 'bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/20' : 'text-slate-400 hover:text-white hover:bg-slate-900/60'}`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Camera className="h-4 w-4 text-cyan-400" /> Company Gallery
+                  </span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-bold">
+                    MEDIA
                   </span>
                 </button>
                 <button
@@ -8204,6 +8225,13 @@ function ControlRoomView({ onLogout, onSettingsChange }: { onLogout: () => void;
             {activeModule === 'trust' && (
               <div className="space-y-6 animate-fade-in">
                 <AdminTrustModule />
+              </div>
+            )}
+
+            {/* Module: Company Gallery */}
+            {activeModule === 'gallery' && (
+              <div className="space-y-6 animate-fade-in">
+                <AdminGalleryModule />
               </div>
             )}
 

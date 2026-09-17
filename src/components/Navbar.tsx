@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, X, ChevronRight, ChevronDown, Award, Briefcase, Sparkles,
   Calendar, Calculator, FileText, Factory, Rocket, Handshake, Workflow,
-  Cpu, Newspaper, Presentation, Users, GraduationCap, ArrowRight, ShieldCheck
+  Cpu, Newspaper, Presentation, Users, GraduationCap, ArrowRight, ShieldCheck, Camera
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Logo from './Logo';
@@ -78,6 +78,7 @@ export default function Navbar({ isAdminLoggedIn }: NavbarProps) {
     { name: 'Technology Stack', path: '/technology', desc: 'Frameworks, clouds & AI', icon: Cpu },
     { name: 'Insights & Articles', path: '/insights', desc: 'Engineering thought leadership', icon: Newspaper },
     { name: 'Events & Masterclasses', path: '/events', desc: 'Tech summits & hackathons', icon: Presentation },
+    { name: 'Company Gallery', path: '/gallery', desc: 'Seminars, collaborations & culture', icon: Camera },
     { name: 'Careers & Hiring', path: '/careers', desc: 'Join engineering & ventures', icon: Users },
     { name: 'Student Projects', path: '/student-projects', desc: 'IT Academy capstones', icon: GraduationCap },
   ];
@@ -100,6 +101,7 @@ export default function Navbar({ isAdminLoggedIn }: NavbarProps) {
     { name: 'Technology', path: '/technology' },
     { name: 'Insights', path: '/insights' },
     { name: 'Events', path: '/events' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
   ];

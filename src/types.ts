@@ -538,6 +538,16 @@ export interface CompanyMetric {
   icon: string;
   order: number;
   active: boolean;
+  auto_calculate?: boolean;
+  calculation_source?: string;
+  is_dynamic?: boolean;
+  raw_count?: number;
+  live_breakdown?: {
+    category: string;
+    description: string;
+    items: { name: string; type?: string; detail?: string }[];
+  };
+  live_stats?: Record<string, number>;
 }
 
 export interface WhySaroHubItem {
@@ -884,6 +894,26 @@ export interface IpGuarantee {
   escrow_and_repos: string;
   security_clearance: string;
   sample_nda_template_url: string;
+}
+
+export type GalleryCategory = 'Seminars' | 'SEO Collaborations' | 'Office Culture' | 'Tech Masterclasses' | 'Partner Summits' | string;
+
+export interface CompanyGalleryItem {
+  id: number;
+  title: string;
+  category: GalleryCategory;
+  image_url: string;
+  caption?: string;
+  description?: string;
+  event_date?: string;
+  location?: string;
+  attendees_count?: string;
+  tags?: string[];
+  featured?: boolean;
+  published?: boolean;
+  order?: number;
+  created_at?: string;
+  updated_at?: string;
 }
 
 

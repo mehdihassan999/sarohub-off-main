@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Camera, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { api } from '../api';
 import SEOHead from '../components/seo/SEOHead';
@@ -69,6 +71,33 @@ export default function AboutView() {
       
       {/* Testimonials with Framer Motion Staggered Entrance Animation */}
       <ClientTestimonials testimonials={testimonials} />
+
+      {/* Company Gallery & Regional Collaborations Teaser */}
+      <section className="py-16 border-t border-b border-slate-900 bg-slate-950/60">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-900/30 via-slate-900 to-slate-950 border border-blue-500/20 p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-2xl space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono">
+                <Camera className="h-3.5 w-3.5" />
+                <span>Life at SaroHub &amp; Ecosystem Impact</span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                Explore Our Company Gallery &amp; Collaborations
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Take a visual journey through our technical keynotes, SEO collaborations with the regional IT center, academy masterclasses, and internal sprint hackathons.
+              </p>
+            </div>
+            <Link
+              to="/gallery"
+              className="flex-shrink-0 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition-all shadow-lg shadow-blue-500/20 hover:scale-105"
+            >
+              <span>View Full Company Gallery</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
       
       <FAQAccordion faqs={faqs} />
     </div>

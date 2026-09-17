@@ -4,7 +4,8 @@ import {
   ContactMessage, NewsletterSubscriber, SEOSettings, ActivityLog,
   ChatSession, Opportunity, OpportunityApplication, EventRegistration, Partner, StudentProject, Venture,
   HeroSectionSettings, CompanyMetric, WhySaroHubItem, IndustrySolution, CaseStudy, ProcessStep, TechStackItem, SecurityStandard, CompanyTimelineItem, Lead, MediaItem,
-  TrustBadge, ClientEndorsement, EngagementModel, LeadMagnet, FeasibilityAudit, SolutionMatch, IpGuarantee
+  TrustBadge, ClientEndorsement, EngagementModel, LeadMagnet, FeasibilityAudit, SolutionMatch, IpGuarantee,
+  CompanyGalleryItem
 } from './types';
 
 /**
@@ -637,6 +638,43 @@ export const api = {
 
   async deleteTestimonial(id: number) {
     return request<any>(`/testimonials/${id}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // Company Gallery API
+  async getCompanyGallery(params?: { category?: string; admin?: boolean }) {
+    const searchParams = new URLSearchParams();
+    if (params?.category && params.category !== 'All') {
+      searchParams.set('category', params.category);
+    }
+    if (params?.admin) {
+      searchParams.set('admin', 'true');
+    }
+    const query = searchParams.toString();
+    return request<CompanyGalleryItem[]>(`/company-gallery${query ? `?${query}` : ''}`);
+  },
+
+  async getCompanyGalleryItem(id: number) {
+    return request<CompanyGalleryItem>(`/company-gallery/${id}`);
+  },
+
+  async createCompanyGalleryItem(body: Partial<CompanyGalleryItem>) {
+    return request<CompanyGalleryItem>('/company-gallery', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  },
+
+  async updateCompanyGalleryItem(id: number, body: Partial<CompanyGalleryItem>) {
+    return request<CompanyGalleryItem>(`/company-gallery/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(body)
+    });
+  },
+
+  async deleteCompanyGalleryItem(id: number) {
+    return request<{ success: boolean; deletedId: number }>(`/company-gallery/${id}`, {
       method: 'DELETE'
     });
   },
